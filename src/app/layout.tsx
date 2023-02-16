@@ -1,6 +1,7 @@
 import './globals.css'
 import NavBar from "../components/NavBar"
 import UserContext from '../context/UserContext'
+import PlaylistContext from '../context/PlaylistContext'
 
 export default function RootLayout({
   children,
@@ -12,8 +13,10 @@ export default function RootLayout({
       <head />
       <body>
         <UserContext>
-          <NavBar />
-          {children}
+          <PlaylistContext>
+            <NavBar />
+            {children}
+          </PlaylistContext>
         </UserContext>
       </body>
     </html>

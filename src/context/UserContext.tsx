@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useState } from "react"
+import { createContext, useState } from 'react'
 
 interface User {
   name?: string,
@@ -22,7 +22,11 @@ const UserContext = createContext<Context>({
   handleLogin: () => {},
 })
 
-export default function UserProvider({ children }: { children: React.ReactNode}) {
+export default function UserProvider({ 
+  children 
+}: {
+  children: React.ReactNode
+}) {
   const [user, setUser] = useState(emptyUser)
 
   const handleLogin = (data: User | undefined) => {
