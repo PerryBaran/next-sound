@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 
 interface Song {
   image?: string,
@@ -22,7 +22,9 @@ const PlaylistContext = createContext({
   removeFromPlaylist: (i: number) => {},
 })
 
-export default function MusicProvider({ 
+const usePlaylistContext = () => useContext(PlaylistContext);
+
+function PlaylistProvider({ 
   children 
 }: {
   children: React.ReactNode
@@ -72,3 +74,5 @@ export default function MusicProvider({
     </PlaylistContext.Provider>
   )
 }
+
+export { usePlaylistContext, PlaylistProvider }

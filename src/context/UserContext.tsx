@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 
 interface User {
   name?: string,
@@ -17,7 +17,9 @@ const UserContext = createContext({
   handleLogin: (data: User | undefined) => {},
 })
 
-export default function UserProvider({ 
+const useUserContext = () => useContext(UserContext);
+
+function UserProvider({ 
   children 
 }: {
   children: React.ReactNode
@@ -40,3 +42,5 @@ export default function UserProvider({
     </UserContext.Provider>
   )
 }
+
+export { useUserContext, UserProvider};

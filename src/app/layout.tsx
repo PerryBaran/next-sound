@@ -1,7 +1,7 @@
 import './globals.css'
-import NavBar from "../components/NavBar"
-import UserContext from '../context/UserContext'
-import PlaylistContext from '../context/PlaylistContext'
+import NavBar from "../components/navBar/NavBar"
+import { UserProvider }  from '../context/UserContext'
+import { PlaylistProvider } from '../context/PlaylistContext'
 
 export default function RootLayout({
   children,
@@ -12,12 +12,12 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body>
-        <UserContext>
-          <PlaylistContext>
+        <UserProvider>
+          <PlaylistProvider>
             <NavBar />
             {children}
-          </PlaylistContext>
-        </UserContext>
+          </PlaylistProvider>
+        </UserProvider>
       </body>
     </html>
   )
