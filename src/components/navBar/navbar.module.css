@@ -1,0 +1,26 @@
+.container {
+  background-color: var(--main-colour);
+  height: var(--navbar-height);
+}
+
+.container > ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+}
+
+.container li {
+  list-style: none;
+  font-size: 2rem;
+}
+
+.container h1 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.container a {
+  text-decoration: none;
+  color: var(--almost-white);
+}
