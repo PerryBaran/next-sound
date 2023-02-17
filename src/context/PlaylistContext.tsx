@@ -8,23 +8,18 @@ interface Song {
   albumName: string,
   songName: string,
   audio: string,
-  key?: string,
 };
 
-interface Context {
-  playlist: Song[],
-  playlistIndex: number,
-  setPlaylistIndex: (i: number) => void,
-  addToPlaylist: (songs: Song[], addNext: boolean) => void,
-  removeFromPlaylist: (i: number) => void,
+interface Playlist extends Song {
+  key: string,
 }
 
-const PlaylistContext = createContext<Context>({
-  playlist: [],
+const PlaylistContext = createContext({
+  playlist: [] as Playlist[],
   playlistIndex: 0,
-  addToPlaylist: () => {},
-  removeFromPlaylist: () => {},
-  setPlaylistIndex: () => {},
+  setPlaylistIndex: (i: number) => {},
+  addToPlaylist: (songs: Song[], addNext: boolean) => {},
+  removeFromPlaylist: (i: number) => {},
 })
 
 export default function MusicProvider({ 
@@ -32,14 +27,12 @@ export default function MusicProvider({
 }: {
   children: React.ReactNode
 }) {
-  const [playlist, setPlaylist] = useState<Song[]>([]);
+  const [playlist, setPlaylist] = useState<Playlist[]>([]);
   const [playlistIndex, setPlaylistIndex] = useState(0);
 
   const addToPlaylist = (songs: Song[], addNext = false) => {
     const data = songs.map((song) => {
-      const clone = song
-      clone.key = crypto.randomUUID()
-      return clone
+      return {...song, key: crypto.randomUUID()}
     })
 
     setPlaylist((prev) => {

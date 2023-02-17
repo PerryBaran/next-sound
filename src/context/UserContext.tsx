@@ -7,19 +7,14 @@ interface User {
   id?: string,
 }
 
-interface Context {
-  user: User,
-  handleLogin: (data: User | undefined) => void,
-}
-
 const emptyUser = {
   name: '',
   id: '',
 }
 
-const UserContext = createContext<Context>({
+const UserContext = createContext({
   user: emptyUser,
-  handleLogin: () => {},
+  handleLogin: (data: User | undefined) => {},
 })
 
 export default function UserProvider({ 
