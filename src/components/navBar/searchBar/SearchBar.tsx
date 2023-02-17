@@ -16,7 +16,7 @@ export default function NavBar() {
   };
 
   return (
-    <form onSubmit={(e: FormEvent) => submitHandler(e)}>
+    <form onSubmit={submitHandler}>
       <input type='text' ref={searchRef} placeholder="Search" />
       <button type='submit'>Search</button>
     </form>
