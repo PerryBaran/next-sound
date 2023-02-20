@@ -1,0 +1,13 @@
+.container {
+  position: relative;
+}
+
+.options {
+  position: absolute;
+  bottom: 20px;
+  right: -50px;
+  background-color: red;
+  width: 110px;
+  display: flex;
+  flex-direction: column;
+}

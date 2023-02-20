@@ -1,17 +1,19 @@
 import css from './songs.module.css'
+import SongMenu from '../../songMenu/SongMenu'
 
 interface Props {
-  songName: string,
+  songName: string
   audio: string
+  image: string
+  artistName: string
+  albumName: string
 }
 
-export default function Songs({
-  songName,
-  audio
-}: Props) {
+export default function Songs(props: Props) {
   return (
     <li className={css.container}>
-      <h4>{songName}</h4>
+      <h4>{props.songName}</h4>
+      <SongMenu songs={[props]} />
     </li>
   )
 }
