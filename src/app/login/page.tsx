@@ -11,9 +11,9 @@ export default function Login() {
     email: '',
     password: ''
   });
-  const [alert, setAlert] = useState('');
-  const { handleLogin } = useUserContext();
-  const router = useRouter();
+  const [alert, setAlert] = useState('')
+  const { handleLogin } = useUserContext()
+  const router = useRouter()
 
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFields({ ...fields, [e.target.name]: e.target.value })

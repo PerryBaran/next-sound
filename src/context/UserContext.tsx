@@ -5,7 +5,6 @@ import { getUserById } from '@/requests/users'
 import Cookie from 'js-cookie'
 import jwtDecode from 'jwt-decode'
 
-
 interface User {
   name?: string,
   id?: string,
@@ -32,23 +31,24 @@ function UserProvider({
 
   const handleLogin = (data: User | undefined) => {
     if (data === undefined) {
-      setUser(emptyUser);
+      Cookie.remove('userToken')
+      setUser(emptyUser)
     } else {
       setUser((prev) => {
-        return {...prev, ...data };
+        return {...prev, ...data }
       })
     }
   }
 
   useEffect(() => {
     (async () => {
-      const token = Cookie.get("userToken");
-      if (!token) return;
-      const { id }: { id: number | string } = jwtDecode(token);
-      const response = await getUserById(id);
+      const token = Cookie.get('userToken')
+      if (!token) return
+      const { id }: { id: string } = jwtDecode(token)
+      const response = await getUserById(id)
       handleLogin({
         name: response.name,
-        id: response.id,
+        id,
       });
     })();
   }, []);  

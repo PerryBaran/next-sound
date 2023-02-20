@@ -1,9 +1,9 @@
 import { postRequest, getByIdRequest } from './helpers'
 import Cookies from 'js-cookie'
 
-export async function login(data: {email: string, password: string}) {
+export async function login(data: { email: string; password: string }) {
   const response = await postRequest('users/login', data)
-  Cookies.set('userToken', response.userToken, { expires: 5})
+  Cookies.set('userToken', response.userToken, { expires: 5 })
   return response
 }
 

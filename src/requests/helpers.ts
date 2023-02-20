@@ -3,16 +3,16 @@ import axios from 'axios'
 
 const instance = axios.create({
   withCredentials: true,
-  baseURL: 'https://soundcloud-clone-api.onrender.com',
-});
+  baseURL: 'https://soundcloud-clone-api.onrender.com'
+})
 
 function config() {
   return {
     headers: {
-      userToken: Cookie.get('userToken'),
-    },
-  };
-};
+      userToken: Cookie.get('userToken')
+    }
+  }
+}
 
 type Model = 'users' | 'users/login' | 'users/signup' | 'albums' | 'string'
 
@@ -48,9 +48,9 @@ function createForm(model: string, data: any) {
     }
   }
   return formData
-};
+}
 
-function error(err: any | { response: { data: { message: string }}}) {
+function error(err: any | { response: { data: { message: string } } }) {
   if (err.response?.data?.message) {
     throw new Error(err.response.data.message)
   }
@@ -58,76 +58,79 @@ function error(err: any | { response: { data: { message: string }}}) {
 }
 
 export async function postRequest(model: Model, data: any) {
-  const formData = createForm(model, data);
+  const formData = createForm(model, data)
 
   try {
-    const response = await instance.post(`/${model}`, formData, config());
-    return response.data;
-  } catch (err: any | { response: { data: { message: string }}}) {
+    const response = await instance.post(`/${model}`, formData, config())
+    return response.data
+  } catch (err: any | { response: { data: { message: string } } }) {
     error(err)
   }
-};
+}
 
-export async function getRequest(model: Model, query: {
-  name?: string,
-  exact?: string,
-  limit?: number | string,
-}) {
-  let endpoint = `/${model}`;
-  const queryArray = [];
+export async function getRequest(
+  model: Model,
+  query: {
+    name?: string
+    exact?: string
+    limit?: number | string
+  }
+) {
+  let endpoint = `/${model}`
+  const queryArray = []
   if (query) {
     if (query.name) {
-      queryArray.push(`name=${query.name}`);
+      queryArray.push(`name=${query.name}`)
       if (query.exact) {
-        queryArray.push('exact=true');
+        queryArray.push('exact=true')
       }
     }
     if (query.limit) {
-      queryArray.push(`limit=${query.limit}`);
+      queryArray.push(`limit=${query.limit}`)
     }
     if (queryArray.length > 0) {
-      const query = queryArray.join("&");
-      endpoint = `${endpoint}?${query}`;
+      const query = queryArray.join('&')
+      endpoint = `${endpoint}?${query}`
     }
   }
 
   try {
-    const response = await instance.get(endpoint, config());
-    return response.data;
-  } catch (err: any | { response: { data: { message: string }}}) {
+    const response = await instance.get(endpoint, config())
+    return response.data
+  } catch (err: any | { response: { data: { message: string } } }) {
     error(err)
   }
-};
+}
 
 export async function getByIdRequest(model: Model, id: string | number) {
   try {
-    const response = await instance.get(`/${model}/${id}`, config());
-    return response.data;
-  } catch (err: any | { response: { data: { message: string }}}) {
+    const response = await instance.get(`/${model}/${id}`, config())
+    return response.data
+  } catch (err: any | { response: { data: { message: string } } }) {
     error(err)
   }
-};
+}
 
-export async function patchRequest(model: Model, id: string | number, data: any) {
-  const formData = createForm(model, data);
+export async function patchRequest(
+  model: Model,
+  id: string | number,
+  data: any
+) {
+  const formData = createForm(model, data)
 
   try {
-    const response = await instance.patch(
-      `/${model}/${id}`,
-      formData,
-      config()
-    );
-    return response.data;
-  } catch (err: any | { response: { data: { message: string }}}) {
+    const response = await instance.patch(`/${model}/${id}`, formData, config())
+    return response.data
+  } catch (err: any | { response: { data: { message: string } } }) {
     error(err)
   }
-};
+}
 
 export async function deleteRequest(model: Model, id: string | number) {
   try {
-    const response = await instance.delete(`/${model}/${id}`, config());
-    return response.data;
-  } catch (err: any | { response: { data: { message: string }}}) {
+    const response = await instance.delete(`/${model}/${id}`, config())
+    return response.data
+  } catch (err: any | { response: { data: { message: string } } }) {
     error(err)
   }
-};
+}
