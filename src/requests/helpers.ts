@@ -70,11 +70,13 @@ export async function postRequest(model: Model, data: any) {
 
 export async function getRequest(
   model: Model,
-  query: {
-    name?: string
-    exact?: string
-    limit?: number | string
-  } | undefined
+  query:
+    | {
+        name?: string
+        exact?: string
+        limit?: number | string
+      }
+    | undefined
 ) {
   let endpoint = `/${model}`
   const queryArray = []
