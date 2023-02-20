@@ -3,11 +3,7 @@ interface Props {
 }
 
 export default function EditProfile(props: Props) {
-  const { userId } = props.params;
+  const { userId } = props.params
 
-  return (
-    <div>
-      profile - {userId}
-    </div>
-  )
+  return <div>profile - {userId}</div>
 }

@@ -13,7 +13,7 @@ interface Songs {
 }
 
 interface Albums {
-  User: { name: string, id: string }
+  User: { name: string; id: string }
   name: string
   url: string
   id: string
@@ -21,13 +21,13 @@ interface Albums {
 }
 
 export default async function Home() {
-  const albums: Albums[] = await getAlbums(undefined);
+  const albums: Albums[] = await getAlbums(undefined)
 
   return (
     <main>
       {albums.map((album) => {
         return (
-          <Album 
+          <Album
             key={album.id}
             artistName={album.User.name}
             albumUserId={album.User.id}

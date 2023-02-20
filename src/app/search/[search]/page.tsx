@@ -3,11 +3,7 @@ interface Props {
 }
 
 export default function Search(props: Props) {
-  const { search } = props.params;
+  const { search } = props.params
 
-  return (
-    <div>
-      {search}
-    </div>
-  )
+  return <div>{search}</div>
 }

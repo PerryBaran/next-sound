@@ -1,11 +1,11 @@
 'use client'
 
-import { useRouter } from 'next/navigation';
-import { FormEvent, useRef } from 'react';
+import { useRouter } from 'next/navigation'
+import { FormEvent, useRef } from 'react'
 
 export default function NavBar() {
-  const router = useRouter();
-  const searchRef = useRef<HTMLInputElement>(null);
+  const router = useRouter()
+  const searchRef = useRef<HTMLInputElement>(null)
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault()
@@ -13,12 +13,12 @@ export default function NavBar() {
     if (query) {
       router.push(`search/${query}`)
     }
-  };
+  }
 
   return (
     <form onSubmit={submitHandler}>
-      <input type='text' ref={searchRef} placeholder="Search" />
-      <button type='submit'>Search</button>
+      <input type="text" ref={searchRef} placeholder="Search" />
+      <button type="submit">Search</button>
     </form>
   )
 }

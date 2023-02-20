@@ -3,15 +3,15 @@
 import { createContext, useContext, useState } from 'react'
 
 interface Song {
-  image?: string,
-  artistName: string,
-  albumName: string,
-  songName: string,
-  audio: string,
-};
+  image?: string
+  artistName: string
+  albumName: string
+  songName: string
+  audio: string
+}
 
 interface Playlist extends Song {
-  key: string,
+  key: string
 }
 
 const PlaylistContext = createContext({
@@ -19,57 +19,55 @@ const PlaylistContext = createContext({
   playlistIndex: 0,
   setPlaylistIndex: (i: number) => {},
   addToPlaylist: (songs: Song[], addNext: boolean) => {},
-  removeFromPlaylist: (i: number) => {},
+  removeFromPlaylist: (i: number) => {}
 })
 
-const usePlaylistContext = () => useContext(PlaylistContext);
+const usePlaylistContext = () => useContext(PlaylistContext)
 
-function PlaylistProvider({ 
-  children 
-}: {
-  children: React.ReactNode
-}) {
-  const [playlist, setPlaylist] = useState<Playlist[]>([]);
-  const [playlistIndex, setPlaylistIndex] = useState(0);
+function PlaylistProvider({ children }: { children: React.ReactNode }) {
+  const [playlist, setPlaylist] = useState<Playlist[]>([])
+  const [playlistIndex, setPlaylistIndex] = useState(0)
 
   const addToPlaylist = (songs: Song[], addNext = false) => {
     const data = songs.map((song) => {
-      return {...song, key: crypto.randomUUID()}
+      return { ...song, key: crypto.randomUUID() }
     })
 
     setPlaylist((prev) => {
       if (addNext) {
-        const clone = [...prev];
-        clone.splice(playlistIndex + 1, 0, ...data);
+        const clone = [...prev]
+        clone.splice(playlistIndex + 1, 0, ...data)
         return clone
       }
-      return [...prev, ...data];
+      return [...prev, ...data]
     })
-  };
-  
+  }
+
   const removeFromPlaylist = (i: number) => {
     setPlaylist((prev) => {
-      const clone = [...prev];
-      clone.splice(i, 1);
-      return clone;
-    });
+      const clone = [...prev]
+      clone.splice(i, 1)
+      return clone
+    })
 
     setPlaylistIndex((prev) => {
       if (i > prev || prev === 0) {
-        return prev;
+        return prev
       }
-      return prev - 1;
-    });
+      return prev - 1
+    })
   }
 
   return (
-    <PlaylistContext.Provider value={{
-      playlist,
-      playlistIndex,
-      addToPlaylist,
-      removeFromPlaylist,
-      setPlaylistIndex,
-    }}>
+    <PlaylistContext.Provider
+      value={{
+        playlist,
+        playlistIndex,
+        addToPlaylist,
+        removeFromPlaylist,
+        setPlaylistIndex
+      }}
+    >
       {children}
     </PlaylistContext.Provider>
   )

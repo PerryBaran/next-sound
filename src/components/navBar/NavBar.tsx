@@ -1,10 +1,9 @@
-import Link from 'next/link';
-import SearchBar from './searchBar/SearchBar';
-import CondtionalNav from './conditionalNav/CondtionalNav';
-import css from './navbar.module.css';
+import Link from 'next/link'
+import SearchBar from './searchBar/SearchBar'
+import CondtionalNav from './conditionalNav/CondtionalNav'
+import css from './navbar.module.css'
 
 export default function NavBar() {
-
   return (
     <nav className={css.container}>
       <ul>

@@ -3,11 +3,7 @@ interface Props {
 }
 
 export default function Profile(props: Props) {
-  const { name } = props.params;
+  const { name } = props.params
 
-  return (
-    <div>
-      {name}
-    </div>
-  )
+  return <div>{name}</div>
 }

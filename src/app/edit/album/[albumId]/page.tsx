@@ -3,11 +3,7 @@ interface Props {
 }
 
 export default function EditAlbum(props: Props) {
-  const { albumId } = props.params;
+  const { albumId } = props.params
 
-  return (
-    <div>
-      album - {albumId}
-    </div>
-  )
+  return <div>album - {albumId}</div>
 }

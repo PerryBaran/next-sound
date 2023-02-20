@@ -15,7 +15,7 @@ export default function LogOut() {
   return (
     <div>
       <h2>Are You Sure?</h2>
-      <button type='button' onClick={handleLogout}>
+      <button type="button" onClick={handleLogout}>
         Logout
       </button>
     </div>
