@@ -74,7 +74,7 @@ export async function getRequest(
     name?: string
     exact?: string
     limit?: number | string
-  }
+  } | undefined
 ) {
   let endpoint = `/${model}`
   const queryArray = []
