@@ -3,6 +3,8 @@ import NavBar from "../components/navBar/NavBar"
 import { UserProvider }  from '../context/UserContext'
 import { PlaylistProvider } from '../context/PlaylistContext'
 
+export const revalidate = 100
+
 export default function RootLayout({
   children,
 }: {
