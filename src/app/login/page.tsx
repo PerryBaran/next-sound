@@ -3,8 +3,8 @@
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { useUserContext } from '@/context/UserContext'
-import login from './api/route'
 import Alert from '@/components/alert/Alert'
+import { login } from '@/requests/users'
 
 export default function Login() {
   const [fields, setFields] = useState({
