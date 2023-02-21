@@ -1,13 +1,15 @@
 .container {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
 
   grid-column: 3;
 
   position: relative;
 
   overflow: visible;
+  width: fit-content;
+  height: 100%;
 }
 
 .container input {
@@ -55,17 +57,15 @@
   display: block;
 }
 
-.volume > img {
+.volume img {
   position: relative;
   filter: invert();
   cursor: pointer;
 }
 
-.volume {
+.volume > button {
   background: none;
   border: none;
-  width: 100%;
-  height: 100%;
 }
 
 @media (orientation: portrait) {
