@@ -1,6 +1,7 @@
 import { Inter } from '@next/font/google'
 import { getAlbums } from '@/requests/albums'
 import Album from '@/components/album/Album'
+import css from './home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,7 +25,7 @@ export default async function Home() {
   const albums: Albums[] = await getAlbums(undefined)
 
   return (
-    <main>
+    <main className={css.container}>
       {albums.map((album) => {
         return (
           <Album
