@@ -1,6 +1,12 @@
 'use client'
 
-import { createContext, useContext, useState } from 'react'
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback
+} from 'react'
 
 interface Song {
   image?: string
@@ -21,7 +27,8 @@ const PlaylistContext = createContext({
   addToPlaylist: (songs: Song[], addNext: boolean) => {},
   removeFromPlaylist: (i: number) => {},
   playing: false,
-  handlePlaying: (isPlaying: boolean | undefined) => {}
+  handlePlaying: (isPlaying: boolean | undefined) => {},
+  handlePlayNow: () => {}
 })
 
 const usePlaylistContext = () => useContext(PlaylistContext)
@@ -30,6 +37,7 @@ function PlaylistProvider({ children }: { children: React.ReactNode }) {
   const [playlist, setPlaylist] = useState<Playlist[]>([])
   const [playlistIndex, setPlaylistIndex] = useState(0)
   const [playing, setPlaying] = useState(false)
+  const handlePlayNow = usePlayNow(playlist.length, setPlaylistIndex, setPlaying)
 
   const addToPlaylist = (songs: Song[], addNext = false) => {
     const data = songs.map((song) => {
@@ -103,12 +111,39 @@ function PlaylistProvider({ children }: { children: React.ReactNode }) {
         removeFromPlaylist,
         skipSong,
         playing,
-        handlePlaying
+        handlePlaying,
+        handlePlayNow
       }}
     >
       {children}
     </PlaylistContext.Provider>
   )
+}
+
+function usePlayNow(
+  playlistLength: number,
+  setPlaylistIndex: React.Dispatch<React.SetStateAction<number>>,
+  handlePlaying: React.Dispatch<React.SetStateAction<boolean>>
+) {
+  const [playNow, setPlayNow] = useState(false)
+  const [skip, setSkip] = useState(false)
+
+  const handlePlayNow = () => {
+    setPlayNow(true)
+    setSkip(() => playlistLength !== 0)
+  }
+
+  useEffect(() => {
+    if (playNow) {
+      if (skip) {
+        setPlaylistIndex((prev) => prev + 1)
+      }
+      handlePlaying(true)
+    }
+    setPlayNow(false)
+  }, [handlePlaying, playNow, setPlaylistIndex, skip])
+
+  return handlePlayNow
 }
 
 export { usePlaylistContext, PlaylistProvider }

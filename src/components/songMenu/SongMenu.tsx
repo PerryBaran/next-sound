@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import css from './songMenu.module.css'
 import { usePlaylistContext } from '@/context/PlaylistContext'
 
@@ -15,27 +15,15 @@ interface Props {
 }
 
 export default function SongMenu({ songs }: Props) {
-  const { addToPlaylist, handlePlaying, skipSong, playlist } =
-    usePlaylistContext()
+  const { addToPlaylist, handlePlayNow } = usePlaylistContext()
   const [visible, setVisible] = useState(false)
-  const [playNow, setPlayNow] = useState(false)
-  const [prevPlaylistLength, setPrevPlaylistLength] = useState(0)
 
   const handleAddToPlaylist = (addNext: boolean, playNow: boolean) => {
     addToPlaylist(songs, addNext)
-    setPrevPlaylistLength(playlist.length)
-    setPlayNow(true)
-  }
-
-  useEffect(() => {
-    if (playNow === true) {
-      if (prevPlaylistLength) {
-        skipSong(true)
-      }
-      handlePlaying(true)
+    if (playNow) {
+      handlePlayNow()
     }
-    setPlayNow(false)
-  }, [handlePlaying, playNow, skipSong, prevPlaylistLength])
+  }
 
   const handleBlur = () => {
     setVisible(false)
