@@ -26,13 +26,13 @@ export default function Info(props: Props) {
       ) : (
         <Image
           src={music}
-          alt='default cover art'
+          alt="default cover art"
           height={75}
           width={75}
-          style={{filter: 'invert()'}}
+          style={{ filter: 'invert()' }}
         />
       )}
-      
+
       <div>
         <h3>{artistName}</h3>
         <p>{songName}</p>

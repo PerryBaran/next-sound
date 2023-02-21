@@ -2,12 +2,12 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation'
 import { useRef } from 'react'
 import { useUserContext } from '@/context/UserContext'
 import css from './navbar.module.css'
-import { search } from '@/media/icons';
-import Image from 'next/image';
+import { search } from '@/media/icons'
+import Image from 'next/image'
 
 export default function NavBar() {
   const router = useRouter()
@@ -16,7 +16,6 @@ export default function NavBar() {
   } = useUserContext()
   const pathname = usePathname()
   const searchRef = useRef<HTMLInputElement>(null)
-  
 
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault()
@@ -41,12 +40,7 @@ export default function NavBar() {
           <form onSubmit={submitHandler} className={css.search}>
             <input type="text" ref={searchRef} placeholder="Search" />
             <button type="submit">
-              <Image
-                src={search}
-                alt='search'
-                height={15}
-                width={15}
-              />
+              <Image src={search} alt="search" height={15} width={15} />
             </button>
           </form>
         </li>
