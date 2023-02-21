@@ -19,7 +19,9 @@ const PlaylistContext = createContext({
   playlistIndex: 0,
   skipSong: (i: number | boolean) => {},
   addToPlaylist: (songs: Song[], addNext: boolean) => {},
-  removeFromPlaylist: (i: number) => {}
+  removeFromPlaylist: (i: number) => {},
+  playing: false,
+  handlePlaying: (isPlaying: boolean | undefined) => {}
 })
 
 const usePlaylistContext = () => useContext(PlaylistContext)
@@ -27,6 +29,7 @@ const usePlaylistContext = () => useContext(PlaylistContext)
 function PlaylistProvider({ children }: { children: React.ReactNode }) {
   const [playlist, setPlaylist] = useState<Playlist[]>([])
   const [playlistIndex, setPlaylistIndex] = useState(0)
+  const [playing, setPlaying] = useState(false)
 
   const addToPlaylist = (songs: Song[], addNext = false) => {
     const data = songs.map((song) => {
@@ -83,6 +86,14 @@ function PlaylistProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  const handlePlaying = (isPlaying: boolean | undefined) => {
+    if (isPlaying === undefined) {
+      setPlaying((prev) => !prev)
+    } else {
+      setPlaying(isPlaying)
+    }
+  }
+
   return (
     <PlaylistContext.Provider
       value={{
@@ -90,7 +101,9 @@ function PlaylistProvider({ children }: { children: React.ReactNode }) {
         playlistIndex,
         addToPlaylist,
         removeFromPlaylist,
-        skipSong
+        skipSong,
+        playing,
+        handlePlaying
       }}
     >
       {children}

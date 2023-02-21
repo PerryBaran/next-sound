@@ -7,13 +7,14 @@ import { play, music } from '@/media/icons'
 import { useState } from 'react'
 import { menu } from '@/media/icons'
 
-interface Props {
-  handlePlaying: (isPlayin: boolean | undefined) => void
-}
-
-export default function Playlist({ handlePlaying }: Props) {
-  const { playlist, playlistIndex, skipSong, removeFromPlaylist } =
-    usePlaylistContext()
+export default function Playlist() {
+  const {
+    playlist,
+    playlistIndex,
+    skipSong,
+    removeFromPlaylist,
+    handlePlaying
+  } = usePlaylistContext()
   const [showPlaylist, setShowPlaylist] = useState(false)
 
   const handleSetPlaying = (i: number) => {

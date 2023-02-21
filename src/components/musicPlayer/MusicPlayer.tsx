@@ -12,12 +12,11 @@ import Playlist from './playlist/Playlist'
 import { usePlaylistContext } from '@/context/PlaylistContext'
 
 export default function MusicPlayer() {
-  const { playlist, playlistIndex, skipSong } = usePlaylistContext()
+  const { playlist, playlistIndex, skipSong, playing } = usePlaylistContext()
 
   const [time, setTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [volume, setVolume] = useState(0.5)
-  const [playing, setPlaying] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
   const song = playlist[playlistIndex] || {}
@@ -29,14 +28,6 @@ export default function MusicPlayer() {
       setVolume(0)
     } else {
       setVolume(value)
-    }
-  }
-
-  const handlePlaying = (isPlaying: boolean | undefined) => {
-    if (isPlaying === undefined) {
-      setPlaying((prev) => !prev)
-    } else {
-      setPlaying(isPlaying)
     }
   }
 
@@ -87,16 +78,12 @@ export default function MusicPlayer() {
           />
           <div className={css.belowBar}>
             <Time time={time} />
-            <MediaControls
-              playing={playing}
-              handlePlaying={handlePlaying}
-              skipSong={skipSong}
-            />
+            <MediaControls playing={playing} skipSong={skipSong} />
             <Time time={duration} />
           </div>
         </div>
         <Volume volume={volume} handleVolume={handleVolume} />
-        <Playlist handlePlaying={handlePlaying} />
+        <Playlist />
       </section>
     </>
   )
