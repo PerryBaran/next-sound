@@ -76,6 +76,7 @@ export default function MusicPlayer() {
         <Info
           albumArt={song.image}
           artistName={song.artistName}
+          albumName={song.albumName}
           songName={song.songName}
         />
         <div className={css.center}>

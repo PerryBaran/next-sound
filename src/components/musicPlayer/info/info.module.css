@@ -21,8 +21,6 @@
 
 .container img {
   width: 100%;
-
-  border: 2px solid white;
 }
 
 @media screen and (max-width: 900px) {
