@@ -39,13 +39,11 @@ export default function Volume({ volume, handleVolume }: Props) {
         onChange={changeVolume}
         data-testid="volume"
       />
-      <button
-        className={style.volume}
-        type="button"
-        onClick={handleVolumeToggle}
-      >
-        <VolumeIcon volume={volume} />
-      </button>
+      <div className={style.volume}>
+        <button type="button" onClick={handleVolumeToggle}>
+          <VolumeIcon volume={volume} />
+        </button>
+      </div>
     </div>
   )
 }
