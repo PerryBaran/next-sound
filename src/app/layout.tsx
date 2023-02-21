@@ -1,5 +1,6 @@
 import './globals.css'
 import NavBar from '../components/navBar/NavBar'
+import MusicPlayer from '@/components/musicPlayer/MusicPlayer'
 import { UserProvider } from '../context/UserContext'
 import { PlaylistProvider } from '../context/PlaylistContext'
 
@@ -18,6 +19,7 @@ export default function RootLayout({
           <PlaylistProvider>
             <NavBar />
             {children}
+            <MusicPlayer />
           </PlaylistProvider>
         </UserProvider>
       </body>

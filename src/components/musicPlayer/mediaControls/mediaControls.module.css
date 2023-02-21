@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.container img {
+  filter: invert();
+}
+
+.container > button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}

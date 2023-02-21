@@ -17,7 +17,7 @@ interface Playlist extends Song {
 const PlaylistContext = createContext({
   playlist: [] as Playlist[],
   playlistIndex: 0,
-  setPlaylistIndex: (i: number) => {},
+  skipSong: (i: number | boolean) => {},
   addToPlaylist: (songs: Song[], addNext: boolean) => {},
   removeFromPlaylist: (i: number) => {}
 })
@@ -58,6 +58,31 @@ function PlaylistProvider({ children }: { children: React.ReactNode }) {
     })
   }
 
+  const skipSong = (value: number | boolean) => {
+    const lastPlaylistIndex = playlist.length - 1
+    if (typeof value === 'number') {
+      if (value > lastPlaylistIndex) {
+        setPlaylistIndex(lastPlaylistIndex)
+      } else if (value < 0) {
+        setPlaylistIndex(0)
+      } else {
+        setPlaylistIndex(value)
+      }
+    } else if (value) {
+      if (playlistIndex === lastPlaylistIndex) {
+        setPlaylistIndex(0)
+      } else {
+        setPlaylistIndex((prev) => prev + 1)
+      }
+    } else {
+      if (playlistIndex > 0) {
+        setPlaylistIndex((prev) => prev - 1)
+      } else {
+        setPlaylistIndex(lastPlaylistIndex)
+      }
+    }
+  }
+
   return (
     <PlaylistContext.Provider
       value={{
@@ -65,7 +90,7 @@ function PlaylistProvider({ children }: { children: React.ReactNode }) {
         playlistIndex,
         addToPlaylist,
         removeFromPlaylist,
-        setPlaylistIndex
+        skipSong
       }}
     >
       {children}

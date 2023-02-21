@@ -1,0 +1,48 @@
+.spacer {
+  height: var(--music-player-height);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 2fr 60% 1fr 1fr;
+
+  position: fixed;
+  bottom: 0;
+
+  width: 100%;
+  height: var(--music-player-height);
+
+  background-color: var(--off-colour);
+
+  z-index: 1000;
+  overflow: visible;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  overflow: visible;
+}
+
+.belowBar {
+  display: grid;
+  grid-template-columns: 30px 1fr 30px;
+  margin-top: 10px;
+}
+
+@media (orientation: portrait) {
+  .container {
+    grid-template-columns: 1fr 75% 1fr;
+    grid-template-rows: 20% 1fr;
+
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .center {
+    grid-row: 2;
+    grid-column: 2;
+  }
+}
