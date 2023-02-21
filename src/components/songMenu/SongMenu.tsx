@@ -15,15 +15,8 @@ interface Props {
 }
 
 export default function SongMenu({ songs }: Props) {
-  const { addToPlaylist, handlePlayNow } = usePlaylistContext()
+  const { handleAddToPlaylist } = usePlaylistContext()
   const [visible, setVisible] = useState(false)
-
-  const handleAddToPlaylist = (addNext: boolean, playNow: boolean) => {
-    addToPlaylist(songs, addNext)
-    if (playNow) {
-      handlePlayNow()
-    }
-  }
 
   const handleBlur = () => {
     setVisible(false)
@@ -33,13 +26,13 @@ export default function SongMenu({ songs }: Props) {
     <div className={css.container} onBlur={handleBlur}>
       {visible ? (
         <div className={css['options']}>
-          <button onMouseDown={() => handleAddToPlaylist(true, true)}>
+          <button onMouseDown={() => handleAddToPlaylist(songs, true, true)}>
             Play Now
           </button>
-          <button onMouseDown={() => handleAddToPlaylist(true, false)}>
+          <button onMouseDown={() => handleAddToPlaylist(songs, true, false)}>
             Play Next
           </button>
-          <button onMouseDown={() => handleAddToPlaylist(false, false)}>
+          <button onMouseDown={() => handleAddToPlaylist(songs, false, false)}>
             Add To Queue
           </button>
         </div>
