@@ -4,7 +4,7 @@ import MusicPlayer from '@/components/musicPlayer/MusicPlayer'
 import { UserProvider } from '../context/UserContext'
 import { PlaylistProvider } from '../context/PlaylistContext'
 
-export const revalidate = 100
+export const revalidate = 30
 
 export default function RootLayout({
   children
@@ -16,8 +16,8 @@ export default function RootLayout({
       <head />
       <body>
         <UserProvider>
+          <NavBar />
           <PlaylistProvider>
-            <NavBar />
             {children}
             <MusicPlayer />
           </PlaylistProvider>
