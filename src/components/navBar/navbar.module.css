@@ -13,6 +13,12 @@
 .container li {
   list-style: none;
   font-size: 2rem;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 2px;
 }
 
 .container h1 {
@@ -23,4 +29,23 @@
 .container a {
   text-decoration: none;
   color: var(--almost-white);
+}
+
+.active {
+  background-color: var(--off-colour);
+}
+
+.search {
+  display: flex;
+  width: 100%;
+}
+
+.search > input {
+  width: 100%;
+}
+
+.search > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
