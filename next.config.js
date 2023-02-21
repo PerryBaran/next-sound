@@ -11,10 +11,8 @@ const nextConfig = {
         port: '',
         pathname: '/**'
       },
-    ],
-    loader: 'custom',
-    loaderFile: './src/media/gifs/loading.gif'
-  },
+    ]
+  }
 }
 
 module.exports = nextConfig
