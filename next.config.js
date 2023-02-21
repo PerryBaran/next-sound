@@ -12,6 +12,8 @@ const nextConfig = {
         pathname: '/**'
       },
     ],
+    loader: 'custom',
+    loaderFile: './src/media/gifs/loading.gif'
   },
 }
 
