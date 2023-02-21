@@ -82,8 +82,12 @@ export default function MusicPlayer() {
             <Time time={duration} />
           </div>
         </div>
-        <Volume volume={volume} handleVolume={handleVolume} />
-        <Playlist />
+        <div className={css.centerButton}>
+          <Volume volume={volume} handleVolume={handleVolume} />
+        </div>
+        <div className={css.centerButton}>
+          <Playlist />
+        </div>
       </section>
     </>
   )

@@ -32,6 +32,12 @@
   margin-top: 10px;
 }
 
+.centerButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (orientation: portrait) {
   .container {
     grid-template-columns: 1fr 75% 1fr;
