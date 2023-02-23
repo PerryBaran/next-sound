@@ -14,7 +14,7 @@ function config() {
   }
 }
 
-type Model = 'users' | 'users/login' | 'users/signup' | 'albums' | 'string'
+type Model = 'users' | 'users/login' | 'users/signup' | 'albums' | 'songs'
 
 function createForm(model: string, data: any) {
   const formData = new FormData()
