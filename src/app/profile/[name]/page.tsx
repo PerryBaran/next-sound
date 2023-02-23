@@ -1,32 +1,10 @@
 import { getUsers } from '@/requests/users'
 import Album from '@/components/album/Album'
 import css from './profile.module.css'
+import User from '@/interfaces/users'
 
 interface Props {
   params: { name: string }
-}
-
-interface Songs {
-  name: string
-  url: string
-  id: string
-}
-
-interface Albums {
-  id: string
-  name: string
-  url: string
-  createdAt: string
-  UserId: string
-  Songs: Songs[]
-}
-
-interface User {
-  id: string
-  name: string
-  email: string
-  createdAt: string
-  Albums: Albums[]
 }
 
 export default async function Profile(props: Props) {
