@@ -1,0 +1,23 @@
+.artist {
+  margin: 20px;
+  color: var(--almost-black);
+  background-color: var(--almost-white);
+  width: 95%;
+  max-width: 1000px;
+}
+
+.artist__link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.artist__cover-art {
+  aspect-ratio: 1;
+  width: 100px;
+  margin: 10px;
+}
+
+.artist__name {
+  text-align: left;
+}
