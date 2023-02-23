@@ -1,5 +1,6 @@
 import { getUsers } from '@/requests/users'
 import Album from '@/components/album/Album'
+import css from './profile.module.css'
 
 interface Props {
   params: { name: string }
@@ -34,7 +35,7 @@ export default async function Profile(props: Props) {
   const [user]: User[] = await getUsers({ name, exact: true })
 
   return (
-    <div>
+    <div className={css.container}>
       {!user.name ? (
         <h2>No User Found</h2>
       ) : (
