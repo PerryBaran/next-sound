@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image'
 import css from './album.module.css'
 import { music } from '@/media/icons'
@@ -16,7 +14,7 @@ interface Song {
 interface Props {
   artistName: string
   albumName: string
-  albumArt: string
+  albumArt?: string
   songs: Song[]
   albumUserId: string
   albumId: string

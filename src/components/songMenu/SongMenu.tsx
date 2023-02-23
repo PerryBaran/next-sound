@@ -8,7 +8,7 @@ interface Props {
   songs: {
     songName: string
     audio: string
-    image: string
+    image?: string
     artistName: string
     albumName: string
   }[]
@@ -25,7 +25,7 @@ export default function SongMenu({ songs }: Props) {
   return (
     <div className={css.container} onBlur={handleBlur}>
       {visible ? (
-        <div className={css['options']}>
+        <div className={css.options}>
           <button onMouseDown={() => handleAddToPlaylist(songs, true, true)}>
             Play Now
           </button>

@@ -4,7 +4,7 @@ import SongMenu from '../../songMenu/SongMenu'
 interface Props {
   songName: string
   audio: string
-  image: string
+  image?: string
   artistName: string
   albumName: string
 }
