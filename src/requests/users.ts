@@ -14,8 +14,6 @@ export async function getUsers(
   return response
 }
 
-
-
 export async function login(data: { email: string; password: string }) {
   const response = await postRequest('users/login', data)
   Cookies.set('userToken', response.userToken, { expires: 5 })
