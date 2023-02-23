@@ -73,7 +73,7 @@ export async function getRequest(
   query:
     | {
         name?: string
-        exact?: string
+        exact?: boolean
         limit?: number | string
       }
     | undefined

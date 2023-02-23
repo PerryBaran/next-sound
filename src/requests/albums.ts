@@ -4,7 +4,7 @@ export async function getAlbums(
   query:
     | {
         name?: string
-        exact?: string
+        exact?: boolean
         limit?: number | string
       }
     | undefined
