@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import { createContext, useContext, useState, useEffect } from 'react'
-import { getUserById } from '@/requests/users'
-import Cookie from 'js-cookie'
-import jwtDecode from 'jwt-decode'
+import { createContext, useContext, useState, useEffect } from "react"
+import { getUserById } from "@/requests/users"
+import Cookie from "js-cookie"
+import jwtDecode from "jwt-decode"
 
 interface User {
   name?: string
@@ -11,8 +11,8 @@ interface User {
 }
 
 const emptyUser = {
-  name: '',
-  id: ''
+  name: "",
+  id: ""
 }
 
 const UserContext = createContext({
@@ -27,7 +27,7 @@ function UserProvider({ children }: { children: React.ReactNode }) {
 
   const handleLogin = (data: User | undefined) => {
     if (data === undefined) {
-      Cookie.remove('userToken')
+      Cookie.remove("userToken")
       setUser(emptyUser)
     } else {
       setUser((prev) => {
@@ -38,7 +38,7 @@ function UserProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     ;(async () => {
-      const token = Cookie.get('userToken')
+      const token = Cookie.get("userToken")
       if (!token) return
       const { id }: { id: string } = jwtDecode(token)
       const response = await getUserById(id)

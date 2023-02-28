@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import style from './info.module.css'
-import Image from 'next/image'
-import { music } from '@/media/icons'
+import style from "./info.module.css"
+import Image from "next/image"
+import { music } from "@/media/icons"
 
 interface Props {
   albumArt: string | undefined
@@ -29,7 +29,7 @@ export default function Info(props: Props) {
           alt="default cover art"
           height={75}
           width={75}
-          style={{ filter: 'invert()' }}
+          style={{ filter: "invert()" }}
         />
       )}
 

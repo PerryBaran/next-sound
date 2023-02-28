@@ -1,11 +1,11 @@
-'use client'
+"use client"
 
-import Image from 'next/image'
-import { usePlaylistContext } from '@/context/PlaylistContext'
-import css from './playlist.module.css'
-import { play, music } from '@/media/icons'
-import { useState } from 'react'
-import { menu } from '@/media/icons'
+import Image from "next/image"
+import { usePlaylistContext } from "@/context/PlaylistContext"
+import css from "./playlist.module.css"
+import { play, music } from "@/media/icons"
+import { useState } from "react"
+import { menu } from "@/media/icons"
 
 export default function Playlist() {
   const {

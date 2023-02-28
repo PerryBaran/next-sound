@@ -1,13 +1,13 @@
-'use client'
+"use client"
 
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { usePathname } from 'next/navigation'
-import { useRef } from 'react'
-import { useUserContext } from '@/context/UserContext'
-import css from './navbar.module.css'
-import { search } from '@/media/icons'
-import Image from 'next/image'
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
+import { useRef } from "react"
+import { useUserContext } from "@/context/UserContext"
+import css from "./navbar.module.css"
+import { search } from "@/media/icons"
+import Image from "next/image"
 
 export default function NavBar() {
   const router = useRouter()
@@ -33,7 +33,7 @@ export default function NavBar() {
             <h1>Next-Sound</h1>
           </Link>
         </li>
-        <li className={pathname === '/' ? css.active : ''}>
+        <li className={pathname === "/" ? css.active : ""}>
           <Link href="/">Home</Link>
         </li>
         <li>
@@ -46,18 +46,18 @@ export default function NavBar() {
         </li>
         {name ? (
           <>
-            <li className={pathname === `/profile/${name}` ? css.active : ''}>
+            <li className={pathname === `/profile/${name}` ? css.active : ""}>
               <Link href={`/profile/${name}`}>Profile</Link>
             </li>
-            <li className={pathname === '/upload' ? css.active : ''}>
+            <li className={pathname === "/upload" ? css.active : ""}>
               <Link href="/upload">Upload</Link>
             </li>
-            <li className={pathname === '/logout' ? css.active : ''}>
+            <li className={pathname === "/logout" ? css.active : ""}>
               <Link href="/logout">Logout</Link>
             </li>
           </>
         ) : (
-          <li className={pathname === '/login' ? css.active : ''}>
+          <li className={pathname === "/login" ? css.active : ""}>
             <Link href="/login">Login</Link>
           </li>
         )}

@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { RefObject, useEffect } from 'react'
+import { RefObject, useEffect } from "react"
 
 interface Props {
   playing: boolean

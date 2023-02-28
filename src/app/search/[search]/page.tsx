@@ -1,12 +1,12 @@
-import { getAlbums } from '@/requests/albums'
-import { getSongs } from '@/requests/songs'
-import { getUsers } from '@/requests/users'
-import Albums from '@/interfaces/albums'
-import Users from '@/interfaces/users'
-import Songs from '@/interfaces/songs'
-import Song from '@/components/song/Song'
-import Album from '@/components/album/Album'
-import Artist from '@/components/artist/Artist'
+import { getAlbums } from "@/requests/albums"
+import { getSongs } from "@/requests/songs"
+import { getUsers } from "@/requests/users"
+import Albums from "@/interfaces/albums"
+import Users from "@/interfaces/users"
+import Songs from "@/interfaces/songs"
+import Song from "@/components/song/Song"
+import Album from "@/components/album/Album"
+import Artist from "@/components/artist/Artist"
 
 interface Props {
   params: { search: string }
@@ -26,7 +26,7 @@ export default async function Search(props: Props) {
   return (
     <div>
       {searchResults.length === 0 ? (
-        <h2>{'No results'}</h2>
+        <h2>{"No results"}</h2>
       ) : (
         searchResults.map((data: any) => {
           if (data.AlbumId) {

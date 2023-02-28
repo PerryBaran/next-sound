@@ -1,45 +1,45 @@
-import Cookie from 'js-cookie'
-import axios from 'axios'
+import Cookie from "js-cookie"
+import axios from "axios"
 
 const instance = axios.create({
   withCredentials: true,
-  baseURL: 'https://soundcloud-clone-api.onrender.com'
+  baseURL: "https://soundcloud-clone-api.onrender.com"
 })
 
 function config() {
   return {
     headers: {
-      userToken: Cookie.get('userToken')
+      userToken: Cookie.get("userToken")
     }
   }
 }
 
-type Model = 'users' | 'users/login' | 'users/signup' | 'albums' | 'songs'
+type Model = "users" | "users/login" | "users/signup" | "albums" | "songs"
 
 function createForm(model: string, data: any) {
   const formData = new FormData()
   switch (model) {
-    case 'songs': {
+    case "songs": {
       if (data.name) {
-        formData.append('name', data.name)
+        formData.append("name", data.name)
       }
       if (data.audio) {
-        formData.append('audio', data.audio)
+        formData.append("audio", data.audio)
       }
       if (data.position !== undefined) {
-        formData.append('position', data.position)
+        formData.append("position", data.position)
       }
       if (data.AlbumId) {
-        formData.append('AlbumId', data.AlbumId)
+        formData.append("AlbumId", data.AlbumId)
       }
       break
     }
-    case 'albums': {
+    case "albums": {
       if (data.name) {
-        formData.append('name', data.name)
+        formData.append("name", data.name)
       }
       if (data.image) {
-        formData.append('image', data.image)
+        formData.append("image", data.image)
       }
       break
     }
@@ -54,7 +54,7 @@ function error(err: any | { response: { data: { message: string } } }) {
   if (err.response?.data?.message) {
     throw new Error(err.response.data.message)
   }
-  throw new Error('Unexpected Error')
+  throw new Error("Unexpected Error")
 }
 
 export async function postRequest(model: Model, data: any) {
@@ -84,14 +84,14 @@ export async function getRequest(
     if (query.name) {
       queryArray.push(`name=${query.name}`)
       if (query.exact) {
-        queryArray.push('exact=true')
+        queryArray.push("exact=true")
       }
     }
     if (query.limit) {
       queryArray.push(`limit=${query.limit}`)
     }
     if (queryArray.length > 0) {
-      const query = queryArray.join('&')
+      const query = queryArray.join("&")
       endpoint = `${endpoint}?${query}`
     }
   }

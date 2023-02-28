@@ -1,7 +1,7 @@
-import { getUsers } from '@/requests/users'
-import Album from '@/components/album/Album'
-import css from './profile.module.css'
-import User from '@/interfaces/users'
+import { getUsers } from "@/requests/users"
+import Album from "@/components/album/Album"
+import css from "./profile.module.css"
+import User from "@/interfaces/users"
 
 interface Props {
   params: { name: string }

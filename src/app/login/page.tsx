@@ -1,17 +1,17 @@
-'use client'
+"use client"
 
-import { useState, FormEvent } from 'react'
-import { useRouter } from 'next/navigation'
-import { useUserContext } from '@/context/UserContext'
-import Alert from '@/components/alert/Alert'
-import { login } from '@/requests/users'
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { useUserContext } from "@/context/UserContext"
+import Alert from "@/components/alert/Alert"
+import { login } from "@/requests/users"
 
 export default function Login() {
   const [fields, setFields] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: ""
   })
-  const [alert, setAlert] = useState('')
+  const [alert, setAlert] = useState("")
   const { handleLogin } = useUserContext()
   const router = useRouter()
 
@@ -19,24 +19,24 @@ export default function Login() {
     setFields({ ...fields, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setAlert('')
+    setAlert("")
     const EMAIL_REGEX = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
 
     if (!fields.email) {
-      setAlert('please provide your email address')
+      setAlert("please provide your email address")
     } else if (!fields.password) {
-      setAlert('please insert your password')
+      setAlert("please insert your password")
     } else if (!fields.email.match(EMAIL_REGEX)) {
-      setAlert('please provide a valid email')
+      setAlert("please provide a valid email")
     } else {
       try {
         const user = await login(fields)
         handleLogin(user)
         router.push(`profile/${user.name}`)
       } catch (err: any | Error) {
-        setAlert(err?.message || 'Unexpected Error')
+        setAlert(err?.message || "Unexpected Error")
       }
     }
   }

@@ -1,10 +1,10 @@
-import { Inter } from '@next/font/google'
-import { getAlbums } from '@/requests/albums'
-import Album from '@/components/album/Album'
-import css from './home.module.css'
-import Albums from '@/interfaces/albums'
+import { Inter } from "@next/font/google"
+import { getAlbums } from "@/requests/albums"
+import Album from "@/components/album/Album"
+import css from "./home.module.css"
+import Albums from "@/interfaces/albums"
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] })
 
 export const revalidate = 100
 

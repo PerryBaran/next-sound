@@ -1,15 +1,15 @@
-'use client'
+"use client"
 
-import { useState, useEffect, useRef } from 'react'
-import css from './musicPlayer.module.css'
-import Audio from './audio/Audio'
-import Info from './info/Info'
-import ProgresssBar from './progressbar/ProgresssBar'
-import Time from './time/Time'
-import MediaControls from './mediaControls/MediaControls'
-import Volume from './volume/Volume'
-import Playlist from './playlist/Playlist'
-import { usePlaylistContext } from '@/context/PlaylistContext'
+import { useState, useEffect, useRef } from "react"
+import css from "./musicPlayer.module.css"
+import Audio from "./audio/Audio"
+import Info from "./info/Info"
+import ProgresssBar from "./progressbar/ProgresssBar"
+import Time from "./time/Time"
+import MediaControls from "./mediaControls/MediaControls"
+import Volume from "./volume/Volume"
+import Playlist from "./playlist/Playlist"
+import { usePlaylistContext } from "@/context/PlaylistContext"
 
 export default function MusicPlayer() {
   const { playlist, playlistIndex, skipSong, playing } = usePlaylistContext()

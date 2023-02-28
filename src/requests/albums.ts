@@ -1,4 +1,4 @@
-import { getRequest } from './helpers'
+import { getRequest } from "./helpers"
 
 export async function getAlbums(
   query:
@@ -9,6 +9,6 @@ export async function getAlbums(
       }
     | undefined
 ) {
-  const response = await getRequest('albums', query)
+  const response = await getRequest("albums", query)
   return response
 }

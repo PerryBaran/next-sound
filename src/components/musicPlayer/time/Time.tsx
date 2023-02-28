@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import style from './time.module.css'
+import style from "./time.module.css"
 
 export default function Time(props: { time: number }) {
   const { time } = props

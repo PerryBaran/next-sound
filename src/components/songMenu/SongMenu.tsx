@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
-import css from './songMenu.module.css'
-import { usePlaylistContext } from '@/context/PlaylistContext'
+import { useState } from "react"
+import css from "./songMenu.module.css"
+import { usePlaylistContext } from "@/context/PlaylistContext"
 
 interface Props {
   songs: {

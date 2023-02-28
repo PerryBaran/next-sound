@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState } from "react"
 
 interface Song {
   image?: string
@@ -85,7 +85,7 @@ function PlaylistProvider({ children }: { children: React.ReactNode }) {
 
   const skipSong = (value: number | boolean) => {
     const lastPlaylistIndex = playlist.length - 1
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
       if (value > lastPlaylistIndex) {
         setPlaylistIndex(lastPlaylistIndex)
       } else if (value < 0) {

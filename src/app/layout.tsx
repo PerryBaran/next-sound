@@ -1,8 +1,8 @@
-import './globals.css'
-import NavBar from '../components/navBar/NavBar'
-import MusicPlayer from '@/components/musicPlayer/MusicPlayer'
-import { UserProvider } from '../context/UserContext'
-import { PlaylistProvider } from '../context/PlaylistContext'
+import "./globals.css"
+import NavBar from "../components/navBar/NavBar"
+import MusicPlayer from "@/components/musicPlayer/MusicPlayer"
+import { UserProvider } from "../context/UserContext"
+import { PlaylistProvider } from "../context/PlaylistContext"
 
 export const revalidate = 30
 

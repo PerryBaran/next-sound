@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { ChangeEvent, useEffect, useState } from 'react'
-import style from './progressBar.module.css'
+import { ChangeEvent, useEffect, useState } from "react"
+import style from "./progressBar.module.css"
 
 interface Props {
   handleAudioTime: (value: number) => void

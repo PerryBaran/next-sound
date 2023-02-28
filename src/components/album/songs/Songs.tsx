@@ -1,5 +1,5 @@
-import css from './songs.module.css'
-import SongMenu from '../../songMenu/SongMenu'
+import css from "./songs.module.css"
+import SongMenu from "../../songMenu/SongMenu"
 
 interface Props {
   songName: string

@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { useRouter } from 'next/navigation'
-import { useUserContext } from '@/context/UserContext'
+import { useRouter } from "next/navigation"
+import { useUserContext } from "@/context/UserContext"
 
 export default function LogOut() {
   const router = useRouter()
@@ -9,7 +9,7 @@ export default function LogOut() {
 
   const handleLogout = () => {
     handleLogin(undefined)
-    router.push('/')
+    router.push("/")
   }
 
   return (

@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import Image from 'next/image'
-import style from './volume.module.css'
-import { volumeLow, volumeMedium, volumeMute } from '@/media/icons'
-import { useState } from 'react'
+import Image from "next/image"
+import style from "./volume.module.css"
+import { volumeLow, volumeMedium, volumeMute } from "@/media/icons"
+import { useState } from "react"
 
 interface Props {
   volume: number

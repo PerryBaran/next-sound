@@ -1,5 +1,5 @@
-import { postRequest, getRequest, getByIdRequest } from './helpers'
-import Cookies from 'js-cookie'
+import { postRequest, getRequest, getByIdRequest } from "./helpers"
+import Cookies from "js-cookie"
 
 export async function getUsers(
   query:
@@ -10,17 +10,17 @@ export async function getUsers(
       }
     | undefined
 ) {
-  const response = await getRequest('users', query)
+  const response = await getRequest("users", query)
   return response
 }
 
 export async function login(data: { email: string; password: string }) {
-  const response = await postRequest('users/login', data)
-  Cookies.set('userToken', response.userToken, { expires: 5 })
+  const response = await postRequest("users/login", data)
+  Cookies.set("userToken", response.userToken, { expires: 5 })
   return response
 }
 
 export async function getUserById(id: string | number) {
-  const response = await getByIdRequest('users', id)
+  const response = await getByIdRequest("users", id)
   return response
 }

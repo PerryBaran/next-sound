@@ -1,9 +1,9 @@
-import Image from 'next/image'
-import css from './album.module.css'
-import { music } from '@/media/icons'
-import Link from 'next/link'
-import Songs from './songs/Songs'
-import SongMenu from '../songMenu/SongMenu'
+import Image from "next/image"
+import css from "./album.module.css"
+import { music } from "@/media/icons"
+import Link from "next/link"
+import Songs from "./songs/Songs"
+import SongMenu from "../songMenu/SongMenu"
 
 interface Song {
   name: string
@@ -40,14 +40,14 @@ export default function Album({
 
   return (
     <div className={css.container}>
-      <div className={css['album-info-container']}>
+      <div className={css["album-info-container"]}>
         <Image
           src={albumArt || music}
           alt={`${albumName} cover art`}
           height={100}
           width={100}
         />
-        <div className={css['album-info']}>
+        <div className={css["album-info"]}>
           <h2>
             <Link href={`/profile/${artistName}`}>{artistName}</Link>
           </h2>
@@ -55,7 +55,7 @@ export default function Album({
         </div>
         <SongMenu songs={album} />
       </div>
-      <ul className={css['songs-container']}>
+      <ul className={css["songs-container"]}>
         {songs.map((song) => {
           return (
             <Songs

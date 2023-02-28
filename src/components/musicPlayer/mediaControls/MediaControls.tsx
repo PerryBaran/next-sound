@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import Image from 'next/image'
-import style from './mediaControls.module.css'
-import { play, pause, skip } from '@/media/icons'
-import { usePlaylistContext } from '@/context/PlaylistContext'
+import Image from "next/image"
+import style from "./mediaControls.module.css"
+import { play, pause, skip } from "@/media/icons"
+import { usePlaylistContext } from "@/context/PlaylistContext"
 
 interface Props {
   playing: boolean
@@ -22,7 +22,7 @@ export default function MediaControls(props: Props) {
           alt="skip backwards"
           height={20}
           width={20}
-          style={{ transform: 'rotate(180deg)' }}
+          style={{ transform: "rotate(180deg)" }}
         />
       </button>
       <button onClick={() => handlePlaying(undefined)}>
