@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { useUserContext } from "@/context/UserContext"
 import Alert from "@/components/alert/Alert"
 import { login } from "@/requests/users"
+import Link from "next/link"
 
 export default function Login() {
   const [fields, setFields] = useState({
@@ -68,6 +69,9 @@ export default function Login() {
         </label>
         <button type="submit">Login</button>
       </form>
+      <p>
+        Don&apos;t have an account? <Link href="/signup">Signup here</Link>
+      </p>
     </div>
   )
 }
