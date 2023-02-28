@@ -14,13 +14,23 @@ export async function getUsers(
   return response
 }
 
+export async function getUserById(id: string | number) {
+  const response = await getByIdRequest("users", id)
+  return response
+}
+
 export async function login(data: { email: string; password: string }) {
   const response = await postRequest("users/login", data)
   Cookies.set("userToken", response.userToken, { expires: 5 })
   return response
 }
 
-export async function getUserById(id: string | number) {
-  const response = await getByIdRequest("users", id)
+export async function signup(data: {
+  name: string
+  email: string
+  password: string
+}) {
+  const response = await postRequest("users/signup", data)
+  Cookies.set("userToken", response.userToken, { expires: 5 })
   return response
 }
