@@ -17,7 +17,9 @@ export default function Login() {
   const router = useRouter()
 
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFields({ ...fields, [e.target.name]: e.target.value })
+    setFields((prev) => {
+      return { ...prev, [e.target.name]: e.target.value }
+    })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
