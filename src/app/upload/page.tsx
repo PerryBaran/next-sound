@@ -3,10 +3,11 @@
 import Alert from "@/components/alert/Alert"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { postAlbums } from "@/requests/albums"
 
-export default function Upload() {
+export default function UploadAlbum() {
   const [name, setName] = useState("")
-  const [image, setImage] = useState<File | null>(null)
+  const [image, setImage] = useState<File | undefined>()
   const [alert, setAlert] = useState("")
   const router = useRouter()
 
@@ -21,7 +22,7 @@ export default function Upload() {
     setImage(files[0])
   }
 
-  const hanldeSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!name) {
@@ -31,13 +32,19 @@ export default function Upload() {
         name,
         image
       }
+      try {
+        const { id } = await postAlbums(album)
+        router.push(`/upload/${id}`)
+      } catch (err) {
+
+      }
     }
   }
 
   return (
     <div>
       <Alert message={alert} />
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2>Create Album</h2>
         <label htmlFor='name'>
           <span>Name</span>
