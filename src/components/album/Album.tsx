@@ -1,8 +1,9 @@
 import Image from "next/image"
+import Link from "next/link"
 import css from "./album.module.css"
 import { music } from "@/media/icons"
-import Link from "next/link"
 import Songs from "./songs/Songs"
+import EditButton from "./EditButton/EditButton"
 import SongMenu from "../songMenu/SongMenu"
 
 interface Song {
@@ -18,6 +19,7 @@ interface Props {
   songs: Song[]
   albumUserId: string
   albumId: string
+  profile: boolean
 }
 
 export default function Album({
@@ -26,7 +28,8 @@ export default function Album({
   albumArt,
   songs,
   albumUserId,
-  albumId
+  albumId,
+  profile
 }: Props) {
   const album = songs.map((song) => {
     return {
@@ -37,6 +40,8 @@ export default function Album({
       albumName
     }
   })
+
+  if (songs.length === 0 && !profile) return null
 
   return (
     <div className={css.container}>
@@ -54,6 +59,7 @@ export default function Album({
           <h3>{albumName}</h3>
         </div>
         <SongMenu songs={album} />
+        <EditButton albumId={albumId} albumUserId={albumUserId} profile={profile}/>
       </div>
       <ul className={css["songs-container"]}>
         {songs.map((song) => {

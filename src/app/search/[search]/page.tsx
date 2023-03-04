@@ -51,6 +51,7 @@ export default async function Search(props: Props) {
                 albumUserId={data.User.id}
                 key={`${data.id}${data.name}`}
                 albumId={data.id}
+                profile={false}
               />
             )
           }

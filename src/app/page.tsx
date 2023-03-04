@@ -23,6 +23,7 @@ export default async function Home() {
             albumArt={album.url}
             songs={album.Songs}
             albumId={album.id}
+            profile={false}
           />
         )
       })}

@@ -32,6 +32,7 @@ export default async function Profile(props: Props) {
               songs={album.Songs}
               albumId={album.id}
               albumUserId={user.id}
+              profile={true}
             />
           )
         })}
