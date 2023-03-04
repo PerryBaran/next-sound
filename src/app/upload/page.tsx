@@ -35,8 +35,8 @@ export default function UploadAlbum() {
       try {
         const { id } = await postAlbums(album)
         router.push(`/upload/${id}`)
-      } catch (err) {
-
+      } catch (err: any | Error) {
+        setAlert(err?.message || "Unexpected Error")
       }
     }
   }
