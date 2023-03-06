@@ -1,10 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useRouter } from "next/navigation"
-import { useSearchParams } from "next/navigation"
+import useSWR from "swr"
+import { getByIdRequestSWR } from "@/requests/helpers"
 import Alert from "@/components/alert/Alert"
 import { useUserContext } from "@/context/UserContext"
+import { postSongs } from "@/requests/songs"
 
 interface Props {
   params: { albumId: string }
@@ -16,8 +18,16 @@ interface Songs {
   key: string
 }
 
+interface SWRRequest {
+  Songs: Songs[]
+}
+
 export default function UploadSongs(props: Props) {
   const { albumId } = props.params
+  const { data }: { data: SWRRequest } = useSWR(
+    `/albums/${albumId}`,
+    getByIdRequestSWR
+  )
   const [songs, setSongs] = useState<Songs[]>([
     {
       name: "",
@@ -27,12 +37,10 @@ export default function UploadSongs(props: Props) {
   ])
   const [alert, setAlert] = useState("")
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const albumLength = searchParams.get("albumLength")
-  const startingPosition = albumLength === null ? 0 : Number(albumLength)
   const {
     user: { name }
   } = useUserContext()
+  const dragOver = useRef(0)
 
   const addSong = () => {
     const song = {
@@ -80,9 +88,27 @@ export default function UploadSongs(props: Props) {
     })
   }
 
+  const dragEnter = (e: React.DragEvent<HTMLDivElement>, position: number) => {
+    dragOver.current = position
+  }
+
+  const dragEnd = (
+    e: React.DragEvent<HTMLDivElement>,
+    startPosition: number
+  ) => {
+    const endPosition = dragOver.current
+
+    const _songs = [...songs]
+    const songContent = _songs[startPosition]
+    _songs.splice(startPosition, 1)
+    _songs.splice(endPosition, 0, songContent)
+    setSongs(_songs)
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
+    const startingPosition = data.Songs.length
     const { length } = songs
     const songsPromises = []
     for (let i = 0; i < length; i++) {
@@ -101,7 +127,7 @@ export default function UploadSongs(props: Props) {
         position: startingPosition + i,
         AlbumId: albumId
       }
-      songsPromises.push(data)
+      songsPromises.push(postSongs(data))
     }
 
     try {
@@ -120,7 +146,12 @@ export default function UploadSongs(props: Props) {
         <h2>Upload Songs</h2>
         {songs.map((song, i) => {
           return (
-            <div key={song.key}>
+            <div
+              key={song.key}
+              draggable
+              onDragEnter={(e) => dragEnter(e, i)}
+              onDragEnd={(e) => dragEnd(e, i)}
+            >
               <h3>Song {i + 1}</h3>
               <label htmlFor={`name${i}`}>
                 <span>Name</span>
