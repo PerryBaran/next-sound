@@ -52,25 +52,37 @@ export default function UploadSongs(props: Props) {
     })
   }
 
-  const handleUpdateSong = (
+  const handleUpdateName = (
     e: React.ChangeEvent<HTMLInputElement>,
     i: number
   ) => {
-    const { value, files } = e.target
+    const { value } = e.target
 
     setSongs((prev) => {
       const clone = [...prev]
-      if (value) {
-        clone[i].name = value
-      }
-      if (files) {
-        clone[i].audio = files[0]
-      }
+      clone[i].name = value
       return clone
     })
   }
 
-  const handleSubmit = async () => {
+  const handleUpdateAudio = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    i: number
+  ) => {
+    const { files } = e.target
+
+    if (!files) return
+
+    setSongs((prev) => {
+      const clone = [...prev]
+      clone[i].audio = files[0]
+      return clone
+    })
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
     const { length } = songs
     const songsPromises = []
     for (let i = 0; i < length; i++) {
@@ -116,7 +128,7 @@ export default function UploadSongs(props: Props) {
                   type="text"
                   name="name"
                   id={`name${i}`}
-                  onChange={(e) => handleUpdateSong(e, i)}
+                  onChange={(e) => handleUpdateName(e, i)}
                   value={song.name}
                 />
               </label>
@@ -126,7 +138,7 @@ export default function UploadSongs(props: Props) {
                   type="file"
                   name="audio"
                   id={`audio${i}`}
-                  onChange={(e) => handleUpdateSong(e, i)}
+                  onChange={(e) => handleUpdateAudio(e, i)}
                 />
               </label>
               <button type="button" onClick={() => removeSong(i)}>
