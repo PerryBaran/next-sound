@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import Link from "next/link"
 import { useUserContext } from "@/context/UserContext"
@@ -10,9 +10,11 @@ interface Props {
 }
 
 export default function EditButton({ albumId, albumUserId, profile }: Props) {
-  const { user: { id } } = useUserContext()
+  const {
+    user: { id }
+  } = useUserContext()
 
   if (!profile || albumUserId !== id) return null
-  
+
   return <Link href={`/edit/album/${albumId}`}>Edit Album</Link>
 }

@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import Alert from "@/components/alert/Alert"
 import { useRouter } from "next/navigation"
@@ -16,9 +16,9 @@ export default function UploadAlbum() {
   }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.target;
+    const { files } = e.target
     if (!files) return
-  
+
     setImage(files[0])
   }
 
@@ -26,7 +26,7 @@ export default function UploadAlbum() {
     e.preventDefault()
 
     if (!name) {
-      setAlert('Must provide a name')
+      setAlert("Must provide a name")
     } else {
       const album = {
         name,
@@ -46,7 +46,7 @@ export default function UploadAlbum() {
       <Alert message={alert} />
       <form onSubmit={handleSubmit}>
         <h2>Create Album</h2>
-        <label htmlFor='name'>
+        <label htmlFor="name">
           <span>Name</span>
           <input
             type="text"
@@ -56,16 +56,16 @@ export default function UploadAlbum() {
             onChange={handleNameChange}
           />
         </label>
-        <label htmlFor='image'>
+        <label htmlFor="image">
           <span>Cover Art</span>
           <input
-            type='file'
-            name='image'
-            id='image'
+            type="file"
+            name="image"
+            id="image"
             onChange={handleImageChange}
           />
         </label>
-        <button type='submit'>Create Album</button>
+        <button type="submit">Create Album</button>
       </form>
     </div>
   )

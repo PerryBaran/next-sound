@@ -59,7 +59,11 @@ export default function Album({
           <h3>{albumName}</h3>
         </div>
         <SongMenu songs={album} />
-        <EditButton albumId={albumId} albumUserId={albumUserId} profile={profile}/>
+        <EditButton
+          albumId={albumId}
+          albumUserId={albumUserId}
+          profile={profile}
+        />
       </div>
       <ul className={css["songs-container"]}>
         {songs.map((song) => {

@@ -1,9 +1,6 @@
 import { postRequest, getRequest } from "./helpers"
 
-export async function postAlbums(data: {
-  name: string
-  image?: File
-}) {
+export async function postAlbums(data: { name: string; image?: File }) {
   const response = await postRequest("albums", data)
   return response
 }
