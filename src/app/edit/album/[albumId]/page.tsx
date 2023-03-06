@@ -32,7 +32,7 @@ interface SWRRequest {
 export default function EditAlbum(props: Props) {
   const { albumId } = props.params
   const { data }: { data: SWRRequest } = useSWR(
-    `https://soundcloud-clone-api.onrender.com/albums/${albumId}`,
+    `/albums/${albumId}`,
     getByIdRequestSWR
   )
 
