@@ -104,9 +104,18 @@ export async function getRequest(
   }
 }
 
-export async function getByIdRequest(model: Model, id: string | number) {
+export async function getByIdRequest(model: Model, id: string) {
   try {
     const response = await instance.get(`/${model}/${id}`, config())
+    return response.data
+  } catch (err: any | { response: { data: { message: string } } }) {
+    error(err)
+  }
+}
+
+export async function getByIdRequestSWR(route: string) {
+  try {
+    const response = await instance.get(route, config())
     return response.data
   } catch (err: any | { response: { data: { message: string } } }) {
     error(err)
