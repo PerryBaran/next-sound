@@ -6,7 +6,7 @@ import useSWR from "swr"
 import { getByIdRequestSWR } from "@/requests/helpers"
 import Alert from "@/components/alert/Alert"
 import { patchAlbums, deleteAlbums } from "@/requests/albums"
-import { patchSongs, deleteSongs } from "@/requests/songs"
+import { patchSongs, deleteSongs, postSongs } from "@/requests/songs"
 import { useUserContext } from "@/context/UserContext"
 
 interface Props {
@@ -21,9 +21,9 @@ interface Album {
 interface Songs {
   name: string
   audio?: File
-  delete: boolean
-  position: number
-  id: string
+  delete?: boolean
+  position?: number
+  id?: string
   key: string
 }
 
@@ -138,44 +138,111 @@ export default function EditAlbum(props: Props) {
     setPlaceholders(_placeholders)
   }
 
-  const handleSubmit = async (e: React.FormEvent, addSongs = false) => {
+  const addSong = () => {
+    setSongs((prev) => [...prev, {
+      name: "",
+      audio: undefined,
+      key: crypto.randomUUID()
+    }])
+
+    setPlaceholders((prev) => {
+      const clone = {...prev}
+      clone.Songs.push({
+        name: "",
+        audio: undefined,
+        key: crypto.randomUUID()
+      })
+      return clone
+    })
+  }
+
+  const removeSong = (i: number) => {
+    setSongs((prev) => {
+      const clone = [...prev]
+      clone.splice(i, 1)
+      return clone
+    })
+
+    setPlaceholders((prev) => {
+      const clone = {...prev}
+      clone.Songs.splice(i, 1)
+      return clone
+    })
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    const promises = []
+    const albumPromise = []
 
     if (album.name || album.image) {
       const data = {
         name: album.name || undefined,
         image: album.image || undefined
       }
-      promises.push(patchAlbums(albumId, data))
+      albumPromise.push(data)
     }
 
+    const { length } = songs;
+
     let position = 0
-    songs.forEach((song) => {
-      if (song.delete) {
-        promises.push(deleteSongs(song.id))
-      } else {
-        if (song.name || song.audio || song.position !== position) {
+    let songDeletePromises = []
+    let songPatchPromises = []
+    let songPostPromises = []
+    for (let i = 0; i < length; i++) {
+      const song = songs[i]
+      if (song.id) {
+        if (song.delete) {
+          songDeletePromises.push(song.id)
+        } else if (song.name || song.audio || song.position !== position) {
           const data = {
             name: song.name !== "" ? song.name : undefined,
             audio: song.audio || undefined,
             position: song.position !== position ? song.position : undefined
           }
-          promises.push(patchSongs(song.id, data))
+          songPatchPromises.push({
+            id: song.id,
+            data
+          })
+          position++
         }
-        position += 1
+      } else {
+        if (!song.name) {
+          setAlert("All songs must contain a name")
+          return
+        }
+        if (!song.audio) {
+          setAlert("All songs must contain audio")
+          return
+        }
+        const data = {
+          name: song.name,
+          audio: song.audio,
+          position,
+        }
+        songPostPromises.push(data)
       }
-    })
+    }
 
     try {
-      await Promise.all(promises)
+      await Promise.all([
+        ...albumPromise.map((album) => patchAlbums(albumId, album)),
+        ...songDeletePromises.map((id) => deleteSongs(id)),
+        ...songPatchPromises.map((song) => patchSongs(song.id, song.data)),
+        ...songPostPromises.map((data) => postSongs({...data, AlbumId: albumId}))
+      ])
+      
+      router.push(`profile/${name}`)
+    } catch (err: any | Error) {
+      setAlert(err?.message || "Unexpected Error")
+    }
+  }
 
-      if (addSongs) {
-        router.push(`/upload/${albumId}?albumLength=${position + 1}`)
-      } else {
-        router.push(`profile/${name}`)
-      }
+  const handleDeleteAlbum = async () => {
+    try {
+      await deleteAlbums(albumId)
+
+      router.push(`profile/${name}`)
     } catch (err: any | Error) {
       setAlert(err?.message || "Unexpected Error")
     }
@@ -191,7 +258,7 @@ export default function EditAlbum(props: Props) {
             delete: false,
             id: song.id,
             position: i,
-            key: crypto.randomUUID()
+            key: crypto.randomUUID(),
           }
         })
       })
@@ -220,52 +287,61 @@ export default function EditAlbum(props: Props) {
             <input type="file" id="art" onChange={handleAlbumImageChange} />
           </label>
         </div>
-        <h3>Edit Songs</h3>
-        {songs.map((song, i) => {
-          return (
-            <div
-              key={song.key}
-              draggable
-              onDragEnter={(e) => dragEnter(e, i)}
-              onDragEnd={(e) => dragEnd(e, i)}
-            >
-              <h4>Song {i + 1}</h4>
-              <label htmlFor={`song-name${i}`}>
-                <span>Song Name</span>
-                <input
-                  type="text"
-                  id={`song-name${i}`}
-                  name="name"
-                  value={song.name}
-                  placeholder={placeholder?.Songs[i]?.name}
-                  onChange={(e) => handleSongNameChange(e, i)}
-                />
-              </label>
-              <label htmlFor={`song-audio${i}`}>
-                <span className="upload-info">Audio</span>
-                <input
-                  type="file"
-                  id={`song-audio${i}`}
-                  onChange={(e) => handleSongAudioChange(e, i)}
-                />
-              </label>
-              <label htmlFor={`delete-song${i}`}>
-                <span className="upload-info">Delete Song?</span>
-                <input
-                  type="checkbox"
-                  id={`delete-song${i}`}
-                  name="delete"
-                  checked={song.delete}
-                  onChange={(e) => handleSongDelete(e, i)}
-                />
-              </label>
-            </div>
-          )
-        })}
+        <div>
+          <h3>Edit Songs</h3>
+          {songs.map((song, i) => {
+            return (
+              <div
+                key={song.key}
+                draggable
+                onDragEnter={(e) => dragEnter(e, i)}
+                onDragEnd={(e) => dragEnd(e, i)}
+              >
+                <h4>Song {i + 1}</h4>
+                <label htmlFor={`song-name${i}`}>
+                  <span>Song Name</span>
+                  <input
+                    type="text"
+                    id={`song-name${i}`}
+                    name="name"
+                    value={song.name}
+                    placeholder={placeholder?.Songs[i]?.name}
+                    onChange={(e) => handleSongNameChange(e, i)}
+                  />
+                </label>
+                <label htmlFor={`song-audio${i}`}>
+                  <span className="upload-info">Audio</span>
+                  <input
+                    type="file"
+                    id={`song-audio${i}`}
+                    onChange={(e) => handleSongAudioChange(e, i)}
+                  />
+                </label>
+                {song.position === undefined ? (
+                  <button type="button" onClick={() => removeSong(i)}>
+                    x
+                  </button>
+                ) : (
+                  <label htmlFor={`delete-song${i}`}>
+                    <span className="upload-info">Delete Song?</span>
+                    <input
+                      type="checkbox"
+                      id={`delete-song${i}`}
+                      name="delete"
+                      checked={song.delete}
+                      onChange={(e) => handleSongDelete(e, i)}
+                    />
+                  </label>
+                )}
+              </div>
+            )
+          })}
+          <button type="button" onClick={addSong}>
+            +
+          </button>
+        </div>
         <button type="submit">Save Changes</button>
-        <button type="button" onClick={(e) => handleSubmit(e, true)}>
-          Save Changes & Add New Songs
-        </button>
+        <button type="button" onClick={handleDeleteAlbum}>Delete Album</button>
         <button type="button">Cancel</button>
       </form>
     </div>
