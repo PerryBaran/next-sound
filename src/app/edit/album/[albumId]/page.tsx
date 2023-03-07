@@ -8,6 +8,7 @@ import Alert from "@/components/alert/Alert"
 import { patchAlbums, deleteAlbums } from "@/requests/albums"
 import { patchSongs, deleteSongs, postSongs } from "@/requests/songs"
 import { useUserContext } from "@/context/UserContext"
+import css from "./editAlbum.module.css"
 
 interface Props {
   params: { albumId: string }
@@ -297,6 +298,7 @@ export default function EditAlbum(props: Props) {
                 draggable
                 onDragEnter={(e) => dragEnter(e, i)}
                 onDragEnd={(e) => dragEnd(e, i)}
+                className={css.song}
               >
                 <h4>Song {i + 1}</h4>
                 <label htmlFor={`song-name${i}`}>
@@ -319,11 +321,11 @@ export default function EditAlbum(props: Props) {
                   />
                 </label>
                 {!song.id ? (
-                  <button type="button" onClick={() => removeSong(i)}>
+                  <button type="button" onClick={() => removeSong(i)} className={css["delete-song"]}>
                     x
                   </button>
                 ) : (
-                  <label htmlFor={`delete-song${i}`}>
+                  <label htmlFor={`delete-song${i}`} className={css["delete-song"]}>
                     <span className="upload-info">x</span>
                     <input
                       type="checkbox"

@@ -1,0 +1,28 @@
+.song {
+  display: flex;
+}
+
+.delete-song {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--darker-grey);
+  color: white;
+  border: none;
+  aspect-ratio: 1/1;
+  height: 20px;
+  cursor: pointer;
+}
+
+.delete-song:hover {
+  background-color: red;
+}
+
+.delete-song:has(input[type="checkbox"]:checked) {
+  background-color: red;
+}
+
+.delete-song > input[type="checkbox"] {
+  display: none;
+}
