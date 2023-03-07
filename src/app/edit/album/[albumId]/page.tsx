@@ -221,6 +221,7 @@ export default function EditAlbum(props: Props) {
           position,
         }
         songPostPromises.push(data)
+        position++
       }
     }
 
@@ -231,7 +232,7 @@ export default function EditAlbum(props: Props) {
         ...songPatchPromises.map((song) => patchSongs(song.id, song.data)),
         ...songPostPromises.map((data) => postSongs({...data, AlbumId: albumId}))
       ])
-      
+
       router.push(`profile/${name}`)
     } catch (err: any | Error) {
       setAlert(err?.message || "Unexpected Error")
@@ -317,13 +318,13 @@ export default function EditAlbum(props: Props) {
                     onChange={(e) => handleSongAudioChange(e, i)}
                   />
                 </label>
-                {song.position === undefined ? (
+                {!song.id ? (
                   <button type="button" onClick={() => removeSong(i)}>
                     x
                   </button>
                 ) : (
                   <label htmlFor={`delete-song${i}`}>
-                    <span className="upload-info">Delete Song?</span>
+                    <span className="upload-info">x</span>
                     <input
                       type="checkbox"
                       id={`delete-song${i}`}
