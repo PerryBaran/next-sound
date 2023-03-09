@@ -1,4 +1,10 @@
-import { postRequest, getRequest, patchRequest, deleteRequest } from "./helpers"
+import {
+  postRequest,
+  getRequest,
+  patchRequest,
+  deleteRequest,
+  getByIdRequest
+} from "./helpers"
 
 export async function postAlbums(data: { name: string; image?: File }) {
   const response = await postRequest("albums", data)
@@ -18,7 +24,12 @@ export async function getAlbums(
   return response
 }
 
-export async function patchAlbums(
+export async function getAlbumById(id: string) {
+  const response = await getByIdRequest("albums", id)
+  return response
+}
+
+export async function patchAlbum(
   id: string,
   data: { name?: string; image?: File }
 ) {
@@ -26,7 +37,7 @@ export async function patchAlbums(
   return response
 }
 
-export async function deleteAlbums(id: string) {
+export async function deleteAlbum(id: string) {
   const response = await deleteRequest("albums", id)
   return response
 }
