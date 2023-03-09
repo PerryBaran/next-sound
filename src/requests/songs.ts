@@ -22,7 +22,7 @@ export async function getSongs(
   return response
 }
 
-export async function patchSongs(
+export async function patchSong(
   id: string,
   data: { name?: string; audio?: File; position?: number }
 ) {
@@ -30,7 +30,7 @@ export async function patchSongs(
   return response
 }
 
-export async function deleteSongs(id: string) {
+export async function deleteSong(id: string) {
   const response = await deleteRequest("songs", id)
   return response
 }
