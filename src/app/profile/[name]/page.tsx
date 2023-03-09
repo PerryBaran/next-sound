@@ -2,6 +2,7 @@ import { getUsers } from "@/requests/users"
 import Album from "@/components/album/Album"
 import css from "./profile.module.css"
 import User from "@/interfaces/users"
+import EditProfileButton from "@/components/editProfileButton/EditProfileButton"
 
 interface Props {
   params: { name: string }
@@ -14,14 +15,15 @@ export default async function Profile(props: Props) {
 
   return (
     <div className={css.container}>
-      {!user.name ? (
+      {!user?.name ? (
         <h2>No User Found</h2>
       ) : (
         <div>
           <h2>{user.name}</h2>
+          <EditProfileButton userId={user.id} />
         </div>
       )}
-      {user.Albums &&
+      {user?.Albums &&
         user.Albums.map((album) => {
           return (
             <Album
