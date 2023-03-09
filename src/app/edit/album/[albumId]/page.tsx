@@ -3,10 +3,10 @@
 import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import useSWR from "swr"
-import { getByIdRequestSWR } from "@/requests/helpers"
+import { getAlbumById } from "@/requests/albums"
 import Alert from "@/components/alert/Alert"
-import { patchAlbums, deleteAlbums } from "@/requests/albums"
-import { patchSongs, deleteSongs, postSongs } from "@/requests/songs"
+import { patchAlbum, deleteAlbum } from "@/requests/albums"
+import { patchSong, deleteSong, postSongs } from "@/requests/songs"
 import { useUserContext } from "@/context/UserContext"
 import css from "./editAlbum.module.css"
 
@@ -37,10 +37,7 @@ interface SWRRequest {
 
 export default function EditAlbum(props: Props) {
   const { albumId } = props.params
-  const { data }: { data: SWRRequest } = useSWR(
-    `/albums/${albumId}`,
-    getByIdRequestSWR
-  )
+  const { data }: { data: SWRRequest } = useSWR(`${albumId}`, getAlbumById)
   const [placeholder, setPlaceholders] = useState(data)
   const [album, setAlbum] = useState<Album>({
     name: "",
@@ -140,14 +137,17 @@ export default function EditAlbum(props: Props) {
   }
 
   const addSong = () => {
-    setSongs((prev) => [...prev, {
-      name: "",
-      audio: undefined,
-      key: crypto.randomUUID()
-    }])
+    setSongs((prev) => [
+      ...prev,
+      {
+        name: "",
+        audio: undefined,
+        key: crypto.randomUUID()
+      }
+    ])
 
     setPlaceholders((prev) => {
-      const clone = {...prev}
+      const clone = { ...prev }
       clone.Songs.push({
         name: "",
         audio: undefined,
@@ -165,7 +165,7 @@ export default function EditAlbum(props: Props) {
     })
 
     setPlaceholders((prev) => {
-      const clone = {...prev}
+      const clone = { ...prev }
       clone.Songs.splice(i, 1)
       return clone
     })
@@ -184,7 +184,7 @@ export default function EditAlbum(props: Props) {
       albumPromise.push(data)
     }
 
-    const { length } = songs;
+    const { length } = songs
 
     let position = 0
     let songDeletePromises = []
@@ -219,7 +219,7 @@ export default function EditAlbum(props: Props) {
         const data = {
           name: song.name,
           audio: song.audio,
-          position,
+          position
         }
         songPostPromises.push(data)
         position++
@@ -228,10 +228,12 @@ export default function EditAlbum(props: Props) {
 
     try {
       await Promise.all([
-        ...albumPromise.map((album) => patchAlbums(albumId, album)),
-        ...songDeletePromises.map((id) => deleteSongs(id)),
-        ...songPatchPromises.map((song) => patchSongs(song.id, song.data)),
-        ...songPostPromises.map((data) => postSongs({...data, AlbumId: albumId}))
+        ...albumPromise.map((album) => patchAlbum(albumId, album)),
+        ...songDeletePromises.map((id) => deleteSong(id)),
+        ...songPatchPromises.map((song) => patchSong(song.id, song.data)),
+        ...songPostPromises.map((data) =>
+          postSongs({ ...data, AlbumId: albumId })
+        )
       ])
 
       router.push(`profile/${name}`)
@@ -242,12 +244,16 @@ export default function EditAlbum(props: Props) {
 
   const handleDeleteAlbum = async () => {
     try {
-      await deleteAlbums(albumId)
+      await deleteAlbum(albumId)
 
       router.push(`profile/${name}`)
     } catch (err: any | Error) {
       setAlert(err?.message || "Unexpected Error")
     }
+  }
+
+  const handleCancel = () => {
+    router.back()
   }
 
   useEffect(() => {
@@ -260,7 +266,7 @@ export default function EditAlbum(props: Props) {
             delete: false,
             id: song.id,
             position: i,
-            key: crypto.randomUUID(),
+            key: crypto.randomUUID()
           }
         })
       })
@@ -321,11 +327,18 @@ export default function EditAlbum(props: Props) {
                   />
                 </label>
                 {!song.id ? (
-                  <button type="button" onClick={() => removeSong(i)} className={css["delete-song"]}>
+                  <button
+                    type="button"
+                    onClick={() => removeSong(i)}
+                    className={css["delete-song"]}
+                  >
                     x
                   </button>
                 ) : (
-                  <label htmlFor={`delete-song${i}`} className={css["delete-song"]}>
+                  <label
+                    htmlFor={`delete-song${i}`}
+                    className={css["delete-song"]}
+                  >
                     <span className="upload-info">x</span>
                     <input
                       type="checkbox"
@@ -344,8 +357,12 @@ export default function EditAlbum(props: Props) {
           </button>
         </div>
         <button type="submit">Save Changes</button>
-        <button type="button" onClick={handleDeleteAlbum}>Delete Album</button>
-        <button type="button">Cancel</button>
+        <button type="button" onClick={handleDeleteAlbum}>
+          Delete Album
+        </button>
+        <button type="button" onClick={handleCancel}>
+          Cancel
+        </button>
       </form>
     </div>
   )
