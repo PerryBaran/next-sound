@@ -113,20 +113,7 @@ export async function getByIdRequest(model: Model, id: string) {
   }
 }
 
-export async function getByIdRequestSWR(route: string) {
-  try {
-    const response = await instance.get(route, config())
-    return response.data
-  } catch (err: any | { response: { data: { message: string } } }) {
-    error(err)
-  }
-}
-
-export async function patchRequest(
-  model: Model,
-  id: string | number,
-  data: any
-) {
+export async function patchRequest(model: Model, id: string, data: any) {
   const formData = createForm(model, data)
 
   try {
@@ -137,7 +124,7 @@ export async function patchRequest(
   }
 }
 
-export async function deleteRequest(model: Model, id: string | number) {
+export async function deleteRequest(model: Model, id: string) {
   try {
     const response = await instance.delete(`/${model}/${id}`, config())
     return response.data
