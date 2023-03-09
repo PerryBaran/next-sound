@@ -38,8 +38,8 @@ export default function UploadAlbum() {
   } = useUserContext()
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAlbum(prev => {
-      return {...prev, name: e.target.value}
+    setAlbum((prev) => {
+      return { ...prev, name: e.target.value }
     })
   }
 
@@ -47,8 +47,8 @@ export default function UploadAlbum() {
     const { files } = e.target
     if (!files) return
 
-    setAlbum(prev => {
-      return {...prev, image: files[0]}
+    setAlbum((prev) => {
+      return { ...prev, image: files[0] }
     })
   }
 
@@ -144,16 +144,18 @@ export default function UploadAlbum() {
       const data = {
         name,
         audio,
-        position: i,
+        position: i
       }
       songPromises.push(data)
     }
 
     try {
       const { id } = await postAlbums(album)
-      await Promise.all(songPromises.map((data) => {
-        return postSongs({...data, AlbumId: id})
-      }))
+      await Promise.all(
+        songPromises.map((data) => {
+          return postSongs({ ...data, AlbumId: id })
+        })
+      )
       router.push(`profile/${name}`)
     } catch (err: any | Error) {
       setAlert(err?.message || "Unexpected Error")
@@ -224,7 +226,7 @@ export default function UploadAlbum() {
           <button type="button" onClick={addSong}>
             +
           </button>
-          <button type="submit">Upload Album</button>  
+          <button type="submit">Upload Album</button>
         </div>
       </form>
     </div>
