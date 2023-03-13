@@ -48,11 +48,11 @@ export default function MusicPlayer() {
   }
 
   const handleSkip = (value: number | boolean) => {
-    if (loop === "song") {
-      if (audioRef.current) audioRef.current.currentTime = 0;
-      setTime(0)
-    } else {
-      skipSong(value, loop)
+    if (loop !== "song") {
+      skipSong(value, loop === "playlist")
+    } else if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play()
     }
   }
 

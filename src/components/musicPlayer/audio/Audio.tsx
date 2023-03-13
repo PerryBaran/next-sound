@@ -17,15 +17,6 @@ export default function Audio({
   setDuration,
   skipSong
 }: Props) {
-  useEffect(() => {
-    if (audioRef.current) {
-      if (playing) {
-        audioRef.current.play()
-      } else {
-        audioRef.current.pause()
-      }
-    }
-  }, [playing, source, audioRef])
 
   const handleLoadedMetaData = () => {
     if (audioRef.current) {
@@ -36,6 +27,16 @@ export default function Audio({
       }
     }
   }
+  
+  useEffect(() => {
+    if (audioRef.current) {
+      if (playing) {
+        audioRef.current.play()
+      } else {
+        audioRef.current.pause()
+      }
+    }
+  }, [playing, source, audioRef])
 
   return (
     <audio
