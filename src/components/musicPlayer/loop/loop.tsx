@@ -5,6 +5,8 @@ interface Props {
 
 export default function Loop({ loop, handleLoop }: Props) {
   return (
-    <button type="button" onClick={handleLoop}>{loop}</button>
+    <button type="button" onClick={handleLoop}>
+      {loop}
+    </button>
   )
 }
