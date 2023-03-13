@@ -11,14 +11,16 @@ import Volume from "./volume/Volume"
 import Playlist from "./playlist/Playlist"
 import Loop from "./loop/loop"
 import { usePlaylistContext } from "@/context/PlaylistContext"
+import Shuffle from "./shuffle/Shuffle"
 
 export default function MusicPlayer() {
-  const { playlist, playlistIndex, skipSong, playing } = usePlaylistContext()
+  const { playlist, playlistIndex, skipSong, playing, handleShuffle } =
+    usePlaylistContext()
 
   const [time, setTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [volume, setVolume] = useState(0.5)
-  const [loop, setLoop]= useState("")
+  const [loop, setLoop] = useState("")
   const audioRef = useRef<HTMLAudioElement>(null)
 
   const song = playlist[playlistIndex] || {}
@@ -40,7 +42,7 @@ export default function MusicPlayer() {
   }
 
   const handleLoop = () => {
-    setLoop(prev => {
+    setLoop((prev) => {
       if (prev === "playlist") return "song"
       if (prev === "song") return ""
       return "playlist"
@@ -51,7 +53,7 @@ export default function MusicPlayer() {
     if (loop !== "song") {
       skipSong(value, loop === "playlist")
     } else if (audioRef.current) {
-      audioRef.current.currentTime = 0;
+      audioRef.current.currentTime = 0
       audioRef.current.play()
     }
   }
@@ -105,10 +107,13 @@ export default function MusicPlayer() {
           <Volume volume={volume} handleVolume={handleVolume} />
         </div>
         <div className={css.centerButton}>
-          <Playlist />
+          <Loop loop={loop} handleLoop={handleLoop} />
         </div>
         <div className={css.centerButton}>
-          <Loop loop={loop} handleLoop={handleLoop} />
+          <Shuffle handleShuffle={handleShuffle} />
+        </div>
+        <div className={css.centerButton}>
+          <Playlist />
         </div>
       </section>
     </>

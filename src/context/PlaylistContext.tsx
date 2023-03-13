@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 
 interface Song {
   image?: string
@@ -25,7 +25,8 @@ const PlaylistContext = createContext({
   ) => {},
   removeFromPlaylist: (i: number) => {},
   playing: false,
-  handlePlaying: (isPlaying: boolean | undefined) => {}
+  handlePlaying: (isPlaying: boolean | undefined) => {},
+  handleShuffle: (shuffled: boolean) => {}
 })
 
 const usePlaylistContext = () => useContext(PlaylistContext)
@@ -34,6 +35,7 @@ function PlaylistProvider({ children }: { children: React.ReactNode }) {
   const [playlist, setPlaylist] = useState<Playlist[]>([])
   const [playlistIndex, setPlaylistIndex] = useState(0)
   const [playing, setPlaying] = useState(false)
+  const [originalPlaylist, setOriginalPlaylist] = useState<Playlist[]>([])
 
   const addToPlaylist = (songs: Song[], addNext = false) => {
     const data = songs.map((song) => {
@@ -41,6 +43,15 @@ function PlaylistProvider({ children }: { children: React.ReactNode }) {
     })
 
     setPlaylist((prev) => {
+      if (addNext) {
+        const clone = [...prev]
+        clone.splice(playlistIndex + 1, 0, ...data)
+        return clone
+      }
+      return [...prev, ...data]
+    })
+
+    setOriginalPlaylist((prev) => {
       if (addNext) {
         const clone = [...prev]
         clone.splice(playlistIndex + 1, 0, ...data)
@@ -75,12 +86,44 @@ function PlaylistProvider({ children }: { children: React.ReactNode }) {
       return clone
     })
 
+    setOriginalPlaylist((prev) => {
+      const clone = [...prev]
+      clone.splice(i, 1)
+      return clone
+    })
+
     setPlaylistIndex((prev) => {
       if (i > prev || prev === 0) {
         return prev
       }
       return prev - 1
     })
+  }
+
+  const shuffle = () => {
+    setPlaylist((prev) => {
+      let clone = [...prev]
+      let counter = clone.length
+
+      while (counter > 0) {
+        let i = Math.floor(Math.random() * counter)
+        counter--
+
+        let temp = clone[counter]
+        clone[counter] = clone[i]
+        clone[i] = temp
+      }
+
+      return clone
+    })
+  }
+
+  const handleShuffle = (shuffled: boolean) => {
+    if (shuffled) {
+      shuffle()
+    } else {
+      setPlaylist(originalPlaylist)
+    }
   }
 
   const skipSong = (value: number | boolean, loop = false) => {
@@ -125,7 +168,8 @@ function PlaylistProvider({ children }: { children: React.ReactNode }) {
         removeFromPlaylist,
         skipSong,
         playing,
-        handlePlaying
+        handlePlaying,
+        handleShuffle
       }}
     >
       {children}
