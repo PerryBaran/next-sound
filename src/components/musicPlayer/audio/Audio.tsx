@@ -17,7 +17,6 @@ export default function Audio({
   setDuration,
   skipSong
 }: Props) {
-
   const handleLoadedMetaData = () => {
     if (audioRef.current) {
       const seconds = Math.round(audioRef.current.duration)
@@ -27,7 +26,7 @@ export default function Audio({
       }
     }
   }
-  
+
   useEffect(() => {
     if (audioRef.current) {
       if (playing) {
