@@ -4,7 +4,7 @@
 
 .container {
   display: grid;
-  grid-template-columns: 2fr 60% 1fr 1fr;
+  grid-template-columns: 2fr 60% 1fr 1fr 1fr;
 
   position: fixed;
   bottom: 0;

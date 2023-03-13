@@ -9,6 +9,7 @@ import Time from "./time/Time"
 import MediaControls from "./mediaControls/MediaControls"
 import Volume from "./volume/Volume"
 import Playlist from "./playlist/Playlist"
+import Loop from "./loop/loop"
 import { usePlaylistContext } from "@/context/PlaylistContext"
 
 export default function MusicPlayer() {
@@ -17,6 +18,7 @@ export default function MusicPlayer() {
   const [time, setTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [volume, setVolume] = useState(0.5)
+  const [loop, setLoop]= useState("")
   const audioRef = useRef<HTMLAudioElement>(null)
 
   const song = playlist[playlistIndex] || {}
@@ -34,6 +36,23 @@ export default function MusicPlayer() {
   const handleAudioTime = (value: number) => {
     if (audioRef.current) {
       audioRef.current.currentTime = value
+    }
+  }
+
+  const handleLoop = () => {
+    setLoop(prev => {
+      if (prev === "playlist") return "song"
+      if (prev === "song") return ""
+      return "playlist"
+    })
+  }
+
+  const handleSkip = (value: number | boolean) => {
+    if (loop === "song") {
+      if (audioRef.current) audioRef.current.currentTime = 0;
+      setTime(0)
+    } else {
+      skipSong(value, loop)
     }
   }
 
@@ -62,7 +81,7 @@ export default function MusicPlayer() {
           source={song.audio}
           audioRef={audioRef}
           setDuration={setDuration}
-          skipSong={skipSong}
+          skipSong={handleSkip}
         />
         <Info
           albumArt={song.image}
@@ -78,7 +97,7 @@ export default function MusicPlayer() {
           />
           <div className={css.belowBar}>
             <Time time={time} />
-            <MediaControls playing={playing} skipSong={skipSong} />
+            <MediaControls playing={playing} skipSong={handleSkip} />
             <Time time={duration} />
           </div>
         </div>
@@ -87,6 +106,9 @@ export default function MusicPlayer() {
         </div>
         <div className={css.centerButton}>
           <Playlist />
+        </div>
+        <div className={css.centerButton}>
+          <Loop loop={loop} handleLoop={handleLoop} />
         </div>
       </section>
     </>

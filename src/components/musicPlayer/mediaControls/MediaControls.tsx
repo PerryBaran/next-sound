@@ -10,8 +10,7 @@ interface Props {
   skipSong: (value: number | boolean) => void
 }
 
-export default function MediaControls(props: Props) {
-  const { playing, skipSong } = props
+export default function MediaControls({ playing, skipSong }: Props) {
   const { handlePlaying } = usePlaylistContext()
 
   return (
