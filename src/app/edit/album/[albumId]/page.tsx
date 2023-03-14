@@ -190,6 +190,7 @@ export default function EditAlbum(props: Props) {
     let songDeletePromises = []
     let songPatchPromises = []
     let songPostPromises = []
+
     for (let i = 0; i < length; i++) {
       const song = songs[i]
       if (song.id) {
@@ -199,13 +200,12 @@ export default function EditAlbum(props: Props) {
           const data = {
             name: song.name !== "" ? song.name : undefined,
             audio: song.audio || undefined,
-            position: song.position !== position ? song.position : undefined
+            position: song.position !== position ? position : undefined
           }
           songPatchPromises.push({
             id: song.id,
             data
           })
-          position++
         }
       } else {
         if (!song.name) {
@@ -222,11 +222,14 @@ export default function EditAlbum(props: Props) {
           position
         }
         songPostPromises.push(data)
+      }
+      if (!song.delete) {
         position++
       }
     }
 
     try {
+      
       await Promise.all([
         ...albumPromise.map((album) => patchAlbum(albumId, album)),
         ...songDeletePromises.map((id) => deleteSong(id)),
@@ -237,6 +240,7 @@ export default function EditAlbum(props: Props) {
       ])
 
       router.push(`profile/${name}`)
+      
     } catch (err: any | Error) {
       setAlert(err?.message || "Unexpected Error")
     }
@@ -271,14 +275,15 @@ export default function EditAlbum(props: Props) {
 
   useEffect(() => {
     if (data && data.Songs) {
+      console.log(data.Songs)
       setSongs(() => {
-        return data.Songs.map((song, i) => {
+        return data.Songs.map((song) => {
           return {
             name: "",
             audio: undefined,
             delete: false,
             id: song.id,
-            position: i,
+            position: song.position,
             key: crypto.randomUUID()
           }
         })
