@@ -256,12 +256,16 @@ export default function EditAlbum(props: Props) {
     router.back()
   }
 
-    const determineConfirm = (string: string) => {
-    switch(string) {
-      case "cancel": return handleCancel;
-      case "submit": return handleSubmit;
-      case "delete": return handleDeleteAlbum;
-      default: return () => {}
+  const determineConfirm = (string: string) => {
+    switch (string) {
+      case "cancel":
+        return handleCancel
+      case "submit":
+        return handleSubmit
+      case "delete":
+        return handleDeleteAlbum
+      default:
+        return () => {}
     }
   }
 
@@ -286,10 +290,12 @@ export default function EditAlbum(props: Props) {
   return (
     <div>
       <Alert message={alert} />
-      <form onSubmit={(e: React.FormEvent) => {
-        e.preventDefault()
-        setConfirm("submit")
-      }}>
+      <form
+        onSubmit={(e: React.FormEvent) => {
+          e.preventDefault()
+          setConfirm("submit")
+        }}
+      >
         <h2>Edit Album</h2>
         <div>
           <label htmlFor="album-name">
@@ -376,7 +382,7 @@ export default function EditAlbum(props: Props) {
           Cancel
         </button>
         {confirm && (
-          <Confirm 
+          <Confirm
             setConfirm={setConfirm}
             callback={determineConfirm(confirm)}
           />

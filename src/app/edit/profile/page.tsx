@@ -100,12 +100,15 @@ function EditProfileForm({ userId }: Props) {
       setAlert(err?.message || "Unexpected Error")
     }
   }
-  
+
   const determineConfirm = (string: string) => {
-    switch(string) {
-      case "cancel": return handleCancel;
-      case "submit": return handleSubmit;
-      default: return () => {}
+    switch (string) {
+      case "cancel":
+        return handleCancel
+      case "submit":
+        return handleSubmit
+      default:
+        return () => {}
     }
   }
 
@@ -121,10 +124,12 @@ function EditProfileForm({ userId }: Props) {
   return (
     <div>
       <Alert message={alert} />
-      <form onSubmit={(e: React.FormEvent) => {
-        e.preventDefault()
-        setConfirm("submit")
-      }}>
+      <form
+        onSubmit={(e: React.FormEvent) => {
+          e.preventDefault()
+          setConfirm("submit")
+        }}
+      >
         <h2>Edit Profile</h2>
         <label htmlFor="name">
           <span>Name</span>
@@ -180,10 +185,7 @@ function EditProfileForm({ userId }: Props) {
         <ConfirmPassword callback={handleDeleteAlbum} setConfirm={setConfirm} />
       )}
       {confirm && confirm !== "delete" && (
-        <Confirm 
-          setConfirm={setConfirm}
-          callback={determineConfirm(confirm)}
-        />
+        <Confirm setConfirm={setConfirm} callback={determineConfirm(confirm)} />
       )}
     </div>
   )
