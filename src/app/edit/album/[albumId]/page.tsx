@@ -9,6 +9,7 @@ import { patchAlbum, deleteAlbum } from "@/requests/albums"
 import { patchSong, deleteSong, postSongs } from "@/requests/songs"
 import { useUserContext } from "@/context/UserContext"
 import css from "./editAlbum.module.css"
+import Confirm from "@/components/confirm/confirm"
 
 interface Props {
   params: { albumId: string }
@@ -50,6 +51,7 @@ export default function EditAlbum(props: Props) {
   const {
     user: { name }
   } = useUserContext()
+  const [confirm, setConfirm] = useState("")
 
   const handleAlbumNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
@@ -171,9 +173,7 @@ export default function EditAlbum(props: Props) {
     })
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-
+  const handleSubmit = async () => {
     const albumPromise = []
 
     if (album.name || album.image) {
@@ -256,6 +256,15 @@ export default function EditAlbum(props: Props) {
     router.back()
   }
 
+    const determineConfirm = (string: string) => {
+    switch(string) {
+      case "cancel": return handleCancel;
+      case "submit": return handleSubmit;
+      case "delete": return handleDeleteAlbum;
+      default: return () => {}
+    }
+  }
+
   useEffect(() => {
     if (data && data.Songs) {
       setSongs(() => {
@@ -277,7 +286,10 @@ export default function EditAlbum(props: Props) {
   return (
     <div>
       <Alert message={alert} />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e: React.FormEvent) => {
+        e.preventDefault()
+        setConfirm("submit")
+      }}>
         <h2>Edit Album</h2>
         <div>
           <label htmlFor="album-name">
@@ -357,12 +369,18 @@ export default function EditAlbum(props: Props) {
           </button>
         </div>
         <button type="submit">Save Changes</button>
-        <button type="button" onClick={handleDeleteAlbum}>
+        <button type="button" onClick={() => setConfirm("delete")}>
           Delete Album
         </button>
-        <button type="button" onClick={handleCancel}>
+        <button type="button" onClick={() => setConfirm("cancel")}>
           Cancel
         </button>
+        {confirm && (
+          <Confirm 
+            setConfirm={setConfirm}
+            callback={determineConfirm(confirm)}
+          />
+        )}
       </form>
     </div>
   )

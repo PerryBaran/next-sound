@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import Alert from "@/components/alert/Alert"
 import { useRouter } from "next/navigation"
 import ConfirmPassword from "@/components/confirmPassword/confirmPassword"
+import Confirm from "@/components/confirm/confirm"
 
 export default function EditProfile() {
   const {
@@ -51,11 +52,12 @@ function EditProfileForm({ userId }: Props) {
     })
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = async () => {
     const EMAIL_REGEX = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
 
-    if (userData.email && !userData.email.match(EMAIL_REGEX)) {
+    if (!userData.name && !userData.email && !userData.password) {
+      setAlert("No changes requested")
+    } else if (userData.email && !userData.email.match(EMAIL_REGEX)) {
       setAlert("Email must be valid")
     } else if (userData.password && userData.password.length < 8) {
       setAlert("Password must be atleast 8 characters long")
@@ -98,6 +100,14 @@ function EditProfileForm({ userId }: Props) {
       setAlert(err?.message || "Unexpected Error")
     }
   }
+  
+  const determineConfirm = (string: string) => {
+    switch(string) {
+      case "cancel": return handleCancel;
+      case "submit": return handleSubmit;
+      default: return () => {}
+    }
+  }
 
   useEffect(() => {
     if (data) {
@@ -111,7 +121,10 @@ function EditProfileForm({ userId }: Props) {
   return (
     <div>
       <Alert message={alert} />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e: React.FormEvent) => {
+        e.preventDefault()
+        setConfirm("submit")
+      }}>
         <h2>Edit Profile</h2>
         <label htmlFor="name">
           <span>Name</span>
@@ -159,12 +172,18 @@ function EditProfileForm({ userId }: Props) {
         <button type="button" onClick={() => setConfirm("delete")}>
           Delete Account
         </button>
-        <button type="button" onClick={handleCancel}>
+        <button type="button" onClick={() => setConfirm("cancel")}>
           Cancel
         </button>
       </form>
       {confirm === "delete" && (
         <ConfirmPassword callback={handleDeleteAlbum} setConfirm={setConfirm} />
+      )}
+      {confirm && confirm !== "delete" && (
+        <Confirm 
+          setConfirm={setConfirm}
+          callback={determineConfirm(confirm)}
+        />
       )}
     </div>
   )
