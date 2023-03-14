@@ -1,0 +1,14 @@
+.container {
+  background: none;
+  border: none;
+}
+
+.container img {
+  position: relative;
+  filter: invert();
+  cursor: pointer;
+}
+
+.faded img {
+  opacity: 0.4;
+}

@@ -12,6 +12,9 @@ import logout from "./logout.png"
 import profile from "./profile.png"
 import search from "./search.png"
 import upload from "./upload.png"
+import loop from "./loop.png"
+import loopSong from "./loopSong.png"
+import shuffle from "./shuffle.png"
 
 export {
   menu,
@@ -27,5 +30,8 @@ export {
   logout,
   profile,
   search,
-  upload
+  upload,
+  loop,
+  loopSong,
+  shuffle
 }
