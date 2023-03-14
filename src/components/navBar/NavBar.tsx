@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import { useRef } from "react"
 import { useUserContext } from "@/context/UserContext"
 import css from "./navbar.module.css"
-import { search } from "@/media/icons"
+import { home, login, logout, profile, search, upload } from "@/media/icons"
 import Image from "next/image"
 
 export default function NavBar() {
@@ -25,6 +25,10 @@ export default function NavBar() {
     }
   }
 
+  const active = (linkPath: string) => {
+    return pathname === linkPath ? css.active : ""
+  }
+
   return (
     <nav className={css.container}>
       <ul>
@@ -33,8 +37,11 @@ export default function NavBar() {
             <h1>Next-Sound</h1>
           </Link>
         </li>
-        <li className={pathname === "/" ? css.active : ""}>
-          <Link href="/">Home</Link>
+        <li className={active("/")}>
+          <Link href="/">
+            <Image src={home} alt="home" height={30} width={30} />
+            <span>Home</span>
+          </Link>
         </li>
         <li>
           <form onSubmit={submitHandler} className={css.search}>
@@ -46,19 +53,31 @@ export default function NavBar() {
         </li>
         {name ? (
           <>
-            <li className={pathname === `/profile/${name}` ? css.active : ""}>
-              <Link href={`/profile/${name}`}>Profile</Link>
+            <li className={active(`/profile/${name}`)}>
+              <Link href={`/profile/${name}`}>
+                <Image src={profile} alt="Profile" height={30} width={30} />
+                <span>Profile</span>
+              </Link>
             </li>
-            <li className={pathname === "/upload" ? css.active : ""}>
-              <Link href="/upload">Upload</Link>
+            <li className={active("/upload")}>
+              <Link href="/upload">
+                <Image src={upload} alt="upload" height={30} width={30} />
+                <span>Upload</span>
+              </Link>
             </li>
-            <li className={pathname === "/logout" ? css.active : ""}>
-              <Link href="/logout">Logout</Link>
+            <li className={active("/logout")}>
+              <Link href="/logout">
+                <Image src={logout} alt="logout" height={30} width={30} />
+                <span>Logout</span>
+              </Link>
             </li>
           </>
         ) : (
-          <li className={pathname === "/login" ? css.active : ""}>
-            <Link href="/login">Login</Link>
+          <li className={active("/login")}>
+            <Link href="/login">
+              <Image src={login} alt="login" height={30} width={30} />
+              <span>Login</span>
+            </Link>
           </li>
         )}
       </ul>

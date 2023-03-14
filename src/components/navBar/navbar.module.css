@@ -49,3 +49,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.container img {
+  filter: invert();
+}
