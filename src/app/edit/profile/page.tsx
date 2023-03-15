@@ -30,15 +30,17 @@ interface SWRRequest {
 
 function EditProfileForm({ userId }: Props) {
   const { data }: { data: SWRRequest } = useSWR(`${userId}`, getUserById)
-  const [placeholders, setPlaceholders] = useState({
-    name: "",
-    email: ""
-  })
   const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
+    current: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: ""
+    },
+    original: {
+      name: "",
+      email: "",
+    }
   })
   const [alert, setAlert] = useState("")
   const router = useRouter()
@@ -48,39 +50,60 @@ function EditProfileForm({ userId }: Props) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setUserData((prev) => {
-      return { ...prev, [name]: value }
+      const clone = {...prev}
+      switch(name) {
+        case "name": { 
+          clone.current.name = value
+          break
+        }
+        case "email": {
+          clone.current.email = value
+          break
+        }
+        case "password": {
+          clone.current.password = value
+          break
+        }
+        case "confirmPassword": {
+          clone.current.confirmPassword = value
+          break
+        }
+      }
+      return clone
     })
   }
 
   const handleSubmit = async () => {
     const EMAIL_REGEX = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
 
-    if (!userData.name && !userData.email && !userData.password) {
+    if (userData.current.name === userData.original.name && userData.current.email === userData.original.email && !userData.current.password) {
       setAlert("No changes requested")
-    } else if (userData.email && !userData.email.match(EMAIL_REGEX)) {
+    } else if (!userData.current.name) {
+      setAlert("Name cannot be empty")
+    } else if (userData.current.email !== userData.original.email && !userData.current.email.match(EMAIL_REGEX)) {
       setAlert("Email must be valid")
-    } else if (userData.password && userData.password.length < 8) {
+    } else if (userData.current.password && userData.current.password.length < 8) {
       setAlert("Password must be atleast 8 characters long")
     } else if (
-      userData.password &&
-      userData.password !== userData.confirmPassword
+      userData.current.password &&
+      userData.current.password !== userData.current.confirmPassword
     ) {
       setAlert("Passwords do not match")
     } else {
       const data = {
-        name: userData.name || undefined,
-        email: userData.email || undefined,
-        password: userData.password || undefined
+        name: userData.current.name || undefined,
+        email: userData.current.email || undefined,
+        password: userData.current.password || undefined
       }
 
       try {
         await patchUser(userId, data)
 
-        if (userData.name) {
-          handleLogin({ name: userData.name })
+        if (userData.current.name) {
+          handleLogin({ name: userData.current.name })
         }
 
-        router.push(`/profile/${userData.name || user.name}`)
+        router.push(`/profile/${userData.current.name || user.name}`)
       } catch (err: any | Error) {
         setAlert(err?.message || "Unexpected Error")
       }
@@ -114,9 +137,20 @@ function EditProfileForm({ userId }: Props) {
 
   useEffect(() => {
     if (data) {
-      setPlaceholders({
-        name: data.name,
-        email: data.email
+      const { name, email } = data
+      setUserData(() => {
+        return {
+          current: {
+            name,
+            email,
+            password: "",
+            confirmPassword: ""
+          },
+          original: {
+            name,
+            email
+          }
+        }
       })
     }
   }, [data])
@@ -137,8 +171,7 @@ function EditProfileForm({ userId }: Props) {
             type="text"
             id="name"
             name="name"
-            value={userData.name}
-            placeholder={placeholders.name}
+            value={userData.current.name}
             onChange={handleChange}
           />
         </label>
@@ -148,8 +181,7 @@ function EditProfileForm({ userId }: Props) {
             type="text"
             id="email"
             name="email"
-            value={userData.email}
-            placeholder={placeholders.email}
+            value={userData.current.email}
             onChange={handleChange}
           />
         </label>
@@ -159,7 +191,7 @@ function EditProfileForm({ userId }: Props) {
             type="password"
             id="password"
             name="password"
-            value={userData.password}
+            value={userData.current.password}
             onChange={handleChange}
           />
         </label>
@@ -169,7 +201,7 @@ function EditProfileForm({ userId }: Props) {
             type="password"
             id="confirm-password"
             name="confirmPassword"
-            value={userData.confirmPassword}
+            value={userData.current.confirmPassword}
             onChange={handleChange}
           />
         </label>

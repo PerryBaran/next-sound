@@ -16,33 +16,50 @@ interface Props {
 }
 
 interface Album {
-  name: string
-  image: File | undefined
+  current: {
+    name: string
+    image?: File
+  },
+  original: {
+    name: string
+  }
 }
 
+
 interface Songs {
-  name: string
-  audio?: File
-  delete?: boolean
-  position?: number
-  id?: string
+  current: {
+    name: string
+    audio?: File
+    delete?: boolean
+  }
+  original?: {
+    name: string
+    position: number
+    id: string
+  }
   key: string
 }
 
 interface SWRRequest {
   name: string
-  url: string | null
   id: string
-  Songs: Songs[]
+  Songs: {
+    name: string
+    position: number
+    id: string
+  }[]
 }
 
 export default function EditAlbum(props: Props) {
   const { albumId } = props.params
   const { data }: { data: SWRRequest } = useSWR(`${albumId}`, getAlbumById)
-  const [placeholder, setPlaceholders] = useState(data)
   const [album, setAlbum] = useState<Album>({
-    name: "",
-    image: undefined
+    current: {
+      name: ""
+    },
+    original: {
+      name: ""
+    }
   })
   const [songs, setSongs] = useState<Songs[]>([])
   const [alert, setAlert] = useState("")
@@ -58,7 +75,7 @@ export default function EditAlbum(props: Props) {
 
     setAlbum((prev) => {
       const clone = { ...prev }
-      clone.name = value
+      clone.current.name = value
       return clone
     })
   }
@@ -70,7 +87,7 @@ export default function EditAlbum(props: Props) {
 
     setAlbum((prev) => {
       const clone = { ...prev }
-      clone.image = files[0]
+      clone.current.image = files[0]
       return clone
     })
   }
@@ -82,7 +99,7 @@ export default function EditAlbum(props: Props) {
     const { value } = e.target
     setSongs((prev) => {
       const clone = [...prev]
-      clone[i].name = value
+      clone[i].current.name = value
       return clone
     })
   }
@@ -97,7 +114,7 @@ export default function EditAlbum(props: Props) {
 
     setSongs((prev) => {
       const clone = [...prev]
-      clone[i].audio = files[0]
+      clone[i].current.audio = files[0]
       return clone
     })
   }
@@ -109,7 +126,7 @@ export default function EditAlbum(props: Props) {
     const { checked } = e.target
     setSongs((prev) => {
       const clone = [...prev]
-      clone[i].delete = checked
+      clone[i].current.delete = checked
       return clone
     })
   }
@@ -129,34 +146,18 @@ export default function EditAlbum(props: Props) {
     _songs.splice(startPosition, 1)
     _songs.splice(endPosition, 0, songContent)
     setSongs(_songs)
-
-    const _placeholders = { ...placeholder }
-    const _placeholdersSongs = _placeholders.Songs
-    const _placeholderContent = _placeholdersSongs[startPosition]
-    _placeholdersSongs.splice(startPosition, 1)
-    _placeholdersSongs.splice(endPosition, 0, _placeholderContent)
-    setPlaceholders(_placeholders)
   }
 
   const addSong = () => {
     setSongs((prev) => [
       ...prev,
       {
-        name: "",
-        audio: undefined,
+        current: {
+          name: ""
+        },
         key: crypto.randomUUID()
       }
     ])
-
-    setPlaceholders((prev) => {
-      const clone = { ...prev }
-      clone.Songs.push({
-        name: "",
-        audio: undefined,
-        key: crypto.randomUUID()
-      })
-      return clone
-    })
   }
 
   const removeSong = (i: number) => {
@@ -165,27 +166,25 @@ export default function EditAlbum(props: Props) {
       clone.splice(i, 1)
       return clone
     })
-
-    setPlaceholders((prev) => {
-      const clone = { ...prev }
-      clone.Songs.splice(i, 1)
-      return clone
-    })
   }
 
   const handleSubmit = async () => {
     const albumPromise = []
 
-    if (album.name || album.image) {
+    if (!album.current.name) {
+      setAlert("Album must have a name")
+      return
+    }
+
+    if (album.current.name !== album.original.name || album.current.image) {
       const data = {
-        name: album.name || undefined,
-        image: album.image || undefined
+        name: album.current.name || undefined,
+        image: album.current.image || undefined
       }
       albumPromise.push(data)
     }
 
     const { length } = songs
-
     let position = 0
     let songDeletePromises = []
     let songPatchPromises = []
@@ -193,43 +192,50 @@ export default function EditAlbum(props: Props) {
 
     for (let i = 0; i < length; i++) {
       const song = songs[i]
-      if (song.id) {
-        if (song.delete) {
-          songDeletePromises.push(song.id)
-        } else if (song.name || song.audio || song.position !== position) {
+      if (song.original) {
+        if (song.current.delete) {
+          songDeletePromises.push(song.original.id)
+        } else if (
+          (song.current.name && song.current.name !== song.original.name) || 
+          (song.current.audio) || 
+          (song.original.position !== position)) {
           const data = {
-            name: song.name !== "" ? song.name : undefined,
-            audio: song.audio || undefined,
-            position: song.position !== position ? position : undefined
+            name: song.current.name && song.current.name !== song.original.name ? song.current.name : undefined,
+            audio: song.current.audio || undefined,
+            position: song.original.position !== position ? position : undefined
           }
+
           songPatchPromises.push({
-            id: song.id,
+            id: song.original.id,
             data
           })
         }
       } else {
-        if (!song.name) {
+        if (!song.current.name) {
           setAlert("All songs must contain a name")
           return
         }
-        if (!song.audio) {
+
+        if (!song.current.audio) {
           setAlert("All songs must contain audio")
           return
         }
+
         const data = {
-          name: song.name,
-          audio: song.audio,
+          name: song.current.name,
+          audio: song.current.audio,
           position
         }
+
         songPostPromises.push(data)
       }
-      if (!song.delete) {
+
+      if (!song.current.delete) {
         position++
       }
     }
 
-    try {
-      
+    try { 
       await Promise.all([
         ...albumPromise.map((album) => patchAlbum(albumId, album)),
         ...songDeletePromises.map((id) => deleteSong(id)),
@@ -240,7 +246,6 @@ export default function EditAlbum(props: Props) {
       ])
 
       router.push(`profile/${name}`)
-      
     } catch (err: any | Error) {
       setAlert(err?.message || "Unexpected Error")
     }
@@ -273,22 +278,36 @@ export default function EditAlbum(props: Props) {
     }
   }
 
+
   useEffect(() => {
     if (data && data.Songs) {
-      console.log(data.Songs)
       setSongs(() => {
         return data.Songs.map((song) => {
           return {
-            name: "",
-            audio: undefined,
-            delete: false,
-            id: song.id,
-            position: song.position,
+            current: {
+              name: song.name,
+              delete: false,
+            },
+            original: {
+              name: song.name,
+              position: song.position,
+              id: song.id
+            },
             key: crypto.randomUUID()
           }
         })
       })
-      setPlaceholders(data)
+
+      setAlbum(() => {
+        return {
+          current: {
+            name: data.name
+          },
+          original: {
+            name: data.name
+          }
+        }
+      })
     }
   }, [data])
 
@@ -308,8 +327,7 @@ export default function EditAlbum(props: Props) {
             <input
               type="text"
               id="album-name"
-              value={album.name}
-              placeholder={placeholder?.name}
+              value={album.current.name}
               onChange={handleAlbumNameChange}
             />
           </label>
@@ -336,8 +354,7 @@ export default function EditAlbum(props: Props) {
                     type="text"
                     id={`song-name${i}`}
                     name="name"
-                    value={song.name}
-                    placeholder={placeholder?.Songs[i]?.name}
+                    value={song.current.name}
                     onChange={(e) => handleSongNameChange(e, i)}
                   />
                 </label>
@@ -349,7 +366,7 @@ export default function EditAlbum(props: Props) {
                     onChange={(e) => handleSongAudioChange(e, i)}
                   />
                 </label>
-                {!song.id ? (
+                {!song.original ? (
                   <button
                     type="button"
                     onClick={() => removeSong(i)}
@@ -367,7 +384,7 @@ export default function EditAlbum(props: Props) {
                       type="checkbox"
                       id={`delete-song${i}`}
                       name="delete"
-                      checked={song.delete}
+                      checked={song.current.delete}
                       onChange={(e) => handleSongDelete(e, i)}
                     />
                   </label>
