@@ -20,7 +20,6 @@ interface Album {
   image?: File
 }
 
-
 interface Songs {
   current: {
     name: string
@@ -49,8 +48,8 @@ export default function EditAlbum(props: Props) {
   const { albumId } = props.params
   const { data }: { data: SWRRequest } = useSWR(`${albumId}`, getAlbumById)
   const [album, setAlbum] = useState<Album>({
-      name: ""
-    })
+    name: ""
+  })
   const [songs, setSongs] = useState<Songs[]>([])
   const [alert, setAlert] = useState("")
   const dragOver = useRef(0)
@@ -83,6 +82,7 @@ export default function EditAlbum(props: Props) {
     i: number
   ) => {
     const { value } = e.target
+
     setSongs((prev) => {
       const clone = [...prev]
       clone[i].current.name = value
@@ -117,12 +117,11 @@ export default function EditAlbum(props: Props) {
     })
   }
 
-  const dragEnter = (e: React.DragEvent<HTMLDivElement>, position: number) => {
+  const dragEnter = (position: number) => {
     dragOver.current = position
   }
 
   const dragEnd = (
-    e: React.DragEvent<HTMLDivElement>,
     startPosition: number
   ) => {
     const endPosition = dragOver.current
@@ -178,18 +177,21 @@ export default function EditAlbum(props: Props) {
     for (let i = 0; i < length; i++) {
       const song = songs[i]
       if (song.original) {
-        
         if (song.current.delete) {
           songDeletePromises.push(song.original.id)
         } else if (!song.current.name) {
           setAlert("song must have a name")
           return
         } else if (
-          (song.current.name !== song.original.name) || 
-          (song.current.audio) || 
-          (song.original.position !== position)) {
+          song.current.name !== song.original.name ||
+          song.current.audio ||
+          song.original.position !== position
+        ) {
           const data = {
-            name: song.current.name !== song.original.name ? song.current.name : undefined,
+            name:
+              song.current.name !== song.original.name
+                ? song.current.name
+                : undefined,
             audio: song.current.audio || undefined,
             position: song.original.position !== position ? position : undefined
           }
@@ -224,7 +226,7 @@ export default function EditAlbum(props: Props) {
       }
     }
 
-    try { 
+    try {
       await Promise.all([
         ...albumPromise.map((album) => patchAlbum(albumId, album)),
         ...songDeletePromises.map((id) => deleteSong(id)),
@@ -267,7 +269,6 @@ export default function EditAlbum(props: Props) {
     }
   }
 
-
   useEffect(() => {
     if (data && data.Songs) {
       setSongs(() => {
@@ -275,7 +276,7 @@ export default function EditAlbum(props: Props) {
           return {
             current: {
               name: song.name,
-              delete: false,
+              delete: false
             },
             original: {
               name: song.name,
@@ -285,7 +286,6 @@ export default function EditAlbum(props: Props) {
             key: crypto.randomUUID()
           }
         })
-        
       })
 
       setAlbum({
@@ -326,8 +326,8 @@ export default function EditAlbum(props: Props) {
               <div
                 key={song.key}
                 draggable
-                onDragEnter={(e) => dragEnter(e, i)}
-                onDragEnd={(e) => dragEnd(e, i)}
+                onDragEnter={() => dragEnter(i)}
+                onDragEnd={() => dragEnd(i)}
                 className={css.song}
               >
                 <h4>Song {i + 1}</h4>

@@ -31,10 +31,10 @@ interface SWRRequest {
 function EditProfileForm({ userId }: Props) {
   const { data }: { data: SWRRequest } = useSWR(`${userId}`, getUserById)
   const [userData, setUserData] = useState({
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: ""
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
   })
   const [alert, setAlert] = useState("")
   const router = useRouter()
@@ -44,18 +44,25 @@ function EditProfileForm({ userId }: Props) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setUserData((prev) => {
-      return {...prev, [name]: value}
+      return { ...prev, [name]: value }
     })
   }
 
   const handleSubmit = async () => {
     const EMAIL_REGEX = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
 
-    if (userData.name === data.name && userData.email === userData.email && !userData.password) {
+    if (
+      userData.name === data.name &&
+      userData.email === userData.email &&
+      !userData.password
+    ) {
       setAlert("No changes requested")
     } else if (!userData.name) {
       setAlert("Name cannot be empty")
-    } else if (userData.email !== data.email && !userData.email.match(EMAIL_REGEX)) {
+    } else if (
+      userData.email !== data.email &&
+      !userData.email.match(EMAIL_REGEX)
+    ) {
       setAlert("Email must be valid")
     } else if (userData.password && userData.password.length < 8) {
       setAlert("Password must be atleast 8 characters long")
