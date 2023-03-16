@@ -18,7 +18,8 @@ export default function Volume({ volume, handleVolume }: Props) {
     handleVolume(currentVolume)
   }
 
-  const handleVolumeToggle = () => {
+  const handleVolumeToggle = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    console.log(e)
     const preVolume = volume
     if (preVolume !== 0) {
       handleVolume(0)
@@ -40,7 +41,7 @@ export default function Volume({ volume, handleVolume }: Props) {
         data-testid="volume"
       />
       <div className={style.volume}>
-        <button type="button" onMouseDown={handleVolumeToggle}>
+        <button type="button" onClick={handleVolumeToggle}>
           <VolumeIcon volume={volume} />
         </button>
       </div>
