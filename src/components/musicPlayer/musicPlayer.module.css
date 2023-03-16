@@ -37,3 +37,36 @@
   align-items: center;
   justify-content: center;
 }
+
+@media screen and (max-width: 1000px) {
+  .container {
+    grid-template-columns: 2;
+    grid-template-columns: 1fr 1fr 40% 1fr 1fr;
+    padding: 5px;
+  }
+
+  .center {
+    grid-row: 2;
+    grid-column: 3;
+  }
+  
+  .loop, .shuffle, .volume, .playlist {
+    grid-row: 1 / span 2
+  }
+
+  .loop {
+    grid-column: 1;
+  }
+
+  .shuffle {
+    grid-column: 2;
+  }
+
+  .volume {
+    grid-column: 4;
+  }
+  
+  .playlist {
+    grid-column: 5;
+  }
+}

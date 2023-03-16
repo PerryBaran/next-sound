@@ -40,7 +40,7 @@ export default function Volume({ volume, handleVolume }: Props) {
         data-testid="volume"
       />
       <div className={style.volume}>
-        <button type="button" onClick={handleVolumeToggle}>
+        <button type="button" onMouseDown={handleVolumeToggle}>
           <VolumeIcon volume={volume} />
         </button>
       </div>

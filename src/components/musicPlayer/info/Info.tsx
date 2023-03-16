@@ -32,8 +32,7 @@ export default function Info(props: Props) {
           style={{ filter: "invert()" }}
         />
       )}
-
-      <div>
+      <div className={style.info}>
         <h3>{artistName}</h3>
         <p>{songName}</p>
       </div>

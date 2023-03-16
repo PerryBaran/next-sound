@@ -103,16 +103,16 @@ export default function MusicPlayer() {
             <Time time={duration} />
           </div>
         </div>
-        <div className={css.centerButton}>
-          <Volume volume={volume} handleVolume={handleVolume} />
-        </div>
-        <div className={css.centerButton}>
+        <div className={`${css.centerButton} ${css.loop}`}>
           <Loop loop={loop} handleLoop={handleLoop} />
         </div>
-        <div className={css.centerButton}>
+        <div className={`${css.centerButton} ${css.shuffle}`}>
           <Shuffle handleShuffle={handleShuffle} />
         </div>
-        <div className={css.centerButton}>
+        <div className={`${css.centerButton} ${css.volume}`}>
+          <Volume volume={volume} handleVolume={handleVolume} />
+        </div>
+        <div className={`${css.centerButton} ${css.playlist}`}>
           <Playlist />
         </div>
       </section>

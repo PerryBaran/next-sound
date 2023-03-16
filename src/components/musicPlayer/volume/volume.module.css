@@ -67,10 +67,3 @@
   background: none;
   border: none;
 }
-
-@media (orientation: portrait) {
-  .container {
-    grid-row: 2;
-    grid-column: 1;
-  }
-}
