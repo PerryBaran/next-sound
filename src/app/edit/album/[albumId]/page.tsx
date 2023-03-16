@@ -16,13 +16,8 @@ interface Props {
 }
 
 interface Album {
-  current: {
-    name: string
-    image?: File
-  },
-  original: {
-    name: string
-  }
+  name: string
+  image?: File
 }
 
 
@@ -54,13 +49,8 @@ export default function EditAlbum(props: Props) {
   const { albumId } = props.params
   const { data }: { data: SWRRequest } = useSWR(`${albumId}`, getAlbumById)
   const [album, setAlbum] = useState<Album>({
-    current: {
       name: ""
-    },
-    original: {
-      name: ""
-    }
-  })
+    })
   const [songs, setSongs] = useState<Songs[]>([])
   const [alert, setAlert] = useState("")
   const dragOver = useRef(0)
@@ -74,9 +64,7 @@ export default function EditAlbum(props: Props) {
     const { value } = e.target
 
     setAlbum((prev) => {
-      const clone = { ...prev }
-      clone.current.name = value
-      return clone
+      return { ...prev, name: value }
     })
   }
 
@@ -86,9 +74,7 @@ export default function EditAlbum(props: Props) {
     if (!files) return
 
     setAlbum((prev) => {
-      const clone = { ...prev }
-      clone.current.image = files[0]
-      return clone
+      return { ...prev, image: files[0] }
     })
   }
 
@@ -171,17 +157,16 @@ export default function EditAlbum(props: Props) {
   const handleSubmit = async () => {
     const albumPromise = []
 
-    if (!album.current.name) {
+    if (!album.name) {
       setAlert("Album must have a name")
       return
     }
 
-    if (album.current.name !== album.original.name || album.current.image) {
-      const data = {
-        name: album.current.name || undefined,
-        image: album.current.image || undefined
-      }
-      albumPromise.push(data)
+    if (album.name !== data.name || album.image) {
+      albumPromise.push({
+        name: album.name !== data.name ? album.name : undefined,
+        image: album.image || undefined
+      })
     }
 
     const { length } = songs
@@ -193,14 +178,18 @@ export default function EditAlbum(props: Props) {
     for (let i = 0; i < length; i++) {
       const song = songs[i]
       if (song.original) {
+        
         if (song.current.delete) {
           songDeletePromises.push(song.original.id)
+        } else if (!song.current.name) {
+          setAlert("song must have a name")
+          return
         } else if (
-          (song.current.name && song.current.name !== song.original.name) || 
+          (song.current.name !== song.original.name) || 
           (song.current.audio) || 
           (song.original.position !== position)) {
           const data = {
-            name: song.current.name && song.current.name !== song.original.name ? song.current.name : undefined,
+            name: song.current.name !== song.original.name ? song.current.name : undefined,
             audio: song.current.audio || undefined,
             position: song.original.position !== position ? position : undefined
           }
@@ -296,17 +285,11 @@ export default function EditAlbum(props: Props) {
             key: crypto.randomUUID()
           }
         })
+        
       })
 
-      setAlbum(() => {
-        return {
-          current: {
-            name: data.name
-          },
-          original: {
-            name: data.name
-          }
-        }
+      setAlbum({
+        name: data.name
       })
     }
   }, [data])
@@ -327,7 +310,7 @@ export default function EditAlbum(props: Props) {
             <input
               type="text"
               id="album-name"
-              value={album.current.name}
+              value={album.name}
               onChange={handleAlbumNameChange}
             />
           </label>
