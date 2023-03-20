@@ -1,6 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import Alert from '../src/components/alert/Alert'
-import '@testing-library/jest-dom'
+import { render, screen } from "@testing-library/react"
+import Alert from "../../src/components/alert/Alert"
 
 describe("Alert", () => {
   test("if passed a truthy message, message is rendered to screen", () => {

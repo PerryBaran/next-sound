@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditButton snapshot albumUserId doesn't match user id in userContext 1`] = `<DocumentFragment />`;
+
+exports[`EditButton snapshot profile is falsey 1`] = `<DocumentFragment />`;
+
+exports[`EditButton snapshot profile is truthy and albumuserId matches id in userContext 1`] = `
+<DocumentFragment>
+  <a
+    href="/edit/album/test-album-id"
+  >
+    Edit Album
+  </a>
+</DocumentFragment>
+`;
