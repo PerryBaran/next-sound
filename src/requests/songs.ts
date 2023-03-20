@@ -9,13 +9,11 @@ export async function postSongs(data: {
   const response = await postRequest("songs", data)
 }
 
-export async function getSongs(
-  query?: {
-    name?: string
-    exact?: boolean
-    limit?: number | string
-  }
-) {
+export async function getSongs(query?: {
+  name?: string
+  exact?: boolean
+  limit?: number | string
+}) {
   const response = await getRequest("songs", query)
   return response
 }

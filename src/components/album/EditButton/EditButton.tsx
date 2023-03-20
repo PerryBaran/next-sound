@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useUserContext } from "@/context/UserContext"
+import { useUserContext } from "../../../context/UserContext"
 
 interface Props {
   albumId: string

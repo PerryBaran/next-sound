@@ -18,7 +18,9 @@ export default function Volume({ volume, handleVolume }: Props) {
     handleVolume(currentVolume)
   }
 
-  const handleVolumeToggle = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleVolumeToggle = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     console.log(e)
     const preVolume = volume
     if (preVolume !== 0) {

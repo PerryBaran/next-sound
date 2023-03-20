@@ -121,9 +121,7 @@ export default function EditAlbum(props: Props) {
     dragOver.current = position
   }
 
-  const dragEnd = (
-    startPosition: number
-  ) => {
+  const dragEnd = (startPosition: number) => {
     const endPosition = dragOver.current
 
     const _songs = [...songs]

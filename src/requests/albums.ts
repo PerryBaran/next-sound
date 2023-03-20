@@ -11,15 +11,11 @@ export async function postAlbums(data: { name: string; image?: File }) {
   return response
 }
 
-
-
-export async function getAlbums(
-  query?:{
-    name?: string
-    exact?: boolean
-    limit?: number
-  }
-) {
+export async function getAlbums(query?: {
+  name?: string
+  exact?: boolean
+  limit?: number
+}) {
   const response = await getRequest("albums", query)
   return response
 }

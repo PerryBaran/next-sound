@@ -23,13 +23,11 @@ export async function signup(data: {
   return response
 }
 
-export async function getUsers(
-  query?: {
-    name?: string
-    exact?: boolean
-    limit?: number | string
-  }
-) {
+export async function getUsers(query?: {
+  name?: string
+  exact?: boolean
+  limit?: number | string
+}) {
   const response = await getRequest("users", query)
   return response
 }

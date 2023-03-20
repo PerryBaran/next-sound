@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, useEffect } from "react"
-import { getUserById } from "@/requests/users"
+import { getUserById } from "../requests/users"
 import Cookie from "js-cookie"
 import jwtDecode from "jwt-decode"
 
@@ -17,7 +17,7 @@ const emptyUser = {
 
 const UserContext = createContext({
   user: emptyUser,
-  handleLogin: (data: User | undefined) => {}
+  handleLogin: (data?: User) => {}
 })
 
 const useUserContext = () => useContext(UserContext)
@@ -25,7 +25,7 @@ const useUserContext = () => useContext(UserContext)
 function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState(emptyUser)
 
-  const handleLogin = (data: User | undefined) => {
+  const handleLogin = (data?: User) => {
     if (data === undefined) {
       Cookie.remove("userToken")
       setUser(emptyUser)
