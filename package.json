@@ -8,7 +8,7 @@
     "start": "next start",
     "test": "jest",
     "lint": "next lint",
-    "prettier": "prettier --config .prettierrc 'src/**/*' --write"
+    "prettier": "prettier --config .prettierrc '{__tests__,src}/**/*' --write"
   },
   "dependencies": {
     "@next/font": "13.1.6",
