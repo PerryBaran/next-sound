@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import css from "./album.module.css"
 import { music } from "@/media/icons"
-import Songs from "./songs/Songs"
+import AlbumSongs from "./albumSongs/AlbumSongs"
 import EditButton from "./EditButton/EditButton"
 import SongMenu from "../songMenu/SongMenu"
 
@@ -68,7 +68,7 @@ export default function Album({
       <ul className={css["songs-container"]}>
         {songs.map((song) => {
           return (
-            <Songs
+            <AlbumSongs
               key={song.id}
               songName={song.name}
               audio={song.url}

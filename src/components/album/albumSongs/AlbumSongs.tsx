@@ -1,4 +1,4 @@
-import css from "./songs.module.css"
+import css from "./album-songs.module.css"
 import SongMenu from "../../songMenu/SongMenu"
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   albumName: string
 }
 
-export default function Songs(props: Props) {
+export default function AlbumSongs(props: Props) {
   return (
     <li className={css.container}>
       <h4>{props.songName}</h4>
