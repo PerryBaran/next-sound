@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const revalidate = 100
 
 export default async function Home() {
-  const albums: Albums[] = await getAlbums(undefined)
+  const albums: Albums[] = await getAlbums()
 
   return (
     <main className={css.container}>

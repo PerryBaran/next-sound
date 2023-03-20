@@ -10,13 +10,11 @@ export async function postSongs(data: {
 }
 
 export async function getSongs(
-  query:
-    | {
-        name?: string
-        exact?: boolean
-        limit?: number | string
-      }
-    | undefined
+  query?: {
+    name?: string
+    exact?: boolean
+    limit?: number | string
+  }
 ) {
   const response = await getRequest("songs", query)
   return response
