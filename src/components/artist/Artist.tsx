@@ -1,6 +1,6 @@
 import Image from "next/image"
 import css from "./artist.module.css"
-import { profile } from "@/media/icons"
+import { profile } from "../../media/icons"
 import Link from "next/link"
 
 interface Props {

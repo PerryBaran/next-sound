@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Artist snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="artist"
+  >
+    <a
+      class="artist__link"
+      href="/profile/name"
+    >
+      <img
+        alt="album by name"
+        data-nimg="1"
+        decoding="async"
+        height="100"
+        loading="lazy"
+        src="/_next/image?url=%2Fimage&w=256&q=75"
+        srcset="/_next/image?url=%2Fimage&w=128&q=75 1x, /_next/image?url=%2Fimage&w=256&q=75 2x"
+        style="color: transparent;"
+        width="100"
+      />
+      <h2
+        class="artist__name"
+      >
+        name
+      </h2>
+    </a>
+  </div>
+</DocumentFragment>
+`;
