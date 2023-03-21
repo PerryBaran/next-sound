@@ -12,9 +12,7 @@ interface Props {
 const RenderWithRef = (props: Props) => {
   const audioRef = useRef<HTMLAudioElement>(null)
 
-  return (
-    <Audio {...props} audioRef={audioRef}/>
-  )
+  return <Audio {...props} audioRef={audioRef} />
 }
 
 describe("Audio", () => {
@@ -31,8 +29,12 @@ describe("Audio", () => {
   beforeEach(() => {
     mockPlay = jest.fn()
     mockPause = jest.fn()
-    jest.spyOn(window.HTMLMediaElement.prototype, "play").mockImplementation(mockPlay)
-    jest.spyOn(window.HTMLMediaElement.prototype, "pause").mockImplementation(mockPause)
+    jest
+      .spyOn(window.HTMLMediaElement.prototype, "play")
+      .mockImplementation(mockPlay)
+    jest
+      .spyOn(window.HTMLMediaElement.prototype, "pause")
+      .mockImplementation(mockPause)
   })
 
   test("renders correctly", () => {
@@ -49,14 +51,14 @@ describe("Audio", () => {
   })
 
   test("pauses audio element if playing is falsey", () => {
-    render(<RenderWithRef {...props} playing={false}/>)
+    render(<RenderWithRef {...props} playing={false} />)
 
     expect(mockPlay).not.toHaveBeenCalled()
     expect(mockPause).toHaveBeenCalled()
   })
 
   test("on loaded meta data, sets duration", () => {
-    render(<RenderWithRef {...props} playing={false}/>)
+    render(<RenderWithRef {...props} playing={false} />)
 
     expect(props.setDuration).not.toHaveBeenCalled()
 

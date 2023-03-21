@@ -10,11 +10,21 @@ describe("Info", () => {
   }
 
   test("renders correctly with defined props", () => {
-    render(<Info {...props}/>)
+    render(<Info {...props} />)
 
-    expect(screen.getByAltText(`${props.albumName} cover art`)).toHaveAttribute("src", `/_next/image?url=%2F${props.albumArt.substring(1, props.albumArt.length)}&w=256&q=75`)
-    expect(screen.getByText(props.artistName)).toBeInstanceOf(HTMLHeadingElement)
-    expect(screen.getByText(props.songName)).toBeInstanceOf(HTMLParagraphElement)
+    expect(screen.getByAltText(`${props.albumName} cover art`)).toHaveAttribute(
+      "src",
+      `/_next/image?url=%2F${props.albumArt.substring(
+        1,
+        props.albumArt.length
+      )}&w=256&q=75`
+    )
+    expect(screen.getByText(props.artistName)).toBeInstanceOf(
+      HTMLHeadingElement
+    )
+    expect(screen.getByText(props.songName)).toBeInstanceOf(
+      HTMLParagraphElement
+    )
   })
 
   test("renders correctly with undefined props", () => {
@@ -25,7 +35,7 @@ describe("Info", () => {
 
   describe("snapshots", () => {
     test("defined props", () => {
-      const { asFragment } = render(<Info {...props}/>)
+      const { asFragment } = render(<Info {...props} />)
 
       expect(asFragment()).toMatchSnapshot()
     })

@@ -39,20 +39,26 @@ describe("Loop", () => {
 
   describe("snapshots", () => {
     test("loop equal ''", () => {
-      const { asFragment } = render(<Loop handleLoop={props.handleLoop} loop="" />)
-    
+      const { asFragment } = render(
+        <Loop handleLoop={props.handleLoop} loop="" />
+      )
+
       expect(asFragment()).toMatchSnapshot()
     })
 
     test("loop equal 'song'", () => {
-      const { asFragment } = render(<Loop handleLoop={props.handleLoop} loop="song" />)
-    
+      const { asFragment } = render(
+        <Loop handleLoop={props.handleLoop} loop="song" />
+      )
+
       expect(asFragment()).toMatchSnapshot()
     })
 
     test("loop equal 'playlist'", () => {
-      const { asFragment } = render(<Loop handleLoop={props.handleLoop} loop="playlist" />)
-    
+      const { asFragment } = render(
+        <Loop handleLoop={props.handleLoop} loop="playlist" />
+      )
+
       expect(asFragment()).toMatchSnapshot()
     })
   })
