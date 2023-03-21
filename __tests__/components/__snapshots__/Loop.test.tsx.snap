@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loop snapshots loop equal '' 1`] = `
+<DocumentFragment>
+  <button
+    class="container faded"
+    type="button"
+  >
+    <img
+      alt="loop"
+      data-nimg="1"
+      decoding="async"
+      height="40"
+      loading="lazy"
+      src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+      srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+      style="color: transparent;"
+      width="40"
+    />
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Loop snapshots loop equal 'playlist' 1`] = `
+<DocumentFragment>
+  <button
+    class="container null"
+    type="button"
+  >
+    <img
+      alt="loop playlist"
+      data-nimg="1"
+      decoding="async"
+      height="40"
+      loading="lazy"
+      src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+      srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+      style="color: transparent;"
+      width="40"
+    />
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Loop snapshots loop equal 'song' 1`] = `
+<DocumentFragment>
+  <button
+    class="container null"
+    type="button"
+  >
+    <img
+      alt="loop song"
+      data-nimg="1"
+      decoding="async"
+      height="40"
+      loading="lazy"
+      src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+      srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+      style="color: transparent;"
+      width="40"
+    />
+  </button>
+</DocumentFragment>
+`;
