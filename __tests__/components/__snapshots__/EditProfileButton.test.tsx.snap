@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditProfileButton snapshots id in context doesn't equal userId 1`] = `<DocumentFragment />`;
+
+exports[`EditProfileButton snapshots id in context equals userId 1`] = `
+<DocumentFragment>
+  <a
+    href="/edit/profile"
+  >
+    Edit Profile
+  </a>
+</DocumentFragment>
+`;

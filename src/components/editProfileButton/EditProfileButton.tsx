@@ -1,6 +1,6 @@
 "use client"
 
-import { useUserContext } from "@/context/UserContext"
+import { useUserContext } from "../../context/UserContext"
 import Link from "next/link"
 
 interface Props {
@@ -14,5 +14,5 @@ export default function EditProfileButton({ userId }: Props) {
 
   if (id !== userId) return null
 
-  return <Link href={`/edit/profile`}>Edit Profile</Link>
+  return <Link href="/edit/profile">Edit Profile</Link>
 }

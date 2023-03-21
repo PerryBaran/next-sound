@@ -18,6 +18,7 @@ describe("EditButton", () => {
       },
       handleLogin: () => {}
     })
+
     jest
       .spyOn(userContext, "useUserContext")
       .mockImplementation(() => useContext(mockContext))
