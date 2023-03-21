@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Confirm snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div>
+      <h3>
+        Are You Sure?
+      </h3>
+      <button
+        type="button"
+      >
+        Yes
+      </button>
+      <button
+        type="button"
+      >
+        No
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
