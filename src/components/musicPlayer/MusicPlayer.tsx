@@ -9,7 +9,7 @@ import Time from "./time/Time"
 import MediaControls from "./mediaControls/MediaControls"
 import Volume from "./volume/Volume"
 import Playlist from "./playlist/Playlist"
-import Loop from "./loop/loop"
+import Loop from "./loop/Loop"
 import { usePlaylistContext } from "@/context/PlaylistContext"
 import Shuffle from "./shuffle/Shuffle"
 
