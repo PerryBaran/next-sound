@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import css from "./album.module.css"
-import { music } from "@/media/icons"
+import { music } from "../../media/icons"
 import AlbumSongs from "./albumSongs/AlbumSongs"
 import EditButton from "./EditButton/EditButton"
 import SongMenu from "../songMenu/SongMenu"
@@ -31,6 +31,8 @@ export default function Album({
   albumId,
   profile
 }: Props) {
+  if (songs.length === 0 && !profile) return null
+
   const album = songs.map((song) => {
     return {
       songName: song.name,
@@ -40,8 +42,6 @@ export default function Album({
       albumName
     }
   })
-
-  if (songs.length === 0 && !profile) return null
 
   return (
     <div className={css.container}>

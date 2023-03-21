@@ -17,17 +17,17 @@ describe("AlbumSongs", () => {
     mockedSongMenu(props)
     return <div />
   })
-  
+
   test("renders correctly", () => {
-    render(<AlbumSongs {...props}/>)
+    render(<AlbumSongs {...props} />)
 
     expect(screen.getByRole("listitem")).toBeTruthy()
     expect(screen.getByRole("heading")).toHaveTextContent(props.songName)
-    expect(mockedSongMenu).toHaveBeenCalledWith({songs: [props]})
+    expect(mockedSongMenu).toHaveBeenCalledWith({ songs: [props] })
   })
 
   test("snapshot", () => {
-    const { asFragment } = render(<AlbumSongs {...props}/>)
+    const { asFragment } = render(<AlbumSongs {...props} />)
 
     expect(asFragment()).toMatchSnapshot()
   })

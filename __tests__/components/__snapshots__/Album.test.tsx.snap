@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Album snapshots if songs array length is 0 and profile is false 1`] = `<DocumentFragment />`;
+
+exports[`Album snapshots if songs array length is greater than 0 and profile is truthy 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <div
+      class="album-info-container"
+    >
+      <img
+        alt="album-name cover art"
+        data-nimg="1"
+        decoding="async"
+        height="100"
+        loading="lazy"
+        src="/_next/image?url=%2Falbum-art&w=256&q=75"
+        srcset="/_next/image?url=%2Falbum-art&w=128&q=75 1x, /_next/image?url=%2Falbum-art&w=256&q=75 2x"
+        style="color: transparent;"
+        width="100"
+      />
+      <div
+        class="album-info"
+      >
+        <h2>
+          <a
+            href="/profile/artist-name"
+          >
+            artist-name
+          </a>
+        </h2>
+        <h3>
+          album-name
+        </h3>
+      </div>
+      <div />
+      <div />
+    </div>
+    <ul
+      class="songs-container"
+    >
+      <div />
+      <div />
+    </ul>
+  </div>
+</DocumentFragment>
+`;
