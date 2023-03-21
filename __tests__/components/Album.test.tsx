@@ -78,15 +78,17 @@ describe("Album", () => {
     expect(screen.getByText(props.albumName)).toBeTruthy()
     expect(screen.getByRole("list")).toBeTruthy()
 
-    expect(mockedSongMenu).toBeCalledWith({ songs: props.songs.map((song) => {
-      return {
-        songName: song.name,
-        audio: song.url,
-        image: props.albumArt,
-        artistName: props.artistName,
-        albumName: props.albumName
-      }
-    })})
+    expect(mockedSongMenu).toBeCalledWith({
+      songs: props.songs.map((song) => {
+        return {
+          songName: song.name,
+          audio: song.url,
+          image: props.albumArt,
+          artistName: props.artistName,
+          albumName: props.albumName
+        }
+      })
+    })
     expect(mockedEditAlbumButton).toBeCalledWith({
       albumId: props.albumId,
       albumUserId: props.albumUserId,

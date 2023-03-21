@@ -23,7 +23,7 @@ describe("EditProfileButton", () => {
   })
 
   test("if id in context doesn't equal userId, return null", () => {
-    const { container } = render(<EditProfileButton userId="different"/>)
+    const { container } = render(<EditProfileButton userId="different" />)
 
     expect(container).toBeEmptyDOMElement()
   })
@@ -31,19 +31,22 @@ describe("EditProfileButton", () => {
   test("if id in context is equal to userId, renders a link", () => {
     render(<EditProfileButton {...props} />)
 
-    expect(screen.getByText(/edit profile/i)).toHaveAttribute("href", "/edit/profile")
+    expect(screen.getByText(/edit profile/i)).toHaveAttribute(
+      "href",
+      "/edit/profile"
+    )
   })
 
   describe("snapshots", () => {
     test("id in context doesn't equal userId", () => {
-      const { asFragment } = render(<EditProfileButton userId="different"/>)
-  
+      const { asFragment } = render(<EditProfileButton userId="different" />)
+
       expect(asFragment()).toMatchSnapshot()
     })
 
     test("id in context equals userId", () => {
       const { asFragment } = render(<EditProfileButton {...props} />)
-  
+
       expect(asFragment()).toMatchSnapshot()
     })
   })

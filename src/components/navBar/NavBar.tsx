@@ -44,7 +44,11 @@ export default function NavBar() {
           </Link>
         </li>
         <li>
-          <form onSubmit={submitHandler} className={css.search} aria-label="form">
+          <form
+            onSubmit={submitHandler}
+            className={css.search}
+            aria-label="form"
+          >
             <input type="text" ref={searchRef} placeholder="Search" />
             <button type="submit">
               <Image src={search} alt="search" height={15} width={15} />

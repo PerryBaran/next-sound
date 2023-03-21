@@ -18,7 +18,10 @@ describe("ConfirmPassword", () => {
     render(<ConfirmPassword {...props} />)
 
     expect(screen.getByRole("form")).toBeTruthy()
-    expect(screen.getByLabelText(/confirm password/i)).toHaveAttribute("type", "password")
+    expect(screen.getByLabelText(/confirm password/i)).toHaveAttribute(
+      "type",
+      "password"
+    )
     expect(screen.getByText(/^confirm$/i)).toBeInstanceOf(HTMLButtonElement)
     expect(screen.getByText(/cancel/i)).toBeInstanceOf(HTMLButtonElement)
   })
@@ -36,7 +39,9 @@ describe("ConfirmPassword", () => {
     expect(props.callback).toBeCalledWith("")
 
     const password = "test"
-    fireEvent.change(screen.getByLabelText(/confirm password/i), { target: { value: password }})
+    fireEvent.change(screen.getByLabelText(/confirm password/i), {
+      target: { value: password }
+    })
     fireEvent.click(confirmButton)
 
     expect(props.callback).toBeCalledTimes(2)

@@ -40,7 +40,7 @@ describe("NavBar", () => {
         },
         handleLogin: () => {}
       })
-  
+
       jest
         .spyOn(userContext, "useUserContext")
         .mockImplementation(() => useContext(mockContext))
@@ -63,7 +63,10 @@ describe("NavBar", () => {
 
       const formButton = screen.getByRole("button")
       expect(screen.getByRole("form")).toBeTruthy()
-      expect(screen.getByPlaceholderText(/search/i)).toHaveAttribute("type", "text")
+      expect(screen.getByPlaceholderText(/search/i)).toHaveAttribute(
+        "type",
+        "text"
+      )
       expect(formButton).toHaveAttribute("type", "submit")
       expect(formButton.firstChild).toHaveAttribute("alt", "search")
 
@@ -78,7 +81,9 @@ describe("NavBar", () => {
       expect(mockNav.push).toBeCalledTimes(0)
 
       const search = "search text"
-      fireEvent.change(screen.getByPlaceholderText(/search/i), { target: { value: search }})
+      fireEvent.change(screen.getByPlaceholderText(/search/i), {
+        target: { value: search }
+      })
       fireEvent.click(screen.getByRole("button"))
 
       expect(mockNav.push).toBeCalledTimes(1)
@@ -103,7 +108,7 @@ describe("NavBar", () => {
         },
         handleLogin: () => {}
       })
-  
+
       jest
         .spyOn(userContext, "useUserContext")
         .mockImplementation(() => useContext(mockContext))
@@ -126,12 +131,18 @@ describe("NavBar", () => {
 
       const formButton = screen.getByRole("button")
       expect(screen.getByRole("form")).toBeTruthy()
-      expect(screen.getByPlaceholderText(/search/i)).toHaveAttribute("type", "text")
+      expect(screen.getByPlaceholderText(/search/i)).toHaveAttribute(
+        "type",
+        "text"
+      )
       expect(formButton).toHaveAttribute("type", "submit")
       expect(formButton.firstChild).toHaveAttribute("alt", "search")
 
       const profile = screen.getByText(/profile/i)
-      expect(profile.parentElement).toHaveAttribute("href", `/profile/${userName}`)
+      expect(profile.parentElement).toHaveAttribute(
+        "href",
+        `/profile/${userName}`
+      )
       expect(profile.previousSibling).toHaveAttribute("alt", "profile")
 
       const upload = screen.getByText(/upload/i)
