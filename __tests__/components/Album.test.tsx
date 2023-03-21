@@ -30,18 +30,18 @@ describe("Album", () => {
   let mockedSongMenu = jest.fn()
   let mockedEditAlbumButton = jest.fn()
 
-  jest.spyOn(SongMenu, "default").mockImplementation((props: any) => {
-    mockedSongMenu(props)
+  jest.spyOn(SongMenu, "default").mockImplementation((value: any) => {
+    mockedSongMenu(value)
     return <div />
   })
 
-  jest.spyOn(AlbumSongs, "default").mockImplementation((props: any) => {
-    mockedAlbumSongs(props)
+  jest.spyOn(AlbumSongs, "default").mockImplementation((value: any) => {
+    mockedAlbumSongs(value)
     return <div />
   })
 
-  jest.spyOn(EditAlbumButton, "default").mockImplementation((props: any) => {
-    mockedEditAlbumButton(props)
+  jest.spyOn(EditAlbumButton, "default").mockImplementation((value: any) => {
+    mockedEditAlbumButton(value)
     return <div />
   })
 

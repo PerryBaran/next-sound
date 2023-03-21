@@ -13,8 +13,8 @@ describe("Song", () => {
 
   const mockedSongMenu = jest.fn()
 
-  jest.spyOn(SongMenu, "default").mockImplementation((props: any) => {
-    mockedSongMenu(props)
+  jest.spyOn(SongMenu, "default").mockImplementation((value: any) => {
+    mockedSongMenu(value)
     return <div />
   })
 
