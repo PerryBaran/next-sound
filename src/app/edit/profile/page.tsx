@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import Alert from "@/components/alert/Alert"
 import { useRouter } from "next/navigation"
 import ConfirmPassword from "@/components/confirmPassword/confirmPassword"
-import Confirm from "@/components/confirm/confirm"
+import Confirm from "@/components/confirm/Confirm"
 
 export default function EditProfile() {
   const {
