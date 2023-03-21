@@ -4,9 +4,9 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { usePathname } from "next/navigation"
 import { useRef } from "react"
-import { useUserContext } from "@/context/UserContext"
+import { useUserContext } from "../../context/UserContext"
 import css from "./navbar.module.css"
-import { home, login, logout, profile, search, upload } from "@/media/icons"
+import { home, login, logout, profile, search, upload } from "../../media/icons"
 import Image from "next/image"
 
 export default function NavBar() {
@@ -44,7 +44,7 @@ export default function NavBar() {
           </Link>
         </li>
         <li>
-          <form onSubmit={submitHandler} className={css.search}>
+          <form onSubmit={submitHandler} className={css.search} aria-label="form">
             <input type="text" ref={searchRef} placeholder="Search" />
             <button type="submit">
               <Image src={search} alt="search" height={15} width={15} />
@@ -55,7 +55,7 @@ export default function NavBar() {
           <>
             <li className={classes(`/profile/${name}`)}>
               <Link href={`/profile/${name}`}>
-                <Image src={profile} alt="Profile" height={30} width={30} />
+                <Image src={profile} alt="profile" height={30} width={30} />
                 <span>Profile</span>
               </Link>
             </li>
