@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlbumSongs snapshot 1`] = `
+<DocumentFragment>
+  <li
+    class="container"
+  >
+    <h4>
+      song-name
+    </h4>
+    <div />
+  </li>
+</DocumentFragment>
+`;
