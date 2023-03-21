@@ -22,10 +22,10 @@ export default function ConfirmPassword({ callback, setConfirm }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} aria-label="form">
       <label htmlFor="confirm">
         <span>Confirm Password</span>
-        <input type="password" id="password" ref={password} />
+        <input type="password" id="confirm" ref={password} />
       </label>
       <button type="submit">Confirm</button>
       <button type="button" onClick={handleCancel}>
