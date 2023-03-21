@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Song snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="song"
+  >
+    <div
+      class="song__info-container"
+    >
+      <img
+        alt="album-name cover art"
+        data-nimg="1"
+        decoding="async"
+        height="100"
+        loading="lazy"
+        src="/_next/image?url=%2Falbum-art&w=256&q=75"
+        srcset="/_next/image?url=%2Falbum-art&w=128&q=75 1x, /_next/image?url=%2Falbum-art&w=256&q=75 2x"
+        style="color: transparent;"
+        width="100"
+      />
+      <div
+        class="song__info"
+      >
+        <h2
+          class="song__artist-name"
+        >
+          <a
+            href="/profile/artist-name"
+          >
+            artist-name
+          </a>
+        </h2>
+        <h3
+          class="song__song-name"
+        >
+          song-name
+        </h3>
+      </div>
+    </div>
+    <div />
+  </div>
+</DocumentFragment>
+`;

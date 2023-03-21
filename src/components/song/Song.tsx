@@ -1,6 +1,6 @@
 import Image from "next/image"
 import css from "./song.module.css"
-import { music } from "@/media/icons"
+import { music } from "../../media/icons"
 import Link from "next/link"
 import SongMenu from "../songMenu/SongMenu"
 
