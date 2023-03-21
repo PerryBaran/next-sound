@@ -6,7 +6,7 @@ import { deleteUser, getUserById, patchUser } from "@/requests/users"
 import { useEffect, useState } from "react"
 import Alert from "@/components/alert/Alert"
 import { useRouter } from "next/navigation"
-import ConfirmPassword from "@/components/confirmPassword/confirmPassword"
+import ConfirmPassword from "@/components/confirmPassword/ConfirmPassword"
 import Confirm from "@/components/confirm/Confirm"
 
 export default function EditProfile() {
