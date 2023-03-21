@@ -17,7 +17,12 @@ export default function Loop({ loop, handleLoop }: Props) {
       {loop === "song" ? (
         <Image src={loopSong} alt="loop song" height={40} width={40} />
       ) : (
-        <Image src={loopPlaylist} alt={loop === "" ? "loop" : "loop playlist"} height={40} width={40} />
+        <Image
+          src={loopPlaylist}
+          alt={loop === "" ? "loop" : "loop playlist"}
+          height={40}
+          width={40}
+        />
       )}
     </button>
   )
