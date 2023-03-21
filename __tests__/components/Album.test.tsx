@@ -78,7 +78,7 @@ describe("Album", () => {
     expect(screen.getByText(props.albumName)).toBeTruthy()
     expect(screen.getByRole("list")).toBeTruthy()
 
-    const songMenuReturn = props.songs.map((song) => {
+    expect(mockedSongMenu).toBeCalledWith({ songs: props.songs.map((song) => {
       return {
         songName: song.name,
         audio: song.url,
@@ -86,9 +86,7 @@ describe("Album", () => {
         artistName: props.artistName,
         albumName: props.albumName
       }
-    })
-
-    expect(mockedSongMenu).toBeCalledWith({ songs: songMenuReturn })
+    })})
     expect(mockedEditAlbumButton).toBeCalledWith({
       albumId: props.albumId,
       albumUserId: props.albumUserId,
