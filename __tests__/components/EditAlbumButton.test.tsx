@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react"
 import { createContext, useContext } from "react"
 import EditAlbumButton from "../../src/components/album/EditAlbumButton/EditAlbumButton"
-import * as userContext from "../../src/context/UserContext"
+import * as UserContext from "../../src/context/UserContext"
 
 describe("EditButton", () => {
   const props = {
@@ -20,7 +20,7 @@ describe("EditButton", () => {
     })
 
     jest
-      .spyOn(userContext, "useUserContext")
+      .spyOn(UserContext, "useUserContext")
       .mockImplementation(() => useContext(mockContext))
   })
 

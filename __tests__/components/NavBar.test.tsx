@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react"
 import { createContext, useContext } from "react"
 import * as navigation from "next/navigation"
 import NavBar from "../../src/components/navBar/NavBar"
-import * as userContext from "../../src/context/UserContext"
+import * as UserContext from "../../src/context/UserContext"
 
 describe("NavBar", () => {
   let mockNav = {
@@ -42,7 +42,7 @@ describe("NavBar", () => {
       })
 
       jest
-        .spyOn(userContext, "useUserContext")
+        .spyOn(UserContext, "useUserContext")
         .mockImplementation(() => useContext(mockContext))
     })
 
@@ -110,7 +110,7 @@ describe("NavBar", () => {
       })
 
       jest
-        .spyOn(userContext, "useUserContext")
+        .spyOn(UserContext, "useUserContext")
         .mockImplementation(() => useContext(mockContext))
     })
 
