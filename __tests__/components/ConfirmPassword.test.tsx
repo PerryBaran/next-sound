@@ -17,7 +17,7 @@ describe("ConfirmPassword", () => {
   test("renders correctly", () => {
     render(<ConfirmPassword {...props} />)
 
-    expect(screen.getByRole("form")).toBeTruthy()
+    expect(screen.getByRole("form")).toBeInTheDocument()
     expect(screen.getByLabelText(/confirm password/i)).toHaveAttribute(
       "type",
       "password"

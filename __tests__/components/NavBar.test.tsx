@@ -49,8 +49,8 @@ describe("NavBar", () => {
     test("renders correctly", () => {
       render(<NavBar />)
 
-      expect(screen.getByRole("navigation")).toBeTruthy()
-      expect(screen.getByRole("list")).toBeTruthy()
+      expect(screen.getByRole("navigation")).toBeInTheDocument()
+      expect(screen.getByRole("list")).toBeInTheDocument()
       expect(screen.getAllByRole("listitem")).toHaveLength(4)
 
       const heading = screen.getByRole("heading")
@@ -62,7 +62,7 @@ describe("NavBar", () => {
       expect(home.previousSibling).toHaveAttribute("alt", "home")
 
       const formButton = screen.getByRole("button")
-      expect(screen.getByRole("form")).toBeTruthy()
+      expect(screen.getByRole("form")).toBeInTheDocument()
       expect(screen.getByPlaceholderText(/search/i)).toHaveAttribute(
         "type",
         "text"
@@ -117,8 +117,8 @@ describe("NavBar", () => {
     test("renders correctly", () => {
       render(<NavBar />)
 
-      expect(screen.getByRole("navigation")).toBeTruthy()
-      expect(screen.getByRole("list")).toBeTruthy()
+      expect(screen.getByRole("navigation")).toBeInTheDocument()
+      expect(screen.getByRole("list")).toBeInTheDocument()
       expect(screen.getAllByRole("listitem")).toHaveLength(6)
 
       const heading = screen.getByRole("heading")
@@ -130,7 +130,7 @@ describe("NavBar", () => {
       expect(home.previousSibling).toHaveAttribute("alt", "home")
 
       const formButton = screen.getByRole("button")
-      expect(screen.getByRole("form")).toBeTruthy()
+      expect(screen.getByRole("form")).toBeInTheDocument()
       expect(screen.getByPlaceholderText(/search/i)).toHaveAttribute(
         "type",
         "text"

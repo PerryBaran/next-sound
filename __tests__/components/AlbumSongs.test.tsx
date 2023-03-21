@@ -11,7 +11,7 @@ describe("AlbumSongs", () => {
     albumName: "albumName"
   }
 
-  let mockedSongMenu = jest.fn()
+  const mockedSongMenu = jest.fn()
 
   jest.spyOn(SongMenu, "default").mockImplementation((props: any) => {
     mockedSongMenu(props)
@@ -21,7 +21,7 @@ describe("AlbumSongs", () => {
   test("renders correctly", () => {
     render(<AlbumSongs {...props} />)
 
-    expect(screen.getByRole("listitem")).toBeTruthy()
+    expect(screen.getByRole("listitem")).toBeInTheDocument()
     expect(screen.getByRole("heading")).toHaveTextContent(props.songName)
     expect(mockedSongMenu).toHaveBeenCalledWith({ songs: [props] })
   })

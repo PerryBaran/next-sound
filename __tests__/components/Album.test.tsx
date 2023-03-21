@@ -75,8 +75,8 @@ describe("Album", () => {
       "href",
       `/profile/${props.artistName}`
     )
-    expect(screen.getByText(props.albumName)).toBeTruthy()
-    expect(screen.getByRole("list")).toBeTruthy()
+    expect(screen.getByText(props.albumName)).toBeInTheDocument()
+    expect(screen.getByRole("list")).toBeInTheDocument()
 
     expect(mockedSongMenu).toBeCalledWith({
       songs: props.songs.map((song) => {
