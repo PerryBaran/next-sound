@@ -2,13 +2,13 @@
 
 import style from "./info.module.css"
 import Image from "next/image"
-import { music } from "@/media/icons"
+import { music } from "../../../media/icons"
 
 interface Props {
-  albumArt: string | undefined
-  artistName: string | undefined
-  songName: string | undefined
-  albumName: string | undefined
+  albumArt?: string
+  artistName?: string
+  songName?: string
+  albumName?: string
 }
 
 export default function Info(props: Props) {

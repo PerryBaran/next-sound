@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Info snapshots defined props 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <img
+      alt="album-name cover art"
+      data-nimg="1"
+      decoding="async"
+      height="75"
+      loading="lazy"
+      src="/_next/image?url=%2Fart&w=256&q=75"
+      srcset="/_next/image?url=%2Fart&w=96&q=75 1x, /_next/image?url=%2Fart&w=256&q=75 2x"
+      style="color: transparent;"
+      width="75"
+    />
+    <div
+      class="info"
+    >
+      <h3>
+        artist-name
+      </h3>
+      <p>
+        song-name
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Info snapshots undefined props 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <img
+      alt="default cover art"
+      data-nimg="1"
+      decoding="async"
+      height="75"
+      loading="lazy"
+      src="/_next/image?url=%2Fimg.jpg&w=256&q=75"
+      srcset="/_next/image?url=%2Fimg.jpg&w=96&q=75 1x, /_next/image?url=%2Fimg.jpg&w=256&q=75 2x"
+      style="color: transparent; filter: invert();"
+      width="75"
+    />
+    <div
+      class="info"
+    >
+      <h3 />
+      <p />
+    </div>
+  </div>
+</DocumentFragment>
+`;
