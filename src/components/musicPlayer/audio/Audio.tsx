@@ -19,7 +19,7 @@ export default function Audio({
 }: Props) {
   const handleLoadedMetaData = () => {
     if (audioRef.current) {
-      const seconds = Math.round(audioRef.current.duration)
+      const seconds = Math.round(audioRef.current.duration) || 0
       setDuration(seconds)
       if (playing) {
         audioRef.current.play()
