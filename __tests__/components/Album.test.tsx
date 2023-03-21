@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react"
 import Album from "../../src/components/album/Album"
 import * as AlbumSongs from "../../src/components/album/albumSongs/AlbumSongs"
 import * as SongMenu from "../../src/components/songMenu/SongMenu"
-import * as EditButton from "../../src/components/album/EditButton/EditButton"
+import * as EditAlbumButton from "../../src/components/album/EditAlbumButton/EditAlbumButton"
 
 describe("Album", () => {
   const props = {
@@ -28,7 +28,7 @@ describe("Album", () => {
 
   let mockedAlbumSongs = jest.fn()
   let mockedSongMenu = jest.fn()
-  let mockedEditButton = jest.fn()
+  let mockedEditAlbumButton = jest.fn()
 
   jest.spyOn(SongMenu, "default").mockImplementation((props: any) => {
     mockedSongMenu(props)
@@ -40,8 +40,8 @@ describe("Album", () => {
     return <div />
   })
 
-  jest.spyOn(EditButton, "default").mockImplementation((props: any) => {
-    mockedEditButton(props)
+  jest.spyOn(EditAlbumButton, "default").mockImplementation((props: any) => {
+    mockedEditAlbumButton(props)
     return <div />
   })
 
@@ -89,7 +89,7 @@ describe("Album", () => {
     })
 
     expect(mockedSongMenu).toBeCalledWith({ songs: songMenuReturn })
-    expect(mockedEditButton).toBeCalledWith({
+    expect(mockedEditAlbumButton).toBeCalledWith({
       albumId: props.albumId,
       albumUserId: props.albumUserId,
       profile: props.profile

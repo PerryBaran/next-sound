@@ -3,7 +3,7 @@ import Link from "next/link"
 import css from "./album.module.css"
 import { music } from "../../media/icons"
 import AlbumSongs from "./albumSongs/AlbumSongs"
-import EditButton from "./EditButton/EditButton"
+import EditAlbumButton from "./EditAlbumButton/EditAlbumButton"
 import SongMenu from "../songMenu/SongMenu"
 
 interface Song {
@@ -59,7 +59,7 @@ export default function Album({
           <h3>{albumName}</h3>
         </div>
         <SongMenu songs={album} />
-        <EditButton
+        <EditAlbumButton
           albumId={albumId}
           albumUserId={albumUserId}
           profile={profile}

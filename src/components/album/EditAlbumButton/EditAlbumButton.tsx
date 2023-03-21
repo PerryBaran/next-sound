@@ -9,7 +9,7 @@ interface Props {
   profile: boolean
 }
 
-export default function EditButton({ albumId, albumUserId, profile }: Props) {
+export default function EditAlbumButton({ albumId, albumUserId, profile }: Props) {
   const {
     user: { id }
   } = useUserContext()

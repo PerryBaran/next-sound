@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import { createContext, useContext } from "react"
-import EditButton from "../../src/components/album/EditButton/EditButton"
+import EditAlbumButton from "../../src/components/album/EditAlbumButton/EditAlbumButton"
 import * as userContext from "../../src/context/UserContext"
 
 describe("EditButton", () => {
@@ -25,7 +25,7 @@ describe("EditButton", () => {
 
   test("returns null if profile is falsey", () => {
     const { container } = render(
-      <EditButton
+      <EditAlbumButton
         profile={false}
         albumId={props.albumId}
         albumUserId={props.albumUserId}
@@ -37,14 +37,14 @@ describe("EditButton", () => {
 
   test("returns null if albumUserId doesn't equal the id from userContext", () => {
     const { container } = render(
-      <EditButton profile albumId={props.albumId} albumUserId="fail" />
+      <EditAlbumButton profile albumId={props.albumId} albumUserId="fail" />
     )
 
     expect(container).toBeEmptyDOMElement()
   })
 
   test("returns a link if profile is truthy and albumUserId is equal to id in userContext", () => {
-    render(<EditButton {...props} />)
+    render(<EditAlbumButton {...props} />)
 
     const link = screen.getByRole("link")
 
@@ -55,7 +55,7 @@ describe("EditButton", () => {
   describe("snapshot", () => {
     test("profile is falsey", () => {
       const { asFragment } = render(
-        <EditButton
+        <EditAlbumButton
           profile={false}
           albumId={props.albumId}
           albumUserId={props.albumUserId}
@@ -67,14 +67,14 @@ describe("EditButton", () => {
 
     test("albumUserId doesn't match user id in userContext", () => {
       const { asFragment } = render(
-        <EditButton profile albumId={props.albumId} albumUserId="fail" />
+        <EditAlbumButton profile albumId={props.albumId} albumUserId="fail" />
       )
 
       expect(asFragment()).toMatchSnapshot()
     })
 
     test("profile is truthy and albumuserId matches id in userContext", () => {
-      const { asFragment } = render(<EditButton {...props} />)
+      const { asFragment } = render(<EditAlbumButton {...props} />)
 
       expect(asFragment()).toMatchSnapshot()
     })
