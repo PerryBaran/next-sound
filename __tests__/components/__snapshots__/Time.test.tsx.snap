@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Time snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <p>
+      10:01
+    </p>
+  </div>
+</DocumentFragment>
+`;
