@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { shuffle } from "@/media/icons/index"
+import { shuffle } from "../../../media/icons/index"
 import Image from "next/image"
 import css from "./shuffle.module.css"
 
