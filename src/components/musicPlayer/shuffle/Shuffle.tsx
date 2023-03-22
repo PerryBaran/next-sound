@@ -6,7 +6,6 @@ import Image from "next/image"
 import css from "./shuffle.module.css"
 import { usePlaylistContext } from "../../../context/PlaylistContext"
 
-
 export default function Shuffle() {
   const { handleShuffle } = usePlaylistContext()
   const [shuffled, setShuffled] = useState(false)
