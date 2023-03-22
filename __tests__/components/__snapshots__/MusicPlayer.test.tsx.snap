@@ -1,0 +1,209 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Playlist snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="spacer"
+  />
+  <section
+    class="container"
+  >
+    <audio
+      data-testid="audio"
+      src="audio-1"
+    />
+    <div
+      class="container"
+    >
+      <img
+        alt="album-1 cover art"
+        data-nimg="1"
+        decoding="async"
+        height="75"
+        loading="lazy"
+        src="/_next/image?url=%2Fimage-1&w=256&q=75"
+        srcset="/_next/image?url=%2Fimage-1&w=96&q=75 1x, /_next/image?url=%2Fimage-1&w=256&q=75 2x"
+        style="color: transparent;"
+        width="75"
+      />
+      <div
+        class="info"
+      >
+        <h3>
+          artist-1
+        </h3>
+        <p>
+          song-1
+        </p>
+      </div>
+    </div>
+    <div
+      class="center"
+    >
+      <input
+        class="bar"
+        max="0"
+        min="0"
+        name="time"
+        type="range"
+        value="0"
+      />
+      <div
+        class="belowBar"
+      >
+        <div
+          class="container"
+        >
+          <p>
+            0:00
+          </p>
+        </div>
+        <div
+          class="container"
+        >
+          <button>
+            <img
+              alt="skip backwards"
+              data-nimg="1"
+              decoding="async"
+              height="20"
+              loading="lazy"
+              src="/_next/image?url=%2Fimg.jpg&w=48&q=75"
+              srcset="/_next/image?url=%2Fimg.jpg&w=32&q=75 1x, /_next/image?url=%2Fimg.jpg&w=48&q=75 2x"
+              style="color: transparent; transform: rotate(180deg);"
+              width="20"
+            />
+          </button>
+          <button>
+            <img
+              alt="play"
+              data-nimg="1"
+              decoding="async"
+              height="20"
+              loading="lazy"
+              src="/_next/image?url=%2Fimg.jpg&w=48&q=75"
+              srcset="/_next/image?url=%2Fimg.jpg&w=32&q=75 1x, /_next/image?url=%2Fimg.jpg&w=48&q=75 2x"
+              style="color: transparent;"
+              width="20"
+            />
+          </button>
+          <button>
+            <img
+              alt="skip forwards"
+              data-nimg="1"
+              decoding="async"
+              height="20"
+              loading="lazy"
+              src="/_next/image?url=%2Fimg.jpg&w=48&q=75"
+              srcset="/_next/image?url=%2Fimg.jpg&w=32&q=75 1x, /_next/image?url=%2Fimg.jpg&w=48&q=75 2x"
+              style="color: transparent;"
+              width="20"
+            />
+          </button>
+        </div>
+        <div
+          class="container"
+        >
+          <p>
+            0:00
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="centerButton loop"
+    >
+      <button
+        class="container faded"
+        type="button"
+      >
+        <img
+          alt="loop"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+      </button>
+    </div>
+    <div
+      class="centerButton shuffle"
+    >
+      <button
+        class="container faded"
+        type="button"
+      >
+        <img
+          alt="shuffle"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+      </button>
+    </div>
+    <div
+      class="centerButton volume"
+    >
+      <div
+        class="container"
+      >
+        <input
+          max="100"
+          min="0"
+          name="volume"
+          type="range"
+          value="50"
+        />
+        <div
+          class="volume"
+        >
+          <button
+            type="button"
+          >
+            <img
+              alt="high volume"
+              data-nimg="1"
+              decoding="async"
+              height="30"
+              loading="lazy"
+              src="/_next/image?url=%2Fimg.jpg&w=64&q=75"
+              srcset="/_next/image?url=%2Fimg.jpg&w=32&q=75 1x, /_next/image?url=%2Fimg.jpg&w=64&q=75 2x"
+              style="color: transparent;"
+              width="30"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="centerButton playlist"
+    >
+      <button
+        class="toggle_playlist"
+        type="button"
+      >
+        <img
+          alt="playlist"
+          data-nimg="1"
+          decoding="async"
+          height="30"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=64&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=32&q=75 1x, /_next/image?url=%2Fimg.jpg&w=64&q=75 2x"
+          style="color: transparent;"
+          width="30"
+        />
+      </button>
+    </div>
+  </section>
+</DocumentFragment>
+`;

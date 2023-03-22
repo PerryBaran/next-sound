@@ -10,7 +10,7 @@ import MediaControls from "./mediaControls/MediaControls"
 import Volume from "./volume/Volume"
 import Playlist from "./playlist/Playlist"
 import Loop from "./loop/Loop"
-import { usePlaylistContext } from "@/context/PlaylistContext"
+import { usePlaylistContext } from "../../context/PlaylistContext"
 import Shuffle from "./shuffle/Shuffle"
 
 export default function MusicPlayer() {
@@ -39,6 +39,7 @@ export default function MusicPlayer() {
     if (audioRef.current) {
       audioRef.current.currentTime = value
     }
+    setTime(value)
   }
 
   const handleLoop = () => {
@@ -107,7 +108,7 @@ export default function MusicPlayer() {
           <Loop loop={loop} handleLoop={handleLoop} />
         </div>
         <div className={`${css.centerButton} ${css.shuffle}`}>
-          <Shuffle handleShuffle={handleShuffle} />
+          <Shuffle />
         </div>
         <div className={`${css.centerButton} ${css.volume}`}>
           <Volume volume={volume} handleVolume={handleVolume} />
