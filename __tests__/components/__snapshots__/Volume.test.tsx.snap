@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Volume snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <input
+      max="100"
+      min="0"
+      name="volume"
+      type="range"
+      value="50"
+    />
+    <div
+      class="volume"
+    >
+      <button
+        type="button"
+      >
+        <img
+          alt="high volume"
+          data-nimg="1"
+          decoding="async"
+          height="30"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=64&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=32&q=75 1x, /_next/image?url=%2Fimg.jpg&w=64&q=75 2x"
+          style="color: transparent;"
+          width="30"
+        />
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import style from "./volume.module.css"
-import { volumeLow, volumeMedium, volumeMute } from "@/media/icons"
+import { volumeLow, volumeMedium, volumeMute } from "../../../media/icons"
 import { useState } from "react"
 
 interface Props {
@@ -21,7 +21,6 @@ export default function Volume({ volume, handleVolume }: Props) {
   const handleVolumeToggle = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    console.log(e)
     const preVolume = volume
     if (preVolume !== 0) {
       handleVolume(0)
@@ -40,7 +39,6 @@ export default function Volume({ volume, handleVolume }: Props) {
         max={100}
         value={volume * 100}
         onChange={changeVolume}
-        data-testid="volume"
       />
       <div className={style.volume}>
         <button type="button" onClick={handleVolumeToggle}>
