@@ -4,12 +4,11 @@ import { useState } from "react"
 import { shuffle } from "../../../media/icons/index"
 import Image from "next/image"
 import css from "./shuffle.module.css"
+import { usePlaylistContext } from "../../../context/PlaylistContext"
 
-interface Props {
-  handleShuffle: (value: boolean) => void
-}
 
-export default function Shuffle({ handleShuffle }: Props) {
+export default function Shuffle() {
+  const { handleShuffle } = usePlaylistContext()
   const [shuffled, setShuffled] = useState(false)
 
   const handleClick = () => {
