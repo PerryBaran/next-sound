@@ -22,7 +22,6 @@ describe("Audio", () => {
     setDuration: jest.fn(),
     skipSong: jest.fn()
   }
-
   let mockPlay = jest.fn()
   let mockPause = jest.fn()
 

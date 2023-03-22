@@ -17,16 +17,7 @@ describe("NavBar", () => {
   }
 
   beforeEach(() => {
-    mockNav = {
-      back: jest.fn(),
-      forward: jest.fn(),
-      reset: jest.fn(),
-      push: jest.fn(),
-      pull: jest.fn(),
-      refresh: jest.fn(),
-      replace: jest.fn(),
-      prefetch: jest.fn()
-    }
+    mockNav.push = jest.fn()
 
     jest.spyOn(navigation, "useRouter").mockImplementation(() => mockNav)
   })

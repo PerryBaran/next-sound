@@ -25,7 +25,6 @@ describe("Album", () => {
     albumId: "album-id",
     profile: true
   }
-
   let mockedAlbumSongs = jest.fn()
   let mockedSongMenu = jest.fn()
   let mockedEditAlbumButton = jest.fn()
