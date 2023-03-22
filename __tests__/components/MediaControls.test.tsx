@@ -16,7 +16,7 @@ describe("MediaControls", () => {
       skipSong: jest.fn()
     }
 
-    mockHandlePlaying  = jest.fn()
+    mockHandlePlaying = jest.fn()
 
     const mockContext = createContext({
       playlist: [],
@@ -33,7 +33,7 @@ describe("MediaControls", () => {
       .spyOn(PlaylistContext, "usePlaylistContext")
       .mockImplementation(() => useContext(mockContext))
   })
-  
+
   test("renders correctly when playing is true", () => {
     render(<MediaControls {...props} />)
 
@@ -44,7 +44,7 @@ describe("MediaControls", () => {
   })
 
   test("renders correctly when playing is false", () => {
-    render(<MediaControls {...props} playing={false}/>)
+    render(<MediaControls {...props} playing={false} />)
 
     expect(screen.getAllByRole("button")).toHaveLength(3)
     expect(screen.getByAltText("skip backwards")).toBeInTheDocument()
@@ -102,7 +102,9 @@ describe("MediaControls", () => {
     })
 
     test("playing is false", () => {
-      const { asFragment } = render(<MediaControls {...props} playing={false} />)
+      const { asFragment } = render(
+        <MediaControls {...props} playing={false} />
+      )
 
       expect(asFragment()).toMatchSnapshot()
     })

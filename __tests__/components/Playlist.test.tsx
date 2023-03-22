@@ -19,7 +19,7 @@ describe("Playlist", () => {
       songName: "song-2",
       audio: "audio-2",
       key: "key-2"
-    },
+    }
   ]
   let mockSkipSong = jest.fn()
   let mockRemoveFromPlaylist = jest.fn()
@@ -58,10 +58,14 @@ describe("Playlist", () => {
     fireEvent.click(screen.getByAltText("playlist"))
 
     expect(screen.getAllByText(/x/i)).toHaveLength(mockPlaylist.length)
-    expect(screen.getAllByAltText(/play now/i)).toHaveLength(mockPlaylist.length)
+    expect(screen.getAllByAltText(/play now/i)).toHaveLength(
+      mockPlaylist.length
+    )
 
     mockPlaylist.forEach((song) => {
-      expect(screen.getByAltText(`${song.albumName} cover art`)).toBeInTheDocument()
+      expect(
+        screen.getByAltText(`${song.albumName} cover art`)
+      ).toBeInTheDocument()
       expect(screen.getByText(song.artistName)).toBeInTheDocument()
       expect(screen.getByText(song.artistName)).toBeInTheDocument()
     })
