@@ -5,7 +5,7 @@ import * as PlaylistContext from "../../src/context/PlaylistContext"
 
 describe("Shuffle", () => {
   let mockHandleShuffle = jest.fn()
-  
+
   beforeEach(() => {
     mockHandleShuffle = jest.fn()
 
