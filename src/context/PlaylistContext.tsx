@@ -25,7 +25,7 @@ const PlaylistContext = createContext({
   ) => {},
   removeFromPlaylist: (i: number) => {},
   playing: false,
-  handlePlaying: (isPlaying: boolean | undefined) => {},
+  handlePlaying: (isPlaying?: boolean) => {},
   handleShuffle: (shuffled: boolean) => {}
 })
 
@@ -151,7 +151,7 @@ function PlaylistProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const handlePlaying = (isPlaying: boolean | undefined) => {
+  const handlePlaying = (isPlaying?: boolean) => {
     if (isPlaying === undefined) {
       setPlaying((prev) => !prev)
     } else {

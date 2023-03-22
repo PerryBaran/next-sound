@@ -2,8 +2,8 @@
 
 import Image from "next/image"
 import style from "./mediaControls.module.css"
-import { play, pause, skip } from "@/media/icons"
-import { usePlaylistContext } from "@/context/PlaylistContext"
+import { play, pause, skip } from "../../../media/icons"
+import { usePlaylistContext } from "../../../context/PlaylistContext"
 
 interface Props {
   playing: boolean
@@ -24,7 +24,7 @@ export default function MediaControls({ playing, skipSong }: Props) {
           style={{ transform: "rotate(180deg)" }}
         />
       </button>
-      <button onClick={() => handlePlaying(undefined)}>
+      <button onClick={() => handlePlaying()}>
         {playing ? (
           <Image src={pause} alt="pause" height={20} width={20} />
         ) : (
