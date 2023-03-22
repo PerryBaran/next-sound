@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgressBar snapshot 1`] = `
+<DocumentFragment>
+  <input
+    class="bar"
+    max="100"
+    min="0"
+    name="time"
+    type="range"
+    value="10"
+  />
+</DocumentFragment>
+`;

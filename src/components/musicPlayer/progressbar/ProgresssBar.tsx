@@ -1,6 +1,6 @@
 "use client"
 
-import { ChangeEvent, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import style from "./progressBar.module.css"
 
 interface Props {
@@ -11,16 +11,10 @@ interface Props {
 
 export default function ProgresssBar(props: Props) {
   const { handleAudioTime, time, duration } = props
-  const [rangeValue, setRangeValue] = useState(time)
 
-  useEffect(() => {
-    setRangeValue(time)
-  }, [time])
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const time = Number(e.target.value)
     handleAudioTime(time)
-    setRangeValue(time)
   }
 
   return (
@@ -29,10 +23,9 @@ export default function ProgresssBar(props: Props) {
       name="time"
       min={0}
       max={duration}
-      value={rangeValue}
+      value={time}
       onChange={handleChange}
       className={style.bar}
-      data-testid="progress-bar"
     />
   )
 }
