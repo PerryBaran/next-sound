@@ -29,12 +29,12 @@ describe("Shuffle", () => {
     render(<Shuffle />)
 
     expect(screen.getByRole("button")).toBeInTheDocument()
-    expect(screen.getByAltText("shuffle")).toBeInTheDocument()
+    expect(screen.getByAltText(/shuffle/i)).toBeInTheDocument()
   })
 
   test("shuffle click", () => {
     render(<Shuffle />)
-    const shuffle = screen.getByAltText("shuffle")
+    const shuffle = screen.getByAltText(/shuffle/i)
 
     expect(mockHandleShuffle).toBeCalledTimes(0)
 
