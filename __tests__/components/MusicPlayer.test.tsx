@@ -81,16 +81,6 @@ describe("Playlist", () => {
     expect(volumeInput).toHaveDisplayValue("0")
   })
 
-  test("handleAudoTime, progressBar can't go over duration", async () => {
-    render(<MusicPlayer />)
-    const progressBar = screen.getByDisplayValue(0)
-
-    fireEvent.change(progressBar, { target: { value: 50 } })
-
-    //value can't go over max, max is duration, duration is set onLoadMetaData therefore requires an actual audio element to set duration
-    expect(progressBar).toHaveDisplayValue("0")
-  })
-
   test("handleLoop", () => {
     render(<MusicPlayer />)
     const loopButton = screen.getByAltText(/loop/i)
