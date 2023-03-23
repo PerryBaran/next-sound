@@ -9,7 +9,7 @@ import * as requestHelpers from "../../src/requests/helpers/requestHelpers"
 describe("songs requests", () => {
   const mockData = {
     name: "name",
-    audio: new File([], "audii"),
+    audio: new File([], "audio"),
     position: 1,
     AlbumId: "album-id"
   }
