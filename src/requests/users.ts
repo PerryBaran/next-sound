@@ -26,7 +26,7 @@ export async function signup(data: {
 export async function getUsers(query?: {
   name?: string
   exact?: boolean
-  limit?: number | string
+  limit?: number
 }) {
   const response = await getRequest("users", query)
   return response
