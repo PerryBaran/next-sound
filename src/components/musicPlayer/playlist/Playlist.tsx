@@ -25,6 +25,7 @@ export default function Playlist() {
     <>
       {showPlaylist && (
         <div className={css.container}>
+          {playlist.length === 0 && <p>Playlist Empty</p>}
           {playlist.map((song, i) => {
             return (
               <div

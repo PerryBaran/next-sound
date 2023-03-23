@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Playlist snapshot 1`] = `
+exports[`Playlist playlist not empty snapshot 1`] = `
 <DocumentFragment>
   <button
     class="toggle_playlist"
