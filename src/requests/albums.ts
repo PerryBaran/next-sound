@@ -4,7 +4,7 @@ import {
   patchRequest,
   deleteRequest,
   getByIdRequest
-} from "./helpers"
+} from "./helpers/requestHelpers"
 
 export async function postAlbums(data: { name: string; image?: File }) {
   const response = await postRequest("albums", data)

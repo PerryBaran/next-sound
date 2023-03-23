@@ -4,7 +4,7 @@ import {
   patchSong,
   deleteSong
 } from "../../src/requests/songs"
-import * as requestHelpers from "../../src/requests/helpers"
+import * as requestHelpers from "../../src/requests/helpers/requestHelpers"
 
 describe("songs requests", () => {
   const mockData = {

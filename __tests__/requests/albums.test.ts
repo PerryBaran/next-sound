@@ -5,7 +5,7 @@ import {
   patchAlbum,
   deleteAlbum
 } from "../../src/requests/albums"
-import * as requestHelpers from "../../src/requests/helpers"
+import * as requestHelpers from "../../src/requests/helpers/requestHelpers"
 
 describe("albums requests", () => {
   const mockData = {

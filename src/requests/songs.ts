@@ -1,4 +1,4 @@
-import { postRequest, getRequest, patchRequest, deleteRequest } from "./helpers"
+import { postRequest, getRequest, patchRequest, deleteRequest } from "./helpers/requestHelpers"
 
 export async function postSongs(data: {
   name: string
@@ -13,7 +13,7 @@ export async function postSongs(data: {
 export async function getSongs(query?: {
   name?: string
   exact?: boolean
-  limit?: number | string
+  limit?: number
 }) {
   const response = await getRequest("songs", query)
   return response

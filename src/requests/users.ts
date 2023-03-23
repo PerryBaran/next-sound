@@ -4,7 +4,7 @@ import {
   getByIdRequest,
   patchRequest,
   deleteRequest
-} from "./helpers"
+} from "./helpers/requestHelpers"
 import Cookies from "js-cookie"
 
 export async function login(data: { email: string; password: string }) {

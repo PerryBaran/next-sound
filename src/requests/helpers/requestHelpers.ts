@@ -1,54 +1,8 @@
-import Cookie from "js-cookie"
-import axios from "axios"
-
-const instance = axios.create({
-  withCredentials: true,
-  baseURL: "https://soundcloud-clone-api.onrender.com"
-})
-
-function config() {
-  return {
-    headers: {
-      userToken: Cookie.get("userToken")
-    }
-  }
-}
+import Cookies from "js-cookie"
+import { instance, config } from "./axios"
+import createForm from "./createForm"
 
 type Model = "users" | "users/login" | "users/signup" | "albums" | "songs"
-
-function createForm(model: string, data: any) {
-  const formData = new FormData()
-  switch (model) {
-    case "songs": {
-      if (data.name) {
-        formData.append("name", data.name)
-      }
-      if (data.audio) {
-        formData.append("audio", data.audio)
-      }
-      if (data.position !== undefined) {
-        formData.append("position", data.position)
-      }
-      if (data.AlbumId) {
-        formData.append("AlbumId", data.AlbumId)
-      }
-      break
-    }
-    case "albums": {
-      if (data.name) {
-        formData.append("name", data.name)
-      }
-      if (data.image) {
-        formData.append("image", data.image)
-      }
-      break
-    }
-    default: {
-      return data
-    }
-  }
-  return formData
-}
 
 function error(err: any | { response: { data: { message: string } } }) {
   if (err.response?.data?.message) {
@@ -58,10 +12,10 @@ function error(err: any | { response: { data: { message: string } } }) {
 }
 
 export async function postRequest(model: Model, data: any) {
-  const formData = createForm(model, data)
+  const formattedData = createForm(model, data)
 
   try {
-    const response = await instance.post(`/${model}`, formData, config())
+    const response = await instance.post(`/${model}`, formattedData, config())
     return response.data
   } catch (err: any | { response: { data: { message: string } } }) {
     error(err)
@@ -70,13 +24,11 @@ export async function postRequest(model: Model, data: any) {
 
 export async function getRequest(
   model: Model,
-  query:
-    | {
-        name?: string
-        exact?: boolean
-        limit?: number | string
-      }
-    | undefined
+  query?: {
+      name?: string
+      exact?: boolean
+      limit?: number
+    }
 ) {
   let endpoint = `/${model}`
   const queryArray = []
@@ -114,10 +66,10 @@ export async function getByIdRequest(model: Model, id: string) {
 }
 
 export async function patchRequest(model: Model, id: string, data: any) {
-  const formData = createForm(model, data)
+  const formattedData = createForm(model, data)
 
   try {
-    const response = await instance.patch(`/${model}/${id}`, formData, config())
+    const response = await instance.patch(`/${model}/${id}`, formattedData, config())
     return response.data
   } catch (err: any | { response: { data: { message: string } } }) {
     error(err)

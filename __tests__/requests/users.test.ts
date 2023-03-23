@@ -6,7 +6,7 @@ import {
   patchUser,
   deleteUser
 } from "../../src/requests/users"
-import * as requestHelpers from "../../src/requests/helpers"
+import * as requestHelpers from "../../src/requests/helpers/requestHelpers"
 import Cookies, { CookieAttributes } from "js-cookie"
 
 describe("albums requests", () => {
