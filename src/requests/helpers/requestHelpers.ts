@@ -25,10 +25,10 @@ export async function postRequest(model: Model, data: any) {
 export async function getRequest(
   model: Model,
   query?: {
-      name?: string
-      exact?: boolean
-      limit?: number
-    }
+    name?: string
+    exact?: boolean
+    limit?: number
+  }
 ) {
   let endpoint = `/${model}`
   const queryArray = []
@@ -69,7 +69,11 @@ export async function patchRequest(model: Model, id: string, data: any) {
   const formattedData = createForm(model, data)
 
   try {
-    const response = await instance.patch(`/${model}/${id}`, formattedData, config())
+    const response = await instance.patch(
+      `/${model}/${id}`,
+      formattedData,
+      config()
+    )
     return response.data
   } catch (err: any | { response: { data: { message: string } } }) {
     error(err)
