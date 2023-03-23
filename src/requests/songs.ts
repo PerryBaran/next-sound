@@ -7,6 +7,7 @@ export async function postSongs(data: {
   AlbumId: string
 }) {
   const response = await postRequest("songs", data)
+  return response
 }
 
 export async function getSongs(query?: {
