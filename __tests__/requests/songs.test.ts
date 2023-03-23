@@ -6,7 +6,7 @@ import {
 } from "../../src/requests/songs"
 import * as requestHelpers from "../../src/requests/helpers"
 
-describe("albums requests", () => {
+describe("songs requests", () => {
   const mockData = {
     name: "name",
     audio: new File([], "audii"),
@@ -17,7 +17,7 @@ describe("albums requests", () => {
   let mockRequest = jest.fn()
   const resolve = "resolve"
 
-  beforeEach(() => mockRequest = jest.fn())
+  beforeEach(() => (mockRequest = jest.fn()))
 
   test("postSongs calls postRequest and returns response", async () => {
     jest
@@ -33,7 +33,7 @@ describe("albums requests", () => {
     expect(mockRequest).toHaveBeenCalledWith("songs", mockData)
     expect(response).toEqual(resolve)
   })
-  
+
   test("getSongs calls getRequest and returns response", async () => {
     jest
       .spyOn(requestHelpers, "getRequest")
@@ -61,7 +61,7 @@ describe("albums requests", () => {
         mockRequest(string, id, data)
         return Promise.resolve(resolve)
       })
-    
+
     const response = await patchSong(mockId, mockData)
 
     expect(mockRequest).toHaveBeenCalledTimes(1)

@@ -16,7 +16,7 @@ describe("albums requests", () => {
   const resolve = "resolve"
   let mockRequest = jest.fn()
 
-  beforeEach(() => mockRequest = jest.fn())
+  beforeEach(() => (mockRequest = jest.fn()))
 
   test("postAlbums calls postRequest and returns response", async () => {
     jest
@@ -32,7 +32,7 @@ describe("albums requests", () => {
     expect(mockRequest).toHaveBeenCalledWith("albums", mockData)
     expect(response).toEqual(resolve)
   })
-  
+
   test("getAlbums calls getRequest and returns response", async () => {
     jest
       .spyOn(requestHelpers, "getRequest")
@@ -60,15 +60,12 @@ describe("albums requests", () => {
         mockRequest(string, id)
         return Promise.resolve(resolve)
       })
-
-    const id = "teset-id"
-    const response = await getAlbumById(id)
+    const response = await getAlbumById(mockId)
 
     expect(mockRequest).toHaveBeenCalledTimes(1)
-    expect(mockRequest).toHaveBeenCalledWith("albums", id)
+    expect(mockRequest).toHaveBeenCalledWith("albums", mockId)
     expect(response).toEqual(resolve)
   })
-
 
   test("patchAlbum calls patchRequest and returns response", async () => {
     jest
@@ -77,7 +74,6 @@ describe("albums requests", () => {
         mockRequest(string, id, data)
         return Promise.resolve(resolve)
       })
-
 
     const response = await patchAlbum(mockId, mockData)
 
