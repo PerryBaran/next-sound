@@ -1,5 +1,3 @@
-type Model = "users" | "users/login" | "users/signup" | "albums" | "songs"
-
 export default function createForm(model: string, data: any) {
   const formData = new FormData()
   switch (model) {
