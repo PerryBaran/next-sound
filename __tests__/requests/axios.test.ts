@@ -1,6 +1,5 @@
 import { instance, config } from "../../src/requests/helpers/axios"
 import Cookies from "js-cookie"
-import axios from "axios"
 
 describe("axios", () => {
   test("instance", () => {
@@ -11,11 +10,11 @@ describe("axios", () => {
   })
 
   test("config", () => {
-    const cookieMock = jest.fn()
+    const mockCookie = jest.fn()
     const token = { userToken: "token" }
 
     jest.spyOn(Cookies, "get").mockImplementation(() => {
-      cookieMock()
+      mockCookie()
       return token
     })
     const response = config()
