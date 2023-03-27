@@ -43,7 +43,7 @@ describe("Playlist", () => {
         handlePlaying: mockHandlePlaying,
         handleShuffle: jest.fn()
       })
-  
+
       jest
         .spyOn(PlaylistContext, "usePlaylistContext")
         .mockImplementation(() => useContext(mockContext))
@@ -104,7 +104,7 @@ describe("Playlist", () => {
       const { asFragment } = render(<Playlist />)
 
       expect(asFragment()).toMatchSnapshot()
-    })    
+    })
   })
 
   test("empty playlist renders correctly", () => {
