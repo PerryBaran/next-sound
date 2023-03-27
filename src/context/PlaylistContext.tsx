@@ -17,7 +17,7 @@ interface Playlist extends Song {
 const PlaylistContext = createContext({
   playlist: [] as Playlist[],
   playlistIndex: 0,
-  skipSong: (i: number | boolean, loop = false) => {},
+  skipSong: (value: number | boolean, loop = false) => {},
   handleAddToPlaylist: (
     songs: Song[],
     addNext: boolean,
