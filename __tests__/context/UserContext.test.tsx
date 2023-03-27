@@ -1,9 +1,9 @@
-import { fireEvent, render, screen, waitFor, act } from "@testing-library/react"
+import { fireEvent, render, screen, waitFor } from "@testing-library/react"
 import { UserProvider, useUserContext } from "../../src/context/UserContext"
 import * as userRequests from "../../src/requests/users"
 import Cookie from "js-cookie"
 
-const Test = ({ data }: { data?: { name?: string, id?: string }}) => {
+const Test = ({ data }: { data?: { name?: string; id?: string } }) => {
   const { user, handleLogin } = useUserContext()
 
   return (
@@ -21,16 +21,16 @@ const mockData = {
   name: "name",
   id: "id"
 }
-jest.mock('jwt-decode', () => (value: any) => {
+jest.mock("jwt-decode", () => (value: any) => {
   mockJwtDecode(value)
   return mockData
-});
+})
 
 describe("UserContext", () => {
   let mockCookie = jest.fn()
   let mockGetUserById = jest.fn()
   const token = { token: "token" }
-  
+
   beforeEach(() => {
     mockCookie = jest.fn()
     mockJwtDecode = jest.fn()
@@ -40,37 +40,55 @@ describe("UserContext", () => {
       mockCookie()
       return token
     })
-    jest.spyOn(userRequests, "getUserById").mockImplementation((data: string) => {
-      mockGetUserById(data)
-      return Promise.resolve(mockData)
-    })
+    jest
+      .spyOn(userRequests, "getUserById")
+      .mockImplementation((data: string) => {
+        mockGetUserById(data)
+        return Promise.resolve(mockData)
+      })
   })
 
   test("gets cookie, decodes it and stores that value in state on start", async () => {
-    render(<UserProvider><Test/></UserProvider>)
+    render(
+      <UserProvider>
+        <Test />
+      </UserProvider>
+    )
 
     await waitFor(() => {
       expect(mockJwtDecode).toBeCalledTimes(1)
       expect(mockJwtDecode).toBeCalledWith(token)
       expect(mockGetUserById).toBeCalledTimes(1)
-      expect(mockGetUserById).toBeCalledWith(mockData.id)      
+      expect(mockGetUserById).toBeCalledWith(mockData.id)
       expect(screen.getByText(mockData.name)).toBeInTheDocument()
       expect(screen.getByText(mockData.id)).toBeInTheDocument()
     })
   })
 
   test("handleLogin with data", async () => {
-    const mockLogin = { name: "mock-name", id: "mock-id"}
-    await waitFor(() => render(<UserProvider><Test data={mockLogin}/></UserProvider>))
+    const mockLogin = { name: "mock-name", id: "mock-id" }
+    await waitFor(() =>
+      render(
+        <UserProvider>
+          <Test data={mockLogin} />
+        </UserProvider>
+      )
+    )
 
     fireEvent.click(screen.getByText("click"))
-    
+
     expect(screen.getByText(mockLogin.name)).toBeInTheDocument()
     expect(screen.getByText(mockLogin.id)).toBeInTheDocument()
   })
 
   test("handleLogin with undefined data", async () => {
-    await waitFor(() => render(<UserProvider><Test/></UserProvider>))
+    await waitFor(() =>
+      render(
+        <UserProvider>
+          <Test />
+        </UserProvider>
+      )
+    )
 
     fireEvent.click(screen.getByText("click"))
 
