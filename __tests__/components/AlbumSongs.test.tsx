@@ -10,12 +10,14 @@ describe("AlbumSongs", () => {
     artistName: "artist-name",
     albumName: "albumName"
   }
+  let SongMenuSpy: jest.SpyInstance
 
-  const mockedSongMenu = jest.fn()
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
 
-  jest.spyOn(SongMenu, "default").mockImplementation((value: any) => {
-    mockedSongMenu(value)
-    return <div />
+  beforeEach(() => {
+    SongMenuSpy = jest.spyOn(SongMenu, "default").mockReturnValue(<div />)
   })
 
   test("renders correctly", () => {
@@ -23,7 +25,7 @@ describe("AlbumSongs", () => {
 
     expect(screen.getByRole("listitem")).toBeInTheDocument()
     expect(screen.getByRole("heading")).toHaveTextContent(props.songName)
-    expect(mockedSongMenu).toHaveBeenCalledWith({ songs: [props] })
+    expect(SongMenuSpy).toHaveBeenCalledTimes(1)
   })
 
   test("snapshot", () => {

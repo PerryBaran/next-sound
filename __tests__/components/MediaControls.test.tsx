@@ -10,6 +10,10 @@ describe("MediaControls", () => {
   }
   let mockHandlePlaying = jest.fn()
 
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
   beforeEach(() => {
     props.skipSong = jest.fn()
     mockHandlePlaying = jest.fn()

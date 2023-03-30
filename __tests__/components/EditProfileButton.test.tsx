@@ -8,6 +8,10 @@ describe("EditProfileButton", () => {
     userId: "user-id"
   }
 
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
   beforeEach(() => {
     const mockContext = createContext({
       user: {

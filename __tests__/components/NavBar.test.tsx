@@ -5,21 +5,23 @@ import NavBar from "../../src/components/navBar/NavBar"
 import * as UserContext from "../../src/context/UserContext"
 
 describe("NavBar", () => {
-  let mockNav = {
-    back: jest.fn(),
-    forward: jest.fn(),
-    reset: jest.fn(),
-    push: jest.fn(),
-    pull: jest.fn(),
-    refresh: jest.fn(),
-    replace: jest.fn(),
-    prefetch: jest.fn()
-  }
+  let mockPush = jest.fn()
+
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
 
   beforeEach(() => {
-    mockNav.push = jest.fn()
+    mockPush = jest.fn()
 
-    jest.spyOn(navigation, "useRouter").mockImplementation(() => mockNav)
+    jest.spyOn(navigation, "useRouter").mockReturnValue({
+      back: jest.fn(),
+      forward: jest.fn(),
+      push: mockPush,
+      refresh: jest.fn(),
+      replace: jest.fn(),
+      prefetch: jest.fn()
+    })
   })
 
   describe("user logged out", () => {
@@ -69,7 +71,7 @@ describe("NavBar", () => {
     test("search functionality", () => {
       render(<NavBar />)
 
-      expect(mockNav.push).toBeCalledTimes(0)
+      expect(mockPush).toBeCalledTimes(0)
 
       const search = "search text"
       fireEvent.change(screen.getByPlaceholderText(/search/i), {
@@ -77,8 +79,8 @@ describe("NavBar", () => {
       })
       fireEvent.click(screen.getByRole("button"))
 
-      expect(mockNav.push).toBeCalledTimes(1)
-      expect(mockNav.push).toBeCalledWith(`search/${search}`)
+      expect(mockPush).toBeCalledTimes(1)
+      expect(mockPush).toBeCalledWith(`search/${search}`)
     })
 
     test("snapshot", () => {

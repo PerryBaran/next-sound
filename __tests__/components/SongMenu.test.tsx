@@ -22,7 +22,6 @@ describe("SongMenu", () => {
       }
     ]
   }
-
   let mockHandleAddToPlaylist = jest.fn()
 
   beforeEach(() => {

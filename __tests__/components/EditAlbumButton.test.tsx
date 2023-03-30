@@ -10,6 +10,10 @@ describe("EditButton", () => {
     albumUserId: "test-user-id"
   }
 
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
   beforeEach(() => {
     const mockContext = createContext({
       user: {

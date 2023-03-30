@@ -22,11 +22,14 @@ describe("Playlist", () => {
     }
   ]
   let mockSkipSong = jest.fn()
-  let mockPlay = jest.fn()
+  let playSpy: jest.SpyInstance
+
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
 
   beforeEach(() => {
     mockSkipSong = jest.fn()
-    mockPlay = jest.fn()
 
     const mockContext = createContext({
       playlist: mockPlaylist,
@@ -42,9 +45,9 @@ describe("Playlist", () => {
     jest
       .spyOn(PlaylistContext, "usePlaylistContext")
       .mockImplementation(() => useContext(mockContext))
-    jest
+    playSpy = jest
       .spyOn(window.HTMLMediaElement.prototype, "play")
-      .mockImplementation(mockPlay)
+      .mockImplementation(jest.fn())
     jest
       .spyOn(window.HTMLMediaElement.prototype, "pause")
       .mockImplementation(jest.fn())
@@ -101,26 +104,26 @@ describe("Playlist", () => {
     const skipForwards = screen.getByAltText(/skip forwards/i)
     const loopButton = screen.getByAltText(/loop/i)
 
-    expect(mockPlay).toBeCalledTimes(0)
+    expect(playSpy).toBeCalledTimes(0)
     expect(mockSkipSong).toBeCalledTimes(0)
 
     fireEvent.click(skipForwards)
 
-    expect(mockPlay).toBeCalledTimes(0)
+    expect(playSpy).toBeCalledTimes(0)
     expect(mockSkipSong).toBeCalledTimes(1)
     expect(mockSkipSong).toHaveBeenLastCalledWith(true, false)
 
     fireEvent.click(loopButton)
     fireEvent.click(skipForwards)
 
-    expect(mockPlay).toBeCalledTimes(0)
+    expect(playSpy).toBeCalledTimes(0)
     expect(mockSkipSong).toBeCalledTimes(2)
     expect(mockSkipSong).toHaveBeenLastCalledWith(true, true)
 
     fireEvent.click(loopButton)
     fireEvent.click(skipForwards)
 
-    expect(mockPlay).toBeCalledTimes(1)
+    expect(playSpy).toBeCalledTimes(1)
     expect(mockSkipSong).toBeCalledTimes(2)
   })
 

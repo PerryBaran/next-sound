@@ -22,18 +22,20 @@ describe("Audio", () => {
     setDuration: jest.fn(),
     skipSong: jest.fn()
   }
-  let mockPlay = jest.fn()
-  let mockPause = jest.fn()
+  let playSpy: jest.SpyInstance
+  let pauseSpy: jest.SpyInstance
+
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
 
   beforeEach(() => {
-    mockPlay = jest.fn()
-    mockPause = jest.fn()
-    jest
+    playSpy = jest
       .spyOn(window.HTMLMediaElement.prototype, "play")
-      .mockImplementation(mockPlay)
-    jest
+      .mockImplementation(jest.fn())
+    pauseSpy = jest
       .spyOn(window.HTMLMediaElement.prototype, "pause")
-      .mockImplementation(mockPause)
+      .mockImplementation(jest.fn())
   })
 
   test("renders correctly", () => {
@@ -45,15 +47,15 @@ describe("Audio", () => {
   test("plays audioElement if playing is truthy", () => {
     render(<RenderWithRef {...props} />)
 
-    expect(mockPlay).toHaveBeenCalled()
-    expect(mockPause).not.toHaveBeenCalled()
+    expect(playSpy).toHaveBeenCalled()
+    expect(pauseSpy).not.toHaveBeenCalled()
   })
 
   test("pauses audio element if playing is falsey", () => {
     render(<RenderWithRef {...props} playing={false} />)
 
-    expect(mockPlay).not.toHaveBeenCalled()
-    expect(mockPause).toHaveBeenCalled()
+    expect(playSpy).not.toHaveBeenCalled()
+    expect(pauseSpy).toHaveBeenCalled()
   })
 
   test("on loaded meta data, sets duration", () => {
@@ -69,11 +71,11 @@ describe("Audio", () => {
   test("plays song on load meta data if playing is true", () => {
     render(<RenderWithRef {...props} />)
 
-    expect(mockPlay).toBeCalledTimes(1)
+    expect(playSpy).toBeCalledTimes(1)
 
     fireEvent.loadedMetadata(screen.getByTestId("audio"))
 
-    expect(mockPlay).toBeCalledTimes(2)
+    expect(playSpy).toBeCalledTimes(2)
   })
 
   test("calls skip song on song end", () => {

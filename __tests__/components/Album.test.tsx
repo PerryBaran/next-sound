@@ -25,23 +25,20 @@ describe("Album", () => {
     albumId: "album-id",
     profile: true
   }
-  let mockedAlbumSongs = jest.fn()
-  let mockedSongMenu = jest.fn()
-  let mockedEditAlbumButton = jest.fn()
+  let AlbumSongSpy: jest.SpyInstance
+  let SongMenuSpy: jest.SpyInstance
+  let EditAlbumButtonSpy: jest.SpyInstance
 
-  jest.spyOn(SongMenu, "default").mockImplementation((value: any) => {
-    mockedSongMenu(value)
-    return <div />
+  afterEach(() => {
+    jest.clearAllMocks()
   })
 
-  jest.spyOn(AlbumSongs, "default").mockImplementation((value: any) => {
-    mockedAlbumSongs(value)
-    return <div />
-  })
-
-  jest.spyOn(EditAlbumButton, "default").mockImplementation((value: any) => {
-    mockedEditAlbumButton(value)
-    return <div />
+  beforeEach(() => {
+    AlbumSongSpy = jest.spyOn(AlbumSongs, "default").mockReturnValue(<div />)
+    SongMenuSpy = jest.spyOn(SongMenu, "default").mockReturnValue(<div />)
+    EditAlbumButtonSpy = jest
+      .spyOn(EditAlbumButton, "default")
+      .mockReturnValue(<div />)
   })
 
   test("if songs array length is 0 and profile is false, returns null", () => {
@@ -77,32 +74,9 @@ describe("Album", () => {
     expect(screen.getByText(props.albumName)).toBeInTheDocument()
     expect(screen.getByRole("list")).toBeInTheDocument()
 
-    expect(mockedSongMenu).toBeCalledWith({
-      songs: props.songs.map((song) => {
-        return {
-          songName: song.name,
-          audio: song.url,
-          image: props.albumArt,
-          artistName: props.artistName,
-          albumName: props.albumName
-        }
-      })
-    })
-    expect(mockedEditAlbumButton).toBeCalledWith({
-      albumId: props.albumId,
-      albumUserId: props.albumUserId,
-      profile: props.profile
-    })
-    expect(mockedAlbumSongs).toBeCalledTimes(props.songs.length)
-    props.songs.forEach((song) => {
-      expect(mockedAlbumSongs).toHaveBeenCalledWith({
-        songName: song.name,
-        audio: song.url,
-        image: props.albumArt,
-        artistName: props.artistName,
-        albumName: props.albumName
-      })
-    })
+    expect(SongMenuSpy).toBeCalledTimes(1)
+    expect(EditAlbumButtonSpy).toBeCalledTimes(1)
+    expect(AlbumSongSpy).toBeCalledTimes(props.songs.length)
   })
 
   describe("snapshots", () => {

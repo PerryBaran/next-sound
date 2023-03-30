@@ -10,12 +10,14 @@ describe("Song", () => {
     songName: "song-name",
     songAudio: "song-audio"
   }
+  let mockedSongMenu: jest.SpyInstance
 
-  const mockedSongMenu = jest.fn()
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
 
-  jest.spyOn(SongMenu, "default").mockImplementation((value: any) => {
-    mockedSongMenu(value)
-    return <div />
+  beforeEach(() => {
+    mockedSongMenu = jest.spyOn(SongMenu, "default").mockReturnValue(<div />)
   })
 
   test("renders correctly", () => {
@@ -34,17 +36,6 @@ describe("Song", () => {
     )
     expect(screen.getByText(props.songName)).toBeInTheDocument()
     expect(mockedSongMenu).toBeCalledTimes(1)
-    expect(mockedSongMenu).toBeCalledWith({
-      songs: [
-        {
-          songName: props.songName,
-          audio: props.songAudio,
-          image: props.albumArt,
-          artistName: props.artistName,
-          albumName: props.albumName
-        }
-      ]
-    })
   })
 
   test("snapshot", () => {

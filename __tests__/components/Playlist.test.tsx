@@ -25,6 +25,10 @@ describe("Playlist", () => {
   let mockRemoveFromPlaylist = jest.fn()
   let mockHandlePlaying = jest.fn()
 
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
   beforeEach(() => {
     mockSkipSong = jest.fn()
     mockRemoveFromPlaylist = jest.fn()
