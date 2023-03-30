@@ -6,7 +6,7 @@ import Albums from "@/interfaces/albums"
 
 const inter = Inter({ subsets: ["latin"] })
 
-export const revalidate = 100
+export const revalidate = 30
 
 export default async function Home() {
   const albums: Albums[] = await getAlbums()
