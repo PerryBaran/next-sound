@@ -10,13 +10,8 @@ describe("axios", () => {
   })
 
   test("config", () => {
-    const mockCookie = jest.fn()
     const token = { userToken: "token" }
-
-    jest.spyOn(Cookies, "get").mockImplementation(() => {
-      mockCookie()
-      return token
-    })
+    jest.spyOn(Cookies, "get").mockReturnValue(token)
     const response = config()
 
     expect(response).toEqual({

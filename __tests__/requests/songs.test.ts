@@ -14,33 +14,28 @@ describe("songs requests", () => {
     AlbumId: "album-id"
   }
   const mockId = "test-id"
-  let mockRequest = jest.fn()
-  const resolve = "resolve"
+  const mockResolve = "resolve"
 
-  beforeEach(() => (mockRequest = jest.fn()))
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
 
   test("postSongs calls postRequest and returns response", async () => {
-    jest
+    const postSpy = jest
       .spyOn(requestHelpers, "postRequest")
-      .mockImplementation((string: any, data: any) => {
-        mockRequest(string, data)
-        return Promise.resolve(resolve)
-      })
+      .mockResolvedValue(mockResolve)
 
     const response = await postSongs(mockData)
 
-    expect(mockRequest).toHaveBeenCalledTimes(1)
-    expect(mockRequest).toHaveBeenCalledWith("songs", mockData)
-    expect(response).toEqual(resolve)
+    expect(postSpy).toHaveBeenCalledTimes(1)
+    expect(postSpy).toHaveBeenCalledWith("songs", mockData)
+    expect(response).toEqual(mockResolve)
   })
 
   test("getSongs calls getRequest and returns response", async () => {
-    jest
+    const getSpy = jest
       .spyOn(requestHelpers, "getRequest")
-      .mockImplementation((string: any, query: any) => {
-        mockRequest(string, query)
-        return Promise.resolve(resolve)
-      })
+      .mockResolvedValue(mockResolve)
 
     const mockQuery = {
       name: "name",
@@ -49,38 +44,32 @@ describe("songs requests", () => {
     }
     const response = await getSongs(mockQuery)
 
-    expect(mockRequest).toHaveBeenCalledTimes(1)
-    expect(mockRequest).toHaveBeenCalledWith("songs", mockQuery)
-    expect(response).toEqual(resolve)
+    expect(getSpy).toHaveBeenCalledTimes(1)
+    expect(getSpy).toHaveBeenCalledWith("songs", mockQuery)
+    expect(response).toEqual(mockResolve)
   })
 
   test("patchSongs calls patchRequest and returns response", async () => {
-    jest
+    const patchSpy = jest
       .spyOn(requestHelpers, "patchRequest")
-      .mockImplementation((string: any, id: any, data: any) => {
-        mockRequest(string, id, data)
-        return Promise.resolve(resolve)
-      })
+      .mockResolvedValue(mockResolve)
 
     const response = await patchSong(mockId, mockData)
 
-    expect(mockRequest).toHaveBeenCalledTimes(1)
-    expect(mockRequest).toHaveBeenCalledWith("songs", mockId, mockData)
-    expect(response).toEqual(resolve)
+    expect(patchSpy).toHaveBeenCalledTimes(1)
+    expect(patchSpy).toHaveBeenCalledWith("songs", mockId, mockData)
+    expect(response).toEqual(mockResolve)
   })
 
   test("deleteSongs calls deleteRequest and returns response", async () => {
-    jest
+    const deleteSpy = jest
       .spyOn(requestHelpers, "deleteRequest")
-      .mockImplementation((string: any, id: any) => {
-        mockRequest(string, id)
-        return Promise.resolve(resolve)
-      })
+      .mockResolvedValue(mockResolve)
 
     const response = await deleteSong(mockId)
 
-    expect(mockRequest).toHaveBeenCalledTimes(1)
-    expect(mockRequest).toHaveBeenCalledWith("songs", mockId)
-    expect(response).toEqual(resolve)
+    expect(deleteSpy).toHaveBeenCalledTimes(1)
+    expect(deleteSpy).toHaveBeenCalledWith("songs", mockId)
+    expect(response).toEqual(mockResolve)
   })
 })

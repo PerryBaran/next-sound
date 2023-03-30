@@ -9,9 +9,8 @@ import * as axios from "../../src/requests/helpers/axios"
 import * as createForm from "../../src/requests/helpers/createForm"
 
 describe("request helper functions", () => {
-  let instanceMock = jest.fn()
-  let mockCreateForm = jest.fn()
-  let mockConfig = jest.fn()
+  let mockCreateForm: jest.SpyInstance
+  let mockConfig: jest.SpyInstance
   const mockData = "data"
   const mockId = "id"
   const mockHeader = {
@@ -21,40 +20,35 @@ describe("request helper functions", () => {
   }
   const mockModel = "users"
 
-  beforeEach(() => {
-    instanceMock = jest.fn()
-    mockCreateForm = jest.fn()
-    mockConfig = jest.fn()
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
 
-    jest.spyOn(axios, "config").mockImplementation(() => {
-      mockConfig()
-      return mockHeader
-    })
+  beforeEach(() => {
+    mockConfig = jest.spyOn(axios, "config").mockReturnValue(mockHeader)
+    mockCreateForm = jest
+      .spyOn(createForm, "default")
+      .mockImplementation((model: any, data: any) => {
+        return data
+      })
   })
 
   describe("postRequest", () => {
+    let instancePostSpy: jest.SpyInstance
+
     beforeEach(() => {
-      jest
-        .spyOn(createForm, "default")
-        .mockImplementation((model: any, data: any) => {
-          mockCreateForm(model, data)
-          return data
-        })
+      instancePostSpy = jest.spyOn(axios.instance, "post")
     })
 
     test("returns data", async () => {
-      jest
-        .spyOn(axios.instance, "post")
-        .mockImplementation((string: any, data: any, config: any) => {
-          instanceMock(string, data, config)
-          return Promise.resolve({ data: mockData })
-        })
+      instancePostSpy.mockResolvedValue({ data: mockData })
+
       const response = await postRequest(mockModel, mockData)
 
       expect(mockCreateForm).toHaveBeenCalledTimes(1)
       expect(mockCreateForm).toHaveBeenCalledWith(mockModel, mockData)
-      expect(instanceMock).toHaveBeenCalledTimes(1)
-      expect(instanceMock).toHaveBeenCalledWith(
+      expect(instancePostSpy).toHaveBeenCalledTimes(1)
+      expect(instancePostSpy).toHaveBeenCalledWith(
         `/${mockModel}`,
         mockData,
         mockHeader
@@ -64,17 +58,15 @@ describe("request helper functions", () => {
 
     test("throws an error with message if it matches expected error from post request", () => {
       const error = "error"
-      jest.spyOn(axios.instance, "post").mockImplementation(() => {
-        throw { response: { data: { message: error } } }
+      instancePostSpy.mockRejectedValue({
+        response: { data: { message: error } }
       })
 
       expect(postRequest(mockModel, mockData)).rejects.toThrow(error)
     })
 
     test("throws unexpected error if unexpected error occurs", () => {
-      jest.spyOn(axios.instance, "post").mockImplementation(() => {
-        throw new Error()
-      })
+      instancePostSpy.mockRejectedValue("")
 
       expect(postRequest(mockModel, mockData)).rejects.toThrow(
         "Unexpected Error"
@@ -83,21 +75,22 @@ describe("request helper functions", () => {
   })
 
   describe("getRequest", () => {
+    let instanceGetSpy: jest.SpyInstance
+
+    beforeEach(() => {
+      instanceGetSpy = jest.spyOn(axios.instance, "get")
+    })
+
     describe("succesfull response", () => {
       beforeEach(() => {
-        jest
-          .spyOn(axios.instance, "get")
-          .mockImplementation((string: any, config: any) => {
-            instanceMock(string, config)
-            return Promise.resolve({ data: mockData })
-          })
+        instanceGetSpy.mockResolvedValue({ data: mockData })
       })
 
       test("returns data", async () => {
         const response = await getRequest(mockModel)
 
-        expect(instanceMock).toHaveBeenCalledTimes(1)
-        expect(instanceMock).toHaveBeenCalledWith(`/${mockModel}`, mockHeader)
+        expect(instanceGetSpy).toHaveBeenCalledTimes(1)
+        expect(instanceGetSpy).toHaveBeenCalledWith(`/${mockModel}`, mockHeader)
         expect(response).toEqual(mockData)
       })
 
@@ -105,8 +98,8 @@ describe("request helper functions", () => {
         const query = { name: "name" }
         await getRequest(mockModel, query)
 
-        expect(instanceMock).toHaveBeenCalledTimes(1)
-        expect(instanceMock).toHaveBeenCalledWith(
+        expect(instanceGetSpy).toHaveBeenCalledTimes(1)
+        expect(instanceGetSpy).toHaveBeenCalledWith(
           `/${mockModel}?name=${query.name}`,
           mockHeader
         )
@@ -116,8 +109,8 @@ describe("request helper functions", () => {
         const query = { name: "name", exact: true, limit: 50 }
         await getRequest(mockModel, query)
 
-        expect(instanceMock).toHaveBeenCalledTimes(1)
-        expect(instanceMock).toHaveBeenCalledWith(
+        expect(instanceGetSpy).toHaveBeenCalledTimes(1)
+        expect(instanceGetSpy).toHaveBeenCalledWith(
           `/${mockModel}?name=${query.name}&exact=true&limit=${query.limit}`,
           mockHeader
         )
@@ -126,34 +119,34 @@ describe("request helper functions", () => {
 
     test("throws an error with message if it matches expected error from post request", () => {
       const error = "error"
-      jest.spyOn(axios.instance, "get").mockImplementation(() => {
-        throw { response: { data: { message: error } } }
+      instanceGetSpy.mockRejectedValue({
+        response: { data: { message: error } }
       })
 
       expect(getRequest(mockModel)).rejects.toThrow("error")
     })
 
     test("throws unexpected error if unexpected error occurs", () => {
-      jest.spyOn(axios.instance, "get").mockImplementation(() => {
-        throw new Error()
-      })
+      instanceGetSpy.mockRejectedValue("")
 
       expect(getRequest(mockModel)).rejects.toThrow("Unexpected Error")
     })
   })
 
   describe("getByIdRequest", () => {
+    let instanceGetByIdSpy: jest.SpyInstance
+
+    beforeEach(() => {
+      instanceGetByIdSpy = jest.spyOn(axios.instance, "get")
+    })
+
     test("returns data", async () => {
-      jest
-        .spyOn(axios.instance, "get")
-        .mockImplementation((string: any, config: any) => {
-          instanceMock(string, config)
-          return Promise.resolve({ data: mockData })
-        })
+      instanceGetByIdSpy.mockResolvedValue({ data: mockData })
+
       const response = await getByIdRequest(mockModel, mockId)
 
-      expect(instanceMock).toHaveBeenCalledTimes(1)
-      expect(instanceMock).toHaveBeenCalledWith(
+      expect(instanceGetByIdSpy).toHaveBeenCalledTimes(1)
+      expect(instanceGetByIdSpy).toHaveBeenCalledWith(
         `/${mockModel}/${mockId}`,
         mockHeader
       )
@@ -162,17 +155,15 @@ describe("request helper functions", () => {
 
     test("throws an error with message if it matches expected error from post request", () => {
       const error = "error"
-      jest.spyOn(axios.instance, "get").mockImplementation(() => {
-        throw { response: { data: { message: error } } }
+      instanceGetByIdSpy.mockRejectedValue({
+        response: { data: { message: error } }
       })
 
       expect(getByIdRequest(mockModel, mockId)).rejects.toThrow(error)
     })
 
     test("throws unexpected error if unexpected error occurs", () => {
-      jest.spyOn(axios.instance, "get").mockImplementation(() => {
-        throw new Error()
-      })
+      instanceGetByIdSpy.mockRejectedValue("")
 
       expect(getByIdRequest(mockModel, mockId)).rejects.toThrow(
         "Unexpected Error"
@@ -181,28 +172,21 @@ describe("request helper functions", () => {
   })
 
   describe("patchRequest", () => {
+    let instancePatchSpy: jest.SpyInstance
+
     beforeEach(() => {
-      jest
-        .spyOn(createForm, "default")
-        .mockImplementation((model: any, data: any) => {
-          mockCreateForm(model, data)
-          return data
-        })
+      instancePatchSpy = jest.spyOn(axios.instance, "patch")
     })
 
     test("returns data", async () => {
-      jest
-        .spyOn(axios.instance, "patch")
-        .mockImplementation((string: any, data: any, config: any) => {
-          instanceMock(string, data, config)
-          return Promise.resolve({ data: mockData })
-        })
+      instancePatchSpy.mockResolvedValue({ data: mockData })
+
       const response = await patchRequest(mockModel, mockId, mockData)
 
       expect(mockCreateForm).toHaveBeenCalledTimes(1)
       expect(mockCreateForm).toHaveBeenCalledWith(mockModel, mockData)
-      expect(instanceMock).toHaveBeenCalledTimes(1)
-      expect(instanceMock).toHaveBeenCalledWith(
+      expect(instancePatchSpy).toHaveBeenCalledTimes(1)
+      expect(instancePatchSpy).toHaveBeenCalledWith(
         `/${mockModel}/${mockId}`,
         mockData,
         mockHeader
@@ -212,17 +196,15 @@ describe("request helper functions", () => {
 
     test("throws an error with message if it matches expected error from post request", () => {
       const error = "error"
-      jest.spyOn(axios.instance, "patch").mockImplementation(() => {
-        throw { response: { data: { message: error } } }
+      instancePatchSpy.mockRejectedValue({
+        response: { data: { message: error } }
       })
 
       expect(patchRequest(mockModel, mockId, mockData)).rejects.toThrow(error)
     })
 
     test("throws unexpected error if unexpected error occurs", () => {
-      jest.spyOn(axios.instance, "patch").mockImplementation(() => {
-        throw new Error()
-      })
+      instancePatchSpy.mockRejectedValue("")
 
       expect(patchRequest(mockModel, mockId, mockData)).rejects.toThrow(
         "Unexpected Error"
@@ -231,17 +213,18 @@ describe("request helper functions", () => {
   })
 
   describe("deleteRequest", () => {
+    let instanceDeleteSpy: jest.SpyInstance
+
+    beforeEach(() => {
+      instanceDeleteSpy = jest.spyOn(axios.instance, "delete")
+    })
+
     test("returns data", async () => {
-      jest
-        .spyOn(axios.instance, "delete")
-        .mockImplementation((string: any, config: any) => {
-          instanceMock(string, config)
-          return Promise.resolve({ data: mockData })
-        })
+      instanceDeleteSpy.mockResolvedValue({ data: mockData })
       const response = await deleteRequest(mockModel, mockId)
 
-      expect(instanceMock).toHaveBeenCalledTimes(1)
-      expect(instanceMock).toHaveBeenCalledWith(
+      expect(instanceDeleteSpy).toHaveBeenCalledTimes(1)
+      expect(instanceDeleteSpy).toHaveBeenCalledWith(
         `/${mockModel}/${mockId}`,
         mockHeader
       )
@@ -250,17 +233,15 @@ describe("request helper functions", () => {
 
     test("throws an error with message if it matches expected error from post request", () => {
       const error = "error"
-      jest.spyOn(axios.instance, "delete").mockImplementation(() => {
-        throw { response: { data: { message: error } } }
+      instanceDeleteSpy.mockRejectedValue({
+        response: { data: { message: error } }
       })
 
       expect(deleteRequest(mockModel, mockId)).rejects.toThrow(error)
     })
 
     test("throws unexpected error if unexpected error occurs", () => {
-      jest.spyOn(axios.instance, "delete").mockImplementation(() => {
-        throw new Error()
-      })
+      instanceDeleteSpy.mockRejectedValue("")
 
       expect(deleteRequest(mockModel, mockId)).rejects.toThrow(
         "Unexpected Error"
