@@ -27,25 +27,21 @@ jest.mock("jwt-decode", () => (value: any) => {
 })
 
 describe("UserContext", () => {
-  let mockCookie = jest.fn()
-  let mockGetUserById = jest.fn()
   const token = { token: "token" }
+  let cookieSpy: jest.SpyInstance
+  let getUserByIdSpy: jest.SpyInstance
+
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
 
   beforeEach(() => {
-    mockCookie = jest.fn()
     mockJwtDecode = jest.fn()
-    mockGetUserById = jest.fn()
 
-    jest.spyOn(Cookie, "get").mockImplementation(() => {
-      mockCookie()
-      return token
-    })
-    jest
+    cookieSpy = jest.spyOn(Cookie, "get").mockReturnValue(token)
+    getUserByIdSpy = jest
       .spyOn(userRequests, "getUserById")
-      .mockImplementation((data: string) => {
-        mockGetUserById(data)
-        return Promise.resolve(mockData)
-      })
+      .mockResolvedValue(mockData)
   })
 
   test("gets cookie, decodes it and stores that value in state on start", async () => {
@@ -58,8 +54,8 @@ describe("UserContext", () => {
     await waitFor(() => {
       expect(mockJwtDecode).toBeCalledTimes(1)
       expect(mockJwtDecode).toBeCalledWith(token)
-      expect(mockGetUserById).toBeCalledTimes(1)
-      expect(mockGetUserById).toBeCalledWith(mockData.id)
+      expect(getUserByIdSpy).toBeCalledTimes(1)
+      expect(getUserByIdSpy).toBeCalledWith(mockData.id)
       expect(screen.getByText(mockData.name)).toBeInTheDocument()
       expect(screen.getByText(mockData.id)).toBeInTheDocument()
     })

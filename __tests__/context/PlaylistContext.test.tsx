@@ -249,11 +249,8 @@ describe("PlaylistContext", () => {
     )
     fireEvent.click(screen.getByText(/handleAddToPlaylist/))
 
-    jest.spyOn(Math, "random").mockImplementationOnce(() => {
-      return 0
-    })
-    jest.spyOn(Math, "random").mockImplementationOnce(() => {
-      return 0
+    songs.forEach(() => {
+      jest.spyOn(Math, "random").mockReturnValueOnce(0)
     })
 
     const shuffle = screen.getByText(/handleShuffle/)
