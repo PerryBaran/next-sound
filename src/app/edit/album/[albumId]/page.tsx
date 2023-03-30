@@ -110,6 +110,7 @@ export default function EditAlbum(props: Props) {
     i: number
   ) => {
     const { checked } = e.target
+
     setSongs((prev) => {
       const clone = [...prev]
       clone[i].current.delete = checked
@@ -178,7 +179,7 @@ export default function EditAlbum(props: Props) {
         if (song.current.delete) {
           songDeletePromises.push(song.original.id)
         } else if (!song.current.name) {
-          setAlert("song must have a name")
+          setAlert("All songs must have a name")
           return
         } else if (
           song.current.name !== song.original.name ||
@@ -201,12 +202,12 @@ export default function EditAlbum(props: Props) {
         }
       } else {
         if (!song.current.name) {
-          setAlert("All songs must contain a name")
+          setAlert("All songs must have a name")
           return
         }
 
         if (!song.current.audio) {
-          setAlert("All songs must contain audio")
+          setAlert("All songs must have audio")
           return
         }
 
@@ -254,7 +255,7 @@ export default function EditAlbum(props: Props) {
     router.back()
   }
 
-  const determineConfirm = (string: string) => {
+  const confirmCallback = (string: string) => {
     switch (string) {
       case "cancel":
         return handleCancel
@@ -387,7 +388,7 @@ export default function EditAlbum(props: Props) {
         {confirm && (
           <Confirm
             setConfirm={setConfirm}
-            callback={determineConfirm(confirm)}
+            callback={confirmCallback(confirm)}
           />
         )}
       </form>
