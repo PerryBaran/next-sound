@@ -1,8 +1,8 @@
 import { Inter } from "@next/font/google"
-import { getAlbums } from "@/requests/albums"
-import Album from "@/components/album/Album"
+import { getAlbums } from "../requests/albums"
+import Album from "../components/album/Album"
 import css from "./home.module.css"
-import Albums from "@/interfaces/albums"
+import Albums from "../interfaces/albums"
 
 const inter = Inter({ subsets: ["latin"] })
 

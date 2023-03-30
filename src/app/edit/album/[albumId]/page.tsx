@@ -9,7 +9,7 @@ import { patchAlbum, deleteAlbum } from "@/requests/albums"
 import { patchSong, deleteSong, postSongs } from "@/requests/songs"
 import { useUserContext } from "@/context/UserContext"
 import css from "./editAlbum.module.css"
-import Confirm from "@/components/confirm/confirm"
+import Confirm from "../../../../components/confirm/Confirm"
 
 interface Props {
   params: { albumId: string }
