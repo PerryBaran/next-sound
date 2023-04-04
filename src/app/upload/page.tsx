@@ -1,11 +1,11 @@
 "use client"
 
-import Alert from "@/components/alert/Alert"
+import Alert from "../../components/alert/Alert"
 import { useRouter } from "next/navigation"
 import { useState, useRef } from "react"
-import { postAlbums } from "@/requests/albums"
-import { postSongs } from "@/requests/songs"
-import { useUserContext } from "@/context/UserContext"
+import { postAlbums } from "../../requests/albums"
+import { postSongs } from "../../requests/songs"
+import { useUserContext } from "../../context/UserContext"
 
 interface Album {
   name: string
@@ -88,7 +88,6 @@ export default function UploadAlbum() {
     i: number
   ) => {
     const { files } = e.target
-
     if (!files) return
 
     setSongs((prev) => {
@@ -186,7 +185,6 @@ export default function UploadAlbum() {
             onChange={handleImageChange}
           />
         </label>
-        <button type="submit">Create Album</button>
         <div>
           <h2>Upload Songs</h2>
           {songs.map((song, i) => {

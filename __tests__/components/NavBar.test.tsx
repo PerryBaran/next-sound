@@ -31,7 +31,7 @@ describe("NavBar", () => {
           id: "",
           name: ""
         },
-        handleLogin: () => {}
+        handleLogin: jest.fn()
       })
 
       jest
