@@ -125,7 +125,7 @@ describe("Playlist", () => {
 
       expect(playSpy).toBeCalledTimes(1)
       expect(mockSkipSong).toBeCalledTimes(2)
-    })    
+    })
   })
 
   test("snapshot", () => {

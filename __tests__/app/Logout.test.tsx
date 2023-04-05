@@ -38,7 +38,9 @@ describe("Logout", () => {
     })
 
     test("renders as expected", () => {
-      expect(screen.getByText(/are you sure/i)).toBeInstanceOf(HTMLHeadingElement)
+      expect(screen.getByText(/are you sure/i)).toBeInstanceOf(
+        HTMLHeadingElement
+      )
       expect(screen.getByText(/logout/i)).toBeInstanceOf(HTMLButtonElement)
     })
 

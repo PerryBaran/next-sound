@@ -102,7 +102,7 @@ describe("Playlist", () => {
           expect(mockRemoveFromPlaylist).toBeCalledTimes(i + 1)
           expect(mockRemoveFromPlaylist).toHaveBeenLastCalledWith(i)
         })
-      })      
+      })
     })
 
     test("snapshot", () => {
