@@ -1,14 +1,14 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { useUserContext } from "@/context/UserContext"
+import { useUserContext } from "../../context/UserContext"
 
 export default function LogOut() {
   const router = useRouter()
   const { handleLogin } = useUserContext()
 
   const handleLogout = () => {
-    handleLogin(undefined)
+    handleLogin()
     router.push("/")
   }
 
