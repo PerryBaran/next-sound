@@ -53,78 +53,79 @@ describe("Playlist", () => {
       .mockImplementation(jest.fn())
   })
 
-  test("renders correctly", () => {
-    render(<MusicPlayer />)
+  describe("tests", () => {
+    beforeEach(() => {
+      render(<MusicPlayer />)
+    })
 
-    expect(screen.getByTestId("audio")).toBeInTheDocument()
-    expect(screen.getByAltText(/cover art/i)).toBeInTheDocument()
-    expect(screen.getByDisplayValue(0)).toBeInstanceOf(HTMLInputElement)
-    expect(screen.getAllByText("0:00")).toHaveLength(2)
-    expect(screen.getByAltText(/skip backwards/i)).toBeInTheDocument()
-    expect(screen.getByAltText(/loop/i)).toBeInTheDocument()
-    expect(screen.getByAltText(/shuffle/i)).toBeInTheDocument()
-    expect(screen.getByAltText(/volume/i)).toBeInTheDocument()
-    expect(screen.getByAltText(/playlist/i)).toBeInTheDocument()
-  })
+    test("renders correctly", () => {
+      expect(screen.getByTestId("audio")).toBeInTheDocument()
+      expect(screen.getByAltText(/cover art/i)).toBeInTheDocument()
+      expect(screen.getByDisplayValue(0)).toBeInstanceOf(HTMLInputElement)
+      expect(screen.getAllByText("0:00")).toHaveLength(2)
+      expect(screen.getByAltText(/skip backwards/i)).toBeInTheDocument()
+      expect(screen.getByAltText(/loop/i)).toBeInTheDocument()
+      expect(screen.getByAltText(/shuffle/i)).toBeInTheDocument()
+      expect(screen.getByAltText(/volume/i)).toBeInTheDocument()
+      expect(screen.getByAltText(/playlist/i)).toBeInTheDocument()
+    })
 
-  test("handleVolume", () => {
-    render(<MusicPlayer />)
-    const volumeInput = screen.getByDisplayValue(50)
+    test("handleVolume", () => {
+      const volumeInput = screen.getByDisplayValue(50)
 
-    fireEvent.change(volumeInput, { target: { value: 60 } })
+      fireEvent.change(volumeInput, { target: { value: 60 } })
 
-    expect(volumeInput).toHaveDisplayValue("60")
+      expect(volumeInput).toHaveDisplayValue("60")
 
-    fireEvent.change(volumeInput, { target: { value: 1000 } })
+      fireEvent.change(volumeInput, { target: { value: 1000 } })
 
-    expect(volumeInput).toHaveDisplayValue("100")
+      expect(volumeInput).toHaveDisplayValue("100")
 
-    fireEvent.change(volumeInput, { target: { value: -10 } })
+      fireEvent.change(volumeInput, { target: { value: -10 } })
 
-    expect(volumeInput).toHaveDisplayValue("0")
-  })
+      expect(volumeInput).toHaveDisplayValue("0")
+    })
 
-  test("handleLoop", () => {
-    render(<MusicPlayer />)
-    const loopButton = screen.getByAltText(/loop/i)
+    test("handleLoop", () => {
+      const loopButton = screen.getByAltText(/loop/i)
 
-    expect(loopButton).toBeInTheDocument()
+      expect(loopButton).toBeInTheDocument()
 
-    fireEvent.click(loopButton)
+      fireEvent.click(loopButton)
 
-    expect(loopButton).toHaveAttribute("alt", "loop playlist")
+      expect(loopButton).toHaveAttribute("alt", "loop playlist")
 
-    fireEvent.click(loopButton)
+      fireEvent.click(loopButton)
 
-    expect(loopButton).toHaveAttribute("alt", "loop song")
-  })
+      expect(loopButton).toHaveAttribute("alt", "loop song")
+    })
 
-  test("handleSkip", () => {
-    render(<MusicPlayer />)
-    const skipForwards = screen.getByAltText(/skip forwards/i)
-    const loopButton = screen.getByAltText(/loop/i)
+    test("handleSkip", () => {
+      const skipForwards = screen.getByAltText(/skip forwards/i)
+      const loopButton = screen.getByAltText(/loop/i)
 
-    expect(playSpy).toBeCalledTimes(0)
-    expect(mockSkipSong).toBeCalledTimes(0)
+      expect(playSpy).toBeCalledTimes(0)
+      expect(mockSkipSong).toBeCalledTimes(0)
 
-    fireEvent.click(skipForwards)
+      fireEvent.click(skipForwards)
 
-    expect(playSpy).toBeCalledTimes(0)
-    expect(mockSkipSong).toBeCalledTimes(1)
-    expect(mockSkipSong).toHaveBeenLastCalledWith(true, false)
+      expect(playSpy).toBeCalledTimes(0)
+      expect(mockSkipSong).toBeCalledTimes(1)
+      expect(mockSkipSong).toHaveBeenLastCalledWith(true, false)
 
-    fireEvent.click(loopButton)
-    fireEvent.click(skipForwards)
+      fireEvent.click(loopButton)
+      fireEvent.click(skipForwards)
 
-    expect(playSpy).toBeCalledTimes(0)
-    expect(mockSkipSong).toBeCalledTimes(2)
-    expect(mockSkipSong).toHaveBeenLastCalledWith(true, true)
+      expect(playSpy).toBeCalledTimes(0)
+      expect(mockSkipSong).toBeCalledTimes(2)
+      expect(mockSkipSong).toHaveBeenLastCalledWith(true, true)
 
-    fireEvent.click(loopButton)
-    fireEvent.click(skipForwards)
+      fireEvent.click(loopButton)
+      fireEvent.click(skipForwards)
 
-    expect(playSpy).toBeCalledTimes(1)
-    expect(mockSkipSong).toBeCalledTimes(2)
+      expect(playSpy).toBeCalledTimes(1)
+      expect(mockSkipSong).toBeCalledTimes(2)
+    })    
   })
 
   test("snapshot", () => {

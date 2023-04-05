@@ -29,28 +29,31 @@ describe("Shuffle", () => {
       .mockImplementation(() => useContext(mockContext))
   })
 
-  test("rendes correctly", () => {
-    render(<Shuffle />)
+  describe("tests", () => {
+    beforeEach(() => {
+      render(<Shuffle />)
+    })
 
-    expect(screen.getByRole("button")).toBeInTheDocument()
-    expect(screen.getByAltText(/shuffle/i)).toBeInTheDocument()
-  })
+    test("rendes correctly", () => {
+      expect(screen.getByRole("button")).toBeInTheDocument()
+      expect(screen.getByAltText(/shuffle/i)).toBeInTheDocument()
+    })
 
-  test("shuffle click", () => {
-    render(<Shuffle />)
-    const shuffle = screen.getByAltText(/shuffle/i)
+    test("shuffle click", () => {
+      const shuffle = screen.getByAltText(/shuffle/i)
 
-    expect(mockHandleShuffle).toBeCalledTimes(0)
+      expect(mockHandleShuffle).toBeCalledTimes(0)
 
-    fireEvent.click(shuffle)
+      fireEvent.click(shuffle)
 
-    expect(mockHandleShuffle).toBeCalledTimes(1)
-    expect(mockHandleShuffle).toHaveBeenLastCalledWith(true)
+      expect(mockHandleShuffle).toBeCalledTimes(1)
+      expect(mockHandleShuffle).toHaveBeenLastCalledWith(true)
 
-    fireEvent.click(shuffle)
+      fireEvent.click(shuffle)
 
-    expect(mockHandleShuffle).toBeCalledTimes(2)
-    expect(mockHandleShuffle).toHaveBeenLastCalledWith(false)
+      expect(mockHandleShuffle).toBeCalledTimes(2)
+      expect(mockHandleShuffle).toHaveBeenLastCalledWith(false)
+    })
   })
 
   test("snapshot", () => {

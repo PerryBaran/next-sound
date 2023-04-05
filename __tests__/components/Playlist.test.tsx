@@ -53,55 +53,56 @@ describe("Playlist", () => {
         .mockImplementation(() => useContext(mockContext))
     })
 
-    test("renders correctly", () => {
-      render(<Playlist />)
-
-      expect(screen.getByRole("button")).toBeInTheDocument()
-      expect(screen.getByAltText("playlist")).toBeInTheDocument()
-    })
-
-    test("button click renders playlist", () => {
-      render(<Playlist />)
-      fireEvent.click(screen.getByAltText("playlist"))
-
-      expect(screen.getAllByText(/x/i)).toHaveLength(mockPlaylist.length)
-      expect(screen.getAllByAltText(/play now/i)).toHaveLength(
-        mockPlaylist.length
-      )
-
-      mockPlaylist.forEach((song) => {
-        expect(
-          screen.getByAltText(`${song.albumName} cover art`)
-        ).toBeInTheDocument()
-        expect(screen.getByText(song.artistName)).toBeInTheDocument()
-        expect(screen.getByText(song.artistName)).toBeInTheDocument()
+    describe("tests", () => {
+      beforeEach(() => {
+        render(<Playlist />)
       })
-    })
 
-    test("play now click", () => {
-      render(<Playlist />)
-      fireEvent.click(screen.getByAltText("playlist"))
-
-      mockPlaylist.forEach((song, i) => {
-        fireEvent.click(screen.getAllByAltText("play now")[i])
-
-        expect(mockHandlePlaying).toBeCalledTimes(i + 1)
-        expect(mockHandlePlaying).toHaveBeenLastCalledWith(true)
-        expect(mockSkipSong).toBeCalledTimes(i + 1)
-        expect(mockSkipSong).toHaveBeenLastCalledWith(i)
+      test("renders correctly", () => {
+        expect(screen.getByRole("button")).toBeInTheDocument()
+        expect(screen.getByAltText("playlist")).toBeInTheDocument()
       })
-    })
 
-    test("x click", () => {
-      render(<Playlist />)
-      fireEvent.click(screen.getByAltText("playlist"))
+      test("button click renders playlist", () => {
+        fireEvent.click(screen.getByAltText("playlist"))
 
-      mockPlaylist.forEach((song, i) => {
-        fireEvent.click(screen.getAllByText("x")[i])
+        expect(screen.getAllByText(/x/i)).toHaveLength(mockPlaylist.length)
+        expect(screen.getAllByAltText(/play now/i)).toHaveLength(
+          mockPlaylist.length
+        )
 
-        expect(mockRemoveFromPlaylist).toBeCalledTimes(i + 1)
-        expect(mockRemoveFromPlaylist).toHaveBeenLastCalledWith(i)
+        mockPlaylist.forEach((song) => {
+          expect(
+            screen.getByAltText(`${song.albumName} cover art`)
+          ).toBeInTheDocument()
+          expect(screen.getByText(song.artistName)).toBeInTheDocument()
+          expect(screen.getByText(song.artistName)).toBeInTheDocument()
+        })
       })
+
+      test("play now click", () => {
+        fireEvent.click(screen.getByAltText("playlist"))
+
+        mockPlaylist.forEach((song, i) => {
+          fireEvent.click(screen.getAllByAltText("play now")[i])
+
+          expect(mockHandlePlaying).toBeCalledTimes(i + 1)
+          expect(mockHandlePlaying).toHaveBeenLastCalledWith(true)
+          expect(mockSkipSong).toBeCalledTimes(i + 1)
+          expect(mockSkipSong).toHaveBeenLastCalledWith(i)
+        })
+      })
+
+      test("x click", () => {
+        fireEvent.click(screen.getByAltText("playlist"))
+
+        mockPlaylist.forEach((song, i) => {
+          fireEvent.click(screen.getAllByText("x")[i])
+
+          expect(mockRemoveFromPlaylist).toBeCalledTimes(i + 1)
+          expect(mockRemoveFromPlaylist).toHaveBeenLastCalledWith(i)
+        })
+      })      
     })
 
     test("snapshot", () => {
