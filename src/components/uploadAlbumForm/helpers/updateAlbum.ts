@@ -10,7 +10,6 @@ interface Data {
     position: number
     id: string
   }[]
-  albumId: string
 }
 
 interface Album {
@@ -114,11 +113,11 @@ export default async function handleSubmit(
 
   try {
     await Promise.all([
-      ...albumPromise.map((album) => patchAlbum(data.albumId, album)),
+      ...albumPromise.map((album) => patchAlbum(data.id, album)),
       ...songDeletePromises.map((id) => deleteSong(id)),
       ...songPatchPromises.map((song) => patchSong(song.id, song.data)),
       ...songPostPromises.map((song) =>
-        postSongs({ ...song, AlbumId: data.albumId })
+        postSongs({ ...song, AlbumId: data.id })
       )
     ])
 

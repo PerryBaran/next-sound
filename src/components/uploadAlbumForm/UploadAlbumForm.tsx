@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useRef } from "react"
 import { useRouter } from "next/navigation"
-import Alert from "@/components/alert/Alert"
-import { deleteAlbum } from "@/requests/albums"
-import { useUserContext } from "@/context/UserContext"
+import Alert from "../alert/Alert"
+import { deleteAlbum } from "../../requests/albums"
+import { useUserContext } from "../../context/UserContext"
 import css from "./editAlbum.module.css"
 import Confirm from "../confirm/Confirm"
 import updateAlbum from "./helpers/updateAlbum"
@@ -19,7 +19,6 @@ interface Props {
       position: number
       id: string
     }[]
-    albumId: string
   }
 }
 
@@ -90,7 +89,6 @@ export default function UploadAlbumForm({ data }: Props) {
 
   const handleAlbumImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target
-
     if (!files) return
 
     setAlbum((prev) => {
@@ -116,7 +114,6 @@ export default function UploadAlbumForm({ data }: Props) {
     i: number
   ) => {
     const { files } = e.target
-
     if (!files) return
 
     setSongs((prev) => {
@@ -150,6 +147,7 @@ export default function UploadAlbumForm({ data }: Props) {
     const songContent = _songs[startPosition]
     _songs.splice(startPosition, 1)
     _songs.splice(endPosition, 0, songContent)
+
     setSongs(_songs)
   }
 
@@ -190,7 +188,7 @@ export default function UploadAlbumForm({ data }: Props) {
   const handleDeleteAlbum = async () => {
     if (data) {
       try {
-        await deleteAlbum(data.albumId)
+        await deleteAlbum(data.id)
 
         router.push(`profile/${name}`)
       } catch (err: any | Error) {
@@ -244,7 +242,7 @@ export default function UploadAlbumForm({ data }: Props) {
           </label>
         </div>
         <div>
-          <h3>Edit Songs</h3>
+          <h3>{data ? "Edit Songs" : "Upload Songs"}</h3>
           {songs.map((song, i) => {
             return (
               <div
@@ -303,7 +301,7 @@ export default function UploadAlbumForm({ data }: Props) {
             +
           </button>
         </div>
-        <button type="submit">{data ? "Save Changes" : "Upload"}</button>
+        <button type="submit">{data ? "Save Changes" : "Submit"}</button>
         {data && (
           <button type="button" onClick={() => setConfirm("delete")}>
             Delete Album

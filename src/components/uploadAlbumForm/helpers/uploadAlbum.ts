@@ -20,7 +20,7 @@ export default async function uploadAlbum(
   name: string
 ) {
   if (!album.name) {
-    setAlert("Must provide a name")
+    setAlert("Album must have a name")
     return
   }
 
