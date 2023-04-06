@@ -26,7 +26,7 @@ export default async function uploadAlbum(
 
   const { length } = songs
   if (length === 0) {
-    setAlert("album must contain atleast one song")
+    setAlert("Album must contain atleast one song")
     return
   }
 

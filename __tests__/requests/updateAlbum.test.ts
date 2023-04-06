@@ -51,8 +51,7 @@ describe("updateAlbum", () => {
 
     test("no album name", async () => {
       const mockAlbum = {
-        name: "",
-        id: mockData.id
+        name: ""
       }
       const mockSongs = [
         {
@@ -86,8 +85,7 @@ describe("updateAlbum", () => {
 
     test("update song doesn't have a name", async () => {
       const mockAlbum = {
-        name: "album-name",
-        id: mockData.id
+        name: "album-name"
       }
       const mockSongs = [
         {
@@ -121,8 +119,7 @@ describe("updateAlbum", () => {
 
     test("post song doesn't have a name", async () => {
       const mockAlbum = {
-        name: "album-name",
-        id: mockData.id
+        name: "album-name"
       }
       const mockSongs = [
         {
@@ -156,8 +153,7 @@ describe("updateAlbum", () => {
 
     test("post song doesn't have audio", async () => {
       const mockAlbum = {
-        name: "album-name",
-        id: mockData.id
+        name: "album-name"
       }
       const mockSongs = [
         {
@@ -192,8 +188,7 @@ describe("updateAlbum", () => {
     test("patchAlbum", async () => {
       const mockAlbum = {
         name: "album-name",
-        image: new File([], "image"),
-        id: mockData.id
+        image: new File([], "image")
       }
       const mockSongs = [
         {
