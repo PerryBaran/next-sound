@@ -5,11 +5,6 @@ import { patchSong, deleteSong, postSongs } from "../../../requests/songs"
 interface Data {
   name: string
   id: string
-  Songs?: {
-    name: string
-    position: number
-    id: string
-  }[]
 }
 
 interface Album {
@@ -28,10 +23,9 @@ interface Songs {
     position: number
     id: string
   }
-  key: string
 }
 
-export default async function handleSubmit(
+export default async function updateAlbum(
   data: Data,
   album: Album,
   songs: Songs[],
