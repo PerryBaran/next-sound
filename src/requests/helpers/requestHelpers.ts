@@ -4,10 +4,11 @@ import createForm from "./createForm"
 
 type Model = "users" | "users/login" | "users/signup" | "albums" | "songs"
 
-function error(err: any | { response: { data: { message: string } } }) {
+function error(err: any) {
   if (err.response?.data?.message) {
     throw new Error(err.response.data.message)
   }
+  if (err) throw new Error(err)
   throw new Error("Unexpected Error")
 }
 
