@@ -2,9 +2,9 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { useUserContext } from "@/context/UserContext"
-import Alert from "@/components/alert/Alert"
-import { login } from "@/requests/users"
+import { useUserContext } from "../../context/UserContext"
+import Alert from "../../components/alert/Alert"
+import { login } from "../../requests/users"
 import Link from "next/link"
 
 export default function Login() {
@@ -30,7 +30,7 @@ export default function Login() {
     if (!fields.email) {
       setAlert("please provide your email address")
     } else if (!fields.password) {
-      setAlert("please insert your password")
+      setAlert("please provide your password")
     } else if (!fields.email.match(EMAIL_REGEX)) {
       setAlert("please provide a valid email")
     } else {
