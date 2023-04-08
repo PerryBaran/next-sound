@@ -35,8 +35,6 @@ describe("SignUp", () => {
     jest
       .spyOn(UserContext, "useUserContext")
       .mockImplementation(() => useContext(mockContext))
-
-    render(<SignUp />)
   })
 
   describe("no errors", () => {
@@ -47,6 +45,8 @@ describe("SignUp", () => {
 
     beforeEach(() => {
       signupSpy.mockResolvedValue(mockUser)
+
+      render(<SignUp />)
     })
 
     test("renders correctly", () => {
@@ -167,56 +167,68 @@ describe("SignUp", () => {
     })
   })
 
-  test("handleSubmit throws expected error", async () => {
-    const error = "error"
-    signupSpy.mockRejectedValue({ message: error })
-    const mockData = {
-      name: "user-name",
-      email: "email@email.com",
-      password: "12345678"
-    }
-    fireEvent.change(screen.getByLabelText(/username/i), {
-      target: { value: mockData.name }
+  describe("errors", () => {
+    beforeEach(() => {
+      render(<SignUp />)
     })
-    fireEvent.change(screen.getByLabelText(/email/i), {
-      target: { value: mockData.email }
-    })
-    fireEvent.change(screen.getByLabelText(/^password$/i), {
-      target: { value: mockData.password }
-    })
-    fireEvent.change(screen.getByLabelText(/confirm password/i), {
-      target: { value: mockData.password }
-    })
-    fireEvent.click(screen.getByText(/^signup$/i))
 
-    await waitFor(() => {
-      expect(screen.getByText(error)).toBeInTheDocument()
+    test("handleSubmit throws expected error", async () => {
+      const error = "error"
+      signupSpy.mockRejectedValue({ message: error })
+      const mockData = {
+        name: "user-name",
+        email: "email@email.com",
+        password: "12345678"
+      }
+      fireEvent.change(screen.getByLabelText(/username/i), {
+        target: { value: mockData.name }
+      })
+      fireEvent.change(screen.getByLabelText(/email/i), {
+        target: { value: mockData.email }
+      })
+      fireEvent.change(screen.getByLabelText(/^password$/i), {
+        target: { value: mockData.password }
+      })
+      fireEvent.change(screen.getByLabelText(/confirm password/i), {
+        target: { value: mockData.password }
+      })
+      fireEvent.click(screen.getByText(/^signup$/i))
+
+      await waitFor(() => {
+        expect(screen.getByText(error)).toBeInTheDocument()
+      })
+    })
+
+    test("handleSubmit throws unexpected error", async () => {
+      signupSpy.mockRejectedValue("")
+      const mockData = {
+        name: "user-name",
+        email: "email@email.com",
+        password: "12345678"
+      }
+      fireEvent.change(screen.getByLabelText(/username/i), {
+        target: { value: mockData.name }
+      })
+      fireEvent.change(screen.getByLabelText(/email/i), {
+        target: { value: mockData.email }
+      })
+      fireEvent.change(screen.getByLabelText(/^password$/i), {
+        target: { value: mockData.password }
+      })
+      fireEvent.change(screen.getByLabelText(/confirm password/i), {
+        target: { value: mockData.password }
+      })
+      fireEvent.click(screen.getByText(/^signup$/i))
+
+      await waitFor(() => {
+        expect(screen.getByText(/unexpected Error/i)).toBeInTheDocument()
+      })
     })
   })
 
-  test("handleSubmit throws unexpected error", async () => {
-    signupSpy.mockRejectedValue("")
-    const mockData = {
-      name: "user-name",
-      email: "email@email.com",
-      password: "12345678"
-    }
-    fireEvent.change(screen.getByLabelText(/username/i), {
-      target: { value: mockData.name }
-    })
-    fireEvent.change(screen.getByLabelText(/email/i), {
-      target: { value: mockData.email }
-    })
-    fireEvent.change(screen.getByLabelText(/^password$/i), {
-      target: { value: mockData.password }
-    })
-    fireEvent.change(screen.getByLabelText(/confirm password/i), {
-      target: { value: mockData.password }
-    })
-    fireEvent.click(screen.getByText(/^signup$/i))
+  test("snapshot", () => {
+    const { asFragment } = render(<SignUp />)
 
-    await waitFor(() => {
-      expect(screen.getByText(/unexpected Error/i)).toBeInTheDocument()
-    })
+    expect(asFragment()).toMatchSnapshot()
   })
 })
