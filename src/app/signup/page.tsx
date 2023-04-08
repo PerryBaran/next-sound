@@ -1,8 +1,8 @@
 "use client"
 
-import Alert from "@/components/alert/Alert"
-import { useUserContext } from "@/context/UserContext"
-import { signup } from "@/requests/users"
+import Alert from "../../components/alert/Alert"
+import { useUserContext } from "../../context/UserContext"
+import { signup } from "../../requests/users"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
