@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditProfile snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <form>
+      <h2>
+        Edit Profile
+      </h2>
+      <label
+        for="name"
+      >
+        <span>
+          Name
+        </span>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          value="user-name"
+        />
+      </label>
+      <label
+        for="email"
+      >
+        <span>
+          Email
+        </span>
+        <input
+          id="email"
+          name="email"
+          type="text"
+          value="email@email.com"
+        />
+      </label>
+      <label
+        for="password"
+      >
+        <span>
+          New Password
+        </span>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          value=""
+        />
+      </label>
+      <label
+        for="confirm-password"
+      >
+        <span>
+          Confirm New Password
+        </span>
+        <input
+          id="confirm-password"
+          name="confirmPassword"
+          type="password"
+          value=""
+        />
+      </label>
+      <button
+        type="submit"
+      >
+        Save Changes
+      </button>
+      <button
+        type="button"
+      >
+        Delete Account
+      </button>
+      <button
+        type="button"
+      >
+        Cancel
+      </button>
+    </form>
+  </div>
+</DocumentFragment>
+`;

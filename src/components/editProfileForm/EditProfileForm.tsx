@@ -38,7 +38,7 @@ export default function EditProfileForm({
 
     if (
       userData.name === data.name &&
-      userData.email === userData.email &&
+      userData.email === data.email &&
       !userData.password
     ) {
       setAlert("No changes requested")
@@ -84,7 +84,7 @@ export default function EditProfileForm({
   const handleDeleteAlbum = async (password: string) => {
     try {
       await deleteUser(userId, password)
-      handleLogin(undefined)
+      handleLogin()
       router.push("/")
     } catch (err: any | Error) {
       setAlert(err?.message || "Unexpected Error")
