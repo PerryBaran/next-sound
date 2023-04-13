@@ -6,7 +6,9 @@ exports[`NavBar user logged in snapshot 1`] = `
     class="container"
   >
     <ul>
-      <li>
+      <li
+        class="heading"
+      >
         <a
           href="/"
         >
@@ -37,10 +39,12 @@ exports[`NavBar user logged in snapshot 1`] = `
           </span>
         </a>
       </li>
-      <li>
+      <li
+        class="search"
+      >
         <form
           aria-label="form"
-          class="search"
+          class="searchForm"
         >
           <input
             placeholder="Search"
@@ -81,7 +85,7 @@ exports[`NavBar user logged in snapshot 1`] = `
             width="30"
           />
           <span>
-            Profile
+            profile
           </span>
         </a>
       </li>
@@ -103,7 +107,7 @@ exports[`NavBar user logged in snapshot 1`] = `
             width="30"
           />
           <span>
-            Upload
+            upload
           </span>
         </a>
       </li>
@@ -125,7 +129,7 @@ exports[`NavBar user logged in snapshot 1`] = `
             width="30"
           />
           <span>
-            Logout
+            logout
           </span>
         </a>
       </li>
@@ -140,7 +144,9 @@ exports[`NavBar user logged out snapshot 1`] = `
     class="container"
   >
     <ul>
-      <li>
+      <li
+        class="heading"
+      >
         <a
           href="/"
         >
@@ -171,10 +177,12 @@ exports[`NavBar user logged out snapshot 1`] = `
           </span>
         </a>
       </li>
-      <li>
+      <li
+        class="search"
+      >
         <form
           aria-label="form"
-          class="search"
+          class="searchForm"
         >
           <input
             placeholder="Search"
@@ -215,7 +223,7 @@ exports[`NavBar user logged out snapshot 1`] = `
             width="30"
           />
           <span>
-            Login
+            login
           </span>
         </a>
       </li>

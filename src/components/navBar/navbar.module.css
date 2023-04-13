@@ -1,6 +1,6 @@
 .container {
-  background-color: var(--main-colour);
   height: 50px;
+  background-color: var(--main-colour);
 }
 
 .container > ul {
@@ -11,50 +11,56 @@
 }
 
 .container li {
-  list-style: none;
-  height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center;  
+  height: 100%;
   margin: 0 2px;
+  list-style: none;
 }
 
 .container img {
   filter: invert();
 }
 
-.icon {
-  width: 50px;
-}
-
-.icon > a {
-  display: flex;
-  align-items: center;
+.container a {
+  color: var(--almost-white);
+  text-decoration: none;
 }
 
 .heading {
   width: 100px;
   font-family: 'Major Mono Display', monospace;
-  font-size: min(1.2rem, 3vw);
 }
 
-.search {
-  width: auto;
-}
-
-.container h1 {
-  font-size: inherit;
-  font-weight: inherit;
+.heading h1 {
   padding: 0 10px;
+  font-family: 'Major Mono Display', monospace;
+  font-size: 3vw;
+  text-align: center;
 }
 
-.container a {
-  text-decoration: none;
-  color: var(--almost-white);
+.link {
+  width: 50px;
+}
+
+.link > a {
+  display: flex;
+  align-items: center;
+}
+
+.link span {
+  display: none;
+  font-family: 'Major Mono Display', monospace;
+  font-size: min(2rem, 2vw);
 }
 
 .active {
   background-color: var(--off-colour);
+}
+
+.search {
+  width: auto;
 }
 
 .searchForm {
@@ -65,9 +71,9 @@
 
 .searchForm > input {
   width: 100%;
-  border: 2px solid var(--off-colour);
   height: 100%;
   padding-left: 2px;
+  border: 2px solid var(--off-colour);
 }
 
 .searchForm > input:focus { 
@@ -86,36 +92,19 @@
 }
 
 .searchForm > button:hover {
-  background-color: white;
-}
-
-.searchForm img {
-  color: var(--off-colour)
-  
-}
-
-.searchForm:has(button:hover) img {
-  filter: none;
-  color: var(--off-colour)
-}
-
-.container span {
-  display: none;
-  font-family: 'Major Mono Display', monospace;
-  font-size: min(2rem, 2vw);
+  background-color: var(--main-colour)
 }
 
 @media screen and (min-width: 800px) {
-  .container span {
-    display: inline;
-  }
-
-  .icon, .search {
+  .link, .search, .heading {
     width: 100%;
   }
 
-  .heading {
-    width: 100%;
+  .heading h1 {
     font-size: min(2rem, 2vw);
+  }
+
+  .link span {
+    display: inline;
   }
 }

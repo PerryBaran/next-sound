@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import { useRef } from "react"
 import { useUserContext } from "../../context/UserContext"
 import css from "./navbar.module.css"
-import { home, login, logout, profile, search, upload, searchSVG } from "../../media/icons"
+import { home, login, logout, profile, search, upload } from "../../media/icons"
 import Image from "next/image"
 
 export default function NavBar() {
@@ -37,7 +37,7 @@ export default function NavBar() {
             <h1>Next-Sound</h1>
           </Link>
         </li>
-        <li className={`${classes("/")} ${css.icon}`}>
+        <li className={classes("/")}>
           <Link href="/">
             <Image src={home} alt="home" height={30} width={30} />
             <span>Home</span>
@@ -51,25 +51,25 @@ export default function NavBar() {
           >
             <input type="text" ref={searchRef} placeholder="Search" />
             <button type="submit">
-              <Image src={searchSVG} alt="search" height={15} width={15} />
+              <Image src={search} alt="search" height={15} width={15} />
             </button>
           </form>
         </li>
         {name ? (
           <>
-            <li className={`${classes(`/profile/${name}`)} ${css.icon}`}>
+            <li className={classes(`/profile/${name}`)}>
               <Link href={`/profile/${name}`}>
                 <Image src={profile} alt="profile" height={30} width={30} />
                 <span>profile</span>
               </Link>
             </li>
-            <li className={`${classes("/upload")} ${css.icon}`}>
+            <li className={classes("/upload")}>
               <Link href="/upload">
                 <Image src={upload} alt="upload" height={30} width={30} />
                 <span>upload</span>
               </Link>
             </li>
-            <li className={`${classes("/logout")} ${css.icon}`}>
+            <li className={classes("/logout")}>
               <Link href="/logout">
                 <Image src={logout} alt="logout" height={30} width={30} />
                 <span>logout</span>
@@ -77,7 +77,7 @@ export default function NavBar() {
             </li>
           </>
         ) : (
-          <li className={`${classes("/login")} ${css.icon}`}>
+          <li className={classes("/login")}>
             <Link href="/login">
               <Image src={login} alt="login" height={30} width={30} />
               <span>login</span>

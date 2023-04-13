@@ -15,7 +15,6 @@ import upload from "./upload.png"
 import loop from "./loop.png"
 import loopSong from "./loopSong.png"
 import shuffle from "./shuffle.png"
-import searchSVG from "./search.svg"
 
 export {
   menu,
@@ -34,6 +33,5 @@ export {
   upload,
   loop,
   loopSong,
-  shuffle,
-  searchSVG
+  shuffle
 }
