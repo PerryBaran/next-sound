@@ -40,14 +40,18 @@ exports[`Playlist snapshot 1`] = `
     <div
       class="center"
     >
-      <input
-        class="bar"
-        max="0"
-        min="0"
-        name="time"
-        type="range"
-        value="0"
-      />
+      <div
+        class="container"
+      >
+        <input
+          class="bar"
+          max="0"
+          min="0"
+          name="time"
+          type="range"
+          value="0"
+        />
+      </div>
       <div
         class="belowBar"
       >

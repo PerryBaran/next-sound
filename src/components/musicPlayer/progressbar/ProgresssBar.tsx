@@ -17,14 +17,16 @@ export default function ProgresssBar({
   }
 
   return (
-    <input
-      type="range"
-      name="time"
-      min={0}
-      max={duration}
-      value={time}
-      onChange={handleChange}
-      className={style.bar}
-    />
+    <div className={style.container}>
+      <input
+        type="range"
+        name="time"
+        min={0}
+        max={duration}
+        value={time}
+        onChange={handleChange}
+        className={style.bar}
+      />      
+    </div>
   )
 }

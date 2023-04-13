@@ -2,13 +2,17 @@
 
 exports[`ProgressBar snapshot 1`] = `
 <DocumentFragment>
-  <input
-    class="bar"
-    max="100"
-    min="0"
-    name="time"
-    type="range"
-    value="10"
-  />
+  <div
+    class="container"
+  >
+    <input
+      class="bar"
+      max="100"
+      min="0"
+      name="time"
+      type="range"
+      value="10"
+    />
+  </div>
 </DocumentFragment>
 `;
