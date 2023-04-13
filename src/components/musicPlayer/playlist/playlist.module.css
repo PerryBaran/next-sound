@@ -1,6 +1,6 @@
 .container {
   position: absolute;
-  bottom: var(--navbar-height);
+  bottom: var(--music-player-height);
   right: 4px;
   width: 265px;
   max-height: 400px;
