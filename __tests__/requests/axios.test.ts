@@ -5,7 +5,7 @@ describe("axios", () => {
   test("instance", () => {
     expect(instance.defaults.withCredentials).toEqual(true)
     expect(instance.defaults.baseURL).toEqual(
-      "https://soundcloud-clone-api.onrender.com"
+      "https://soundcloud-clone-api-production.up.railway.app/"
     )
   })
 
