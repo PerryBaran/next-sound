@@ -44,7 +44,7 @@ exports[`NavBar user logged in snapshot 1`] = `
       >
         <form
           aria-label="form"
-          class="searchForm"
+          class="search-form"
         >
           <input
             placeholder="Search"
@@ -182,7 +182,7 @@ exports[`NavBar user logged out snapshot 1`] = `
       >
         <form
           aria-label="form"
-          class="searchForm"
+          class="search-form"
         >
           <input
             placeholder="Search"

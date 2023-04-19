@@ -19,7 +19,7 @@ export default function Shuffle() {
     <button
       type="button"
       onClick={handleClick}
-      className={`${css.container} ${!shuffled ? css.faded : null}`}
+      className={`${css["container"]} ${!shuffled ? css["faded"] : null}`}
     >
       <Image src={shuffle} alt="shuffle" height={40} width={40} />
     </button>

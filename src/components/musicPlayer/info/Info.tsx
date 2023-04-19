@@ -1,6 +1,6 @@
 "use client"
 
-import style from "./info.module.css"
+import css from "./info.module.css"
 import Image from "next/image"
 import { music } from "../../../media/icons"
 
@@ -15,7 +15,7 @@ export default function Info(props: Props) {
   const { albumArt, artistName, albumName, songName } = props
 
   return (
-    <div className={style.container}>
+    <div className={css["container"]}>
       {albumArt ? (
         <Image
           src={albumArt}
@@ -32,7 +32,7 @@ export default function Info(props: Props) {
           style={{ filter: "invert()" }}
         />
       )}
-      <div className={style.info}>
+      <div className={css["info"]}>
         <h3>{artistName}</h3>
         <p>{songName}</p>
       </div>

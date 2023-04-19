@@ -63,24 +63,24 @@
   width: auto;
 }
 
-.searchForm {
+.search-form {
   display: flex;
   width: 100%;
   height: 25px;
 }
 
-.searchForm > input {
+.search-form > input {
   width: 100%;
   height: 100%;
   padding-left: 2px;
   border: 2px solid var(--off-colour);
 }
 
-.searchForm > input:focus {
+.search-form > input:focus {
   outline-width: 0;
 }
 
-.searchForm > button {
+.search-form > button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,7 +91,7 @@
   cursor: pointer;
 }
 
-.searchForm > button:hover {
+.search-form > button:hover {
   background-color: var(--main-colour);
 }
 

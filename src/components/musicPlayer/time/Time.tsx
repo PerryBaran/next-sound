@@ -1,4 +1,4 @@
-import style from "./time.module.css"
+import css from "./time.module.css"
 
 export default function Time(props: { time: number }) {
   const { time } = props
@@ -17,7 +17,7 @@ export default function Time(props: { time: number }) {
   }
 
   return (
-    <div className={style.container}>
+    <div className={css["container"]}>
       <p>{displayTime(time)}</p>
     </div>
   )

@@ -77,8 +77,8 @@ export default function MusicPlayer() {
 
   return (
     <>
-      <div className={css.spacer} />
-      <section className={css.container}>
+      <div className={css["spacer"]} />
+      <section className={css["container"]}>
         <Audio
           playing={playing}
           source={song.audio}
@@ -92,28 +92,28 @@ export default function MusicPlayer() {
           albumName={song.albumName}
           songName={song.songName}
         />
-        <div className={css.center}>
+        <div className={css["center"]}>
           <ProgresssBar
             handleAudioTime={handleAudioTime}
             time={time}
             duration={duration}
           />
-          <div className={css.belowBar}>
+          <div className={css["below-bar"]}>
             <Time time={time} />
             <MediaControls playing={playing} skipSong={handleSkip} />
             <Time time={duration} />
           </div>
         </div>
-        <div className={`${css.centerButton} ${css.loop}`}>
+        <div className={`${css["center-button"]} ${css["loop"]}`}>
           <Loop loop={loop} handleLoop={handleLoop} />
         </div>
-        <div className={`${css.centerButton} ${css.shuffle}`}>
+        <div className={`${css["center-button"]} ${css["shuffle"]}`}>
           <Shuffle />
         </div>
-        <div className={`${css.centerButton} ${css.volume}`}>
+        <div className={`${css["center-button"]} ${css["volume"]}`}>
           <Volume volume={volume} handleVolume={handleVolume} />
         </div>
-        <div className={`${css.centerButton} ${css.playlist}`}>
+        <div className={`${css["center-button"]} ${css["playlist"]}`}>
           <Playlist />
         </div>
       </section>

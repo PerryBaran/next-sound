@@ -12,7 +12,7 @@ export default function Loop({ loop, handleLoop }: Props) {
     <button
       type="button"
       onClick={handleLoop}
-      className={`${css.container} ${loop === "" ? css.faded : null}`}
+      className={`${css["container"]} ${loop === "" ? css["faded"] : null}`}
     >
       {loop === "song" ? (
         <Image src={loopSong} alt="loop song" height={40} width={40} />

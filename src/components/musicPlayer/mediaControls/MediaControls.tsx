@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import style from "./mediaControls.module.css"
+import css from "./mediaControls.module.css"
 import { play, pause, skip } from "../../../media/icons"
 import { usePlaylistContext } from "../../../context/PlaylistContext"
 
@@ -14,7 +14,7 @@ export default function MediaControls({ playing, skipSong }: Props) {
   const { handlePlaying } = usePlaylistContext()
 
   return (
-    <div className={style.container}>
+    <div className={css["container"]}>
       <button onClick={() => skipSong(false)}>
         <Image
           src={skip}

@@ -73,7 +73,9 @@ export default function Playlist() {
       <button
         type="button"
         onClick={() => setShowPlaylist((prev) => !prev)}
-        className={`${css["toggle-playlist"]} ${!showPlaylist && css["faded"]}`}
+        className={`${css["toggle-playlist"]} ${
+          !showPlaylist ? css["faded"] : null
+        }`}
       >
         <Image src={menu} alt="playlist" height={30} width={30} />
       </button>

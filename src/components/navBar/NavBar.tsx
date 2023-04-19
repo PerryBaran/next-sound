@@ -26,13 +26,13 @@ export default function NavBar() {
   }
 
   const classes = (linkPath: string) => {
-    return `${pathname === linkPath ? css.active : ""} ${css.link}`
+    return `${pathname === linkPath ? css["active"] : ""} ${css["link"]}`
   }
 
   return (
-    <nav className={css.container}>
+    <nav className={css["container"]}>
       <ul>
-        <li className={css.heading}>
+        <li className={css["heading"]}>
           <Link href="/">
             <h1>Next-Sound</h1>
           </Link>
@@ -43,10 +43,10 @@ export default function NavBar() {
             <span>Home</span>
           </Link>
         </li>
-        <li className={css.search}>
+        <li className={css["search"]}>
           <form
             onSubmit={submitHandler}
-            className={css.searchForm}
+            className={css["search-form"]}
             aria-label="form"
           >
             <input type="text" ref={searchRef} placeholder="Search" />

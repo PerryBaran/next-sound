@@ -53,7 +53,7 @@ exports[`Playlist snapshot 1`] = `
         />
       </div>
       <div
-        class="belowBar"
+        class="below-bar"
       >
         <div
           class="container"
@@ -115,7 +115,7 @@ exports[`Playlist snapshot 1`] = `
       </div>
     </div>
     <div
-      class="centerButton loop"
+      class="center-button loop"
     >
       <button
         class="container faded"
@@ -135,7 +135,7 @@ exports[`Playlist snapshot 1`] = `
       </button>
     </div>
     <div
-      class="centerButton shuffle"
+      class="center-button shuffle"
     >
       <button
         class="container faded"
@@ -155,7 +155,7 @@ exports[`Playlist snapshot 1`] = `
       </button>
     </div>
     <div
-      class="centerButton volume"
+      class="center-button volume"
     >
       <div
         class="container"
@@ -189,7 +189,7 @@ exports[`Playlist snapshot 1`] = `
       </div>
     </div>
     <div
-      class="centerButton playlist"
+      class="center-button playlist"
     >
       <button
         class="toggle-playlist faded"
