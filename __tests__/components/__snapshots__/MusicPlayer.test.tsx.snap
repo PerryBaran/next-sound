@@ -192,7 +192,7 @@ exports[`Playlist snapshot 1`] = `
       class="centerButton playlist"
     >
       <button
-        class="toggle_playlist"
+        class="toggle-playlist faded"
         type="button"
       >
         <img

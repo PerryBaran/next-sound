@@ -1,106 +1,115 @@
 .container {
   position: absolute;
   bottom: var(--music-player-height);
-  right: 4px;
+  right: 0;
   width: 265px;
   max-height: 400px;
   background-color: var(--almost-white);
-  border: 1px solid var(--off-colour);
+  border: 2px solid var(--off-colour);
   border-bottom: none;
   display: flex;
   flex-direction: column;
   overflow: auto;
 }
 
-.playlist__song {
+.song {
   display: flex;
-  border-bottom: 1px solid var(--off-colour);
+  border-bottom: 2px solid var(--off-colour);
 }
 
-.play__song_active {
+.active {
   background-color: var(--main-colour);
   color: var(--almost-white);
 }
 
-.playlist__song_artist,
-.playlist__song_name {
+.artist,
+.song-name {
   display: block;
   float: left;
   font-size: 0.8rem;
-  width: 150px;
+  width: 120px;
+  padding-left: 4px;
   text-align: left;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.playlist__song_artist {
+.artist {
   font-weight: 700;
 }
 
-.playlist__song_left {
+.song-left {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
-.playlist__song_right {
+.song-right {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.playlist__song_cover_art {
-  aspect-ratio: 1;
-  width: 30px;
-  margin: 0 2px;
+.song-left > img {
+  border: 1px solid var(--almost-white);
+  border-radius: 2px;
+  background-color: var(--almost-white);
 }
 
-.playlist__play_now,
-.playlist__remove {
+.play,
+.remove {
   font-size: 0.7rem;
   cursor: pointer;
   height: 40px;
-  width: 30px;
+  width: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
-  border-left: 1px solid var(--off-colour);
+  border-left: 2px solid var(--off-colour);
   background-color: var(--almost-white);
   border-radius: 0px;
 }
 
-.playlist__remove {
+.remove {
   font-size: 1.5rem;
   font-weight: 700;
 }
 
-.playlist__play_now > img {
-  aspect-ratio: 1;
-  height: 50%;
-}
-
-.playlist__remove:hover {
+.remove:hover {
   background-color: red;
   color: var(--almost-white);
 }
 
-.playlist__play_now:hover {
+.play:hover {
   background-color: green;
   color: var(--almost-white);
 }
 
-.playlist__play_now:hover > img {
+.play:hover > img,
+.remove:hover > img {
   filter: invert();
 }
 
-.toggle_playlist {
+.toggle-playlist {
   background: none;
   border: none;
   cursor: pointer;
 }
 
-.toggle_playlist img {
+.toggle-playlist img {
   filter: invert();
+}
+
+.faded img {
+  opacity: 0.4;
+}
+
+.empty {
+  text-align: center;
+  font-weight: 600;
+  color: var(--off-colour);
+  border-bottom: 2px solid var(--off-colour);
 }

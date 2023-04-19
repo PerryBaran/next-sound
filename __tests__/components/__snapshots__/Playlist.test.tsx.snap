@@ -3,7 +3,7 @@
 exports[`Playlist playlist not empty snapshot 1`] = `
 <DocumentFragment>
   <button
-    class="toggle_playlist"
+    class="toggle-playlist faded"
     type="button"
   >
     <img

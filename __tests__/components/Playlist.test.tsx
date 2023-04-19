@@ -66,7 +66,9 @@ describe("Playlist", () => {
       test("button click renders playlist", () => {
         fireEvent.click(screen.getByAltText("playlist"))
 
-        expect(screen.getAllByText(/x/i)).toHaveLength(mockPlaylist.length)
+        expect(screen.getAllByAltText(/remove/i)).toHaveLength(
+          mockPlaylist.length
+        )
         expect(screen.getAllByAltText(/play now/i)).toHaveLength(
           mockPlaylist.length
         )
@@ -97,7 +99,7 @@ describe("Playlist", () => {
         fireEvent.click(screen.getByAltText("playlist"))
 
         mockPlaylist.forEach((song, i) => {
-          fireEvent.click(screen.getAllByText("x")[i])
+          fireEvent.click(screen.getAllByAltText("remove")[i])
 
           expect(mockRemoveFromPlaylist).toBeCalledTimes(i + 1)
           expect(mockRemoveFromPlaylist).toHaveBeenLastCalledWith(i)

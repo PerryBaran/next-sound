@@ -15,6 +15,7 @@ import upload from "./upload.png"
 import loop from "./loop.png"
 import loopSong from "./loopSong.png"
 import shuffle from "./shuffle.png"
+import close from "./close.png"
 
 export {
   menu,
@@ -33,5 +34,6 @@ export {
   upload,
   loop,
   loopSong,
-  shuffle
+  shuffle,
+  close
 }
