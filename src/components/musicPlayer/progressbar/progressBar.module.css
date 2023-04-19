@@ -22,14 +22,15 @@
   border-radius: 10px;
 }
 
-.bar::-ms-fill-lower, .bar::-moz-range-progres {
+.bar::-ms-fill-lower,
+.bar::-moz-range-progres {
   background-color: black;
 }
 
 .bar::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 15px;
-  width: 0px;  
+  width: 0px;
   border-radius: 100%;
   box-shadow: -10000px 0 0 10000px var(--off-colour);
   cursor: pointer;
