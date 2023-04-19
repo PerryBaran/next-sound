@@ -172,6 +172,7 @@ export default function UploadAlbumForm({ data }: Props) {
   }
 
   const handleSubmit = async () => {
+    setAlert("")
     if (data) {
       await updateAlbum(data, album, songs, setAlert, router, name)
     } else {
