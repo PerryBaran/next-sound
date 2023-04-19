@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import style from "./volume.module.css"
+import css from "./volume.module.css"
 import { volumeLow, volumeMedium, volumeMute } from "../../../media/icons"
 import { useState } from "react"
 
@@ -31,7 +31,7 @@ export default function Volume({ volume, handleVolume }: Props) {
   }
 
   return (
-    <div className={style.container}>
+    <div className={css["container"]}>
       <input
         type="range"
         name="volume"
@@ -40,7 +40,7 @@ export default function Volume({ volume, handleVolume }: Props) {
         value={volume * 100}
         onChange={changeVolume}
       />
-      <div className={style.volume}>
+      <div className={css["volume"]}>
         <button type="button" onClick={handleVolumeToggle}>
           <VolumeIcon volume={volume} />
         </button>

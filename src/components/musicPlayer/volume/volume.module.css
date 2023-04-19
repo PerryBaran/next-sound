@@ -14,7 +14,7 @@
   appearance: none;
   display: none;
   position: absolute;
-  bottom: 150px;
+  bottom: 153px;
   width: 200px;
   height: 20px;
   border-radius: 2px;
@@ -49,6 +49,11 @@
   position: relative;
   filter: invert();
   cursor: pointer;
+  opacity: 0.4;
+}
+
+.container:hover img {
+  opacity: 1;
 }
 
 .volume > button {
