@@ -1,4 +1,4 @@
-import style from "./progressBar.module.css"
+import css from "./progressBar.module.css"
 
 interface Props {
   handleAudioTime: (value: number) => void
@@ -17,7 +17,7 @@ export default function ProgresssBar({
   }
 
   return (
-    <div className={style.container}>
+    <div className={css["container"]}>
       <input
         type="range"
         name="time"
@@ -25,7 +25,7 @@ export default function ProgresssBar({
         max={duration}
         value={time}
         onChange={handleChange}
-        className={style.bar}
+        className={css["bar"]}
       />
     </div>
   )
