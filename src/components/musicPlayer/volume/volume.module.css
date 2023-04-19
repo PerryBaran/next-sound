@@ -26,11 +26,12 @@
 
   transform: rotate(270deg);
 
-  background-color: rgb(0, 0, 0);
+  background-color: var(--almost-white);
+  border: 2px solid var(--off-colour);
 
   z-index: 1000000;
   cursor: pointer;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .container input::-webkit-slider-thumb {
@@ -38,11 +39,10 @@
   appearance: none;
 
   width: 10px;
-  height: 20px;
+  height: 0px;
 
   border-radius: 4px;
-
-  background: white;
+  box-shadow: -10000px 0 0 10000px var(--off-colour);
 }
 
 .container input::-moz-range-thumb {

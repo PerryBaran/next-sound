@@ -26,7 +26,7 @@ export default function ProgresssBar({
         value={time}
         onChange={handleChange}
         className={style.bar}
-      />      
+      />
     </div>
   )
 }

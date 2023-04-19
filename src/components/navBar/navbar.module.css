@@ -13,7 +13,7 @@
 .container li {
   display: flex;
   align-items: center;
-  justify-content: center;  
+  justify-content: center;
   height: 100%;
   margin: 0 2px;
   list-style: none;
@@ -30,12 +30,12 @@
 
 .heading {
   width: 100px;
-  font-family: 'Major Mono Display', monospace;
+  font-family: "Major Mono Display", monospace;
 }
 
 .heading h1 {
   padding: 0 10px;
-  font-family: 'Major Mono Display', monospace;
+  font-family: "Major Mono Display", monospace;
   font-size: 3vw;
   text-align: center;
 }
@@ -51,7 +51,7 @@
 
 .link span {
   display: none;
-  font-family: 'Major Mono Display', monospace;
+  font-family: "Major Mono Display", monospace;
   font-size: min(2rem, 2vw);
 }
 
@@ -76,7 +76,7 @@
   border: 2px solid var(--off-colour);
 }
 
-.searchForm > input:focus { 
+.searchForm > input:focus {
   outline-width: 0;
 }
 
@@ -92,11 +92,13 @@
 }
 
 .searchForm > button:hover {
-  background-color: var(--main-colour)
+  background-color: var(--main-colour);
 }
 
 @media screen and (min-width: 800px) {
-  .link, .search, .heading {
+  .link,
+  .search,
+  .heading {
     width: 100%;
   }
 

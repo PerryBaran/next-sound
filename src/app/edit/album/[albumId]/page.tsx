@@ -24,5 +24,6 @@ export default function EditAlbum(props: Props) {
     `${albumId}`,
     getAlbumById
   )
+
   return isLoading ? null : <UploadAlbumForm data={data} />
 }
