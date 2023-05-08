@@ -45,20 +45,21 @@ describe("SongMenu", () => {
   test("renders correctly", () => {
     render(<SongMenu {...props} />)
 
-    expect(screen.getByRole("button")).toHaveTextContent("...")
+    expect(screen.getByRole("button")).toBeInTheDocument()
+    expect(screen.getByAltText("...")).toBeInTheDocument()
   })
 
   test("on button click shows more options, on second click hides options", () => {
     render(<SongMenu {...props} />)
 
-    fireEvent.click(screen.getByText("..."))
+    fireEvent.click(screen.getByAltText("..."))
 
     expect(screen.getAllByRole("button")).toHaveLength(4)
-    expect(screen.getByText(/play now/i)).toBeInstanceOf(HTMLButtonElement)
-    expect(screen.getByText(/play next/i)).toBeInstanceOf(HTMLButtonElement)
-    expect(screen.getByText(/add to queue/i)).toBeInstanceOf(HTMLButtonElement)
+    expect(screen.getByText(/play now/i)).toBeInTheDocument()
+    expect(screen.getByText(/play next/i)).toBeInTheDocument()
+    expect(screen.getByText(/add to queue/i)).toBeInTheDocument()
 
-    fireEvent.click(screen.getByText("..."))
+    fireEvent.click(screen.getByAltText("..."))
 
     expect(screen.getAllByRole("button")).toHaveLength(1)
   })
@@ -66,11 +67,11 @@ describe("SongMenu", () => {
   test("on container blur hides options", () => {
     render(<SongMenu {...props} />)
 
-    fireEvent.click(screen.getByText("..."))
+    fireEvent.click(screen.getByAltText("..."))
 
     expect(screen.getAllByRole("button")).toHaveLength(4)
 
-    const container = screen.getByText("...").parentElement
+    const container = screen.getByAltText("...").parentElement
     if (!container) throw new Error("missing container")
     fireEvent.blur(container)
 
@@ -80,7 +81,7 @@ describe("SongMenu", () => {
   test("play now mouseDown", () => {
     render(<SongMenu {...props} />)
 
-    fireEvent.click(screen.getByText("..."))
+    fireEvent.click(screen.getByAltText("..."))
     fireEvent.mouseDown(screen.getByText(/play now/i))
 
     expect(mockHandleAddToPlaylist).toBeCalledTimes(1)
@@ -90,7 +91,7 @@ describe("SongMenu", () => {
   test("play next mouseDown", () => {
     render(<SongMenu {...props} />)
 
-    fireEvent.click(screen.getByText("..."))
+    fireEvent.click(screen.getByAltText("..."))
     fireEvent.mouseDown(screen.getByText(/play next/i))
 
     expect(mockHandleAddToPlaylist).toBeCalledTimes(1)
@@ -100,7 +101,7 @@ describe("SongMenu", () => {
   test("add to queue mouseDown", () => {
     render(<SongMenu {...props} />)
 
-    fireEvent.click(screen.getByText("..."))
+    fireEvent.click(screen.getByAltText("..."))
     fireEvent.mouseDown(screen.getByText(/add to queue/i))
 
     expect(mockHandleAddToPlaylist).toBeCalledTimes(1)

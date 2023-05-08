@@ -6,8 +6,66 @@
   position: absolute;
   bottom: 20px;
   right: 0px;
-  background-color: red;
   width: 110px;
   display: flex;
   flex-direction: column;
+  border: 1px solid var(--darker-grey);
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.options > button {
+  border: none;
+  border-bottom: 1px solid var(--darker-grey);
+  background-color: var(--almost-white);
+  color: var(--darker-grey);
+  font-weight: 100;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  height: 20px;
+}
+
+.options > button:hover {
+  background-color: var(--main-colour);
+  color: var(--almost-white);
+}
+
+.options > button:last-child {
+  border-bottom: none;
+}
+
+.song-menu-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 100%;
+}
+
+.options > button:hover img {
+  filter: invert();
+}
+
+.play-next img {
+  transform: scaleY(-1);
+}
+
+.button {
+  border: none;
+  background: none;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.button > img {
+  transition-duration: 250ms;
+  transform: rotate(90deg);
+}
+
+.button:hover > img {
+  transform: rotate(90deg) scale(1.25);
 }

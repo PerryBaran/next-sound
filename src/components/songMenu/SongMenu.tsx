@@ -3,6 +3,8 @@
 import { useState } from "react"
 import css from "./songMenu.module.css"
 import { usePlaylistContext } from "../../context/PlaylistContext"
+import { play, addList, dots } from "../../media/icons/index"
+import Image from "next/image"
 
 interface Props {
   songs: {
@@ -27,17 +29,34 @@ export default function SongMenu({ songs }: Props) {
       {visible ? (
         <div className={css.options}>
           <button onMouseDown={() => handleAddToPlaylist(songs, true, true)}>
-            Play Now
+            <span className={css["song-menu-image-container"]}>
+              <Image src={play} alt="play now" width={9} />
+            </span>
+            <span>Play Now</span>
           </button>
-          <button onMouseDown={() => handleAddToPlaylist(songs, true, false)}>
-            Play Next
+          <button
+            onMouseDown={() => handleAddToPlaylist(songs, true, false)}
+            className={css["play-next"]}
+          >
+            <span className={css["song-menu-image-container"]}>
+              <Image src={addList} alt="play now" width={15} />
+            </span>
+            <span>Play Next</span>
           </button>
           <button onMouseDown={() => handleAddToPlaylist(songs, false, false)}>
-            Add To Queue
+            <span className={css["song-menu-image-container"]}>
+              <Image src={addList} alt="play now" width={15} />
+            </span>
+            <span>Add To Queue</span>
           </button>
         </div>
       ) : null}
-      <button onClick={() => setVisible((prev) => !prev)}>...</button>
+      <button
+        onClick={() => setVisible((prev) => !prev)}
+        className={css.button}
+      >
+        <Image src={dots} alt="..." height={18} width={18} />
+      </button>
     </div>
   )
 }

@@ -16,6 +16,8 @@ import loop from "./loop.png"
 import loopSong from "./loopSong.png"
 import shuffle from "./shuffle.png"
 import close from "./close.png"
+import dots from "./dots.png"
+import addList from "./add-list.png"
 
 export {
   menu,
@@ -35,5 +37,7 @@ export {
   loop,
   loopSong,
   shuffle,
-  close
+  close,
+  dots,
+  addList
 }

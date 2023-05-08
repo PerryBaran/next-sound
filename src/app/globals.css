@@ -10,6 +10,7 @@
 
 :root {
   --main-colour: rgb(177, 51, 177);
+  --main-colour-pale: rgb(255, 238, 255);
   --off-colour: rgb(116, 27, 116);
   --almost-white: rgb(252, 252, 252);
   --light-grey: rgb(248, 248, 248);
