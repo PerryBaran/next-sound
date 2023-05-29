@@ -60,9 +60,3 @@
   background: none;
   border: none;
 }
-
-@media screen and (max-width: 1000px) {
-  .volume > button {
-    pointer-events: none;
-  }
-}
