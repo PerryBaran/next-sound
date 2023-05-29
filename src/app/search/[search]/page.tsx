@@ -7,6 +7,7 @@ import Songs from "@/interfaces/songs"
 import Song from "@/components/song/Song"
 import Album from "@/components/album/Album"
 import Artist from "@/components/artist/Artist"
+import css from "./search.module.css"
 
 interface Props {
   params: { search: string }
@@ -24,48 +25,48 @@ export default async function Search(props: Props) {
   )
 
   return (
-    <div>
+    <div className={css.container}>
       {searchResults.length === 0 ? (
         <h2>{"No results"}</h2>
       ) : (
-        searchResults.map((data: any) => {
-          if (data.AlbumId) {
-            return (
-              <Song
-                artistName={data.Album.User.name}
-                albumName={data.Album.name}
-                albumArt={data.Album.url}
-                songName={data.name}
-                songAudio={data.url}
-                key={`${data.id}${data.name}`}
-              />
-            )
-          }
-          if (data.UserId) {
-            return (
-              <Album
-                artistName={data.User.name}
-                albumName={data.name}
-                albumArt={data.url}
-                songs={data.Songs}
-                albumUserId={data.User.id}
-                key={`${data.id}${data.name}`}
-                albumId={data.id}
-                profile={false}
-              />
-            )
-          }
-          if (data.email) {
-            return (
-              <Artist
-                name={data.name}
-                image={data.Albums[0]?.url}
-                key={`${data.id}${data.name}`}
-              />
-            )
-          }
-          return null
-        })
+          searchResults.map((data: any) => {
+            if (data.AlbumId) {
+              return (
+                <Song
+                  artistName={data.Album.User.name}
+                  albumName={data.Album.name}
+                  albumArt={data.Album.url}
+                  songName={data.name}
+                  songAudio={data.url}
+                  key={`${data.id}${data.name}`}
+                />
+              )
+            }
+            if (data.UserId) {
+              return (
+                <Album
+                  artistName={data.User.name}
+                  albumName={data.name}
+                  albumArt={data.url}
+                  songs={data.Songs}
+                  albumUserId={data.User.id}
+                  key={`${data.id}${data.name}`}
+                  albumId={data.id}
+                  profile={false}
+                />
+              )
+            }
+            if (data.email) {
+              return (
+                <Artist
+                  name={data.name}
+                  image={data.Albums[0]?.url}
+                  key={`${data.id}${data.name}`}
+                />
+              )
+            }
+            return null
+          })
       )}
     </div>
   )

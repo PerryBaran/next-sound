@@ -2,5 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--almost-white);
+  background-color: var(--dark-grey);
+  padding-top: 20px;
 }

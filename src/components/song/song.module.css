@@ -1,7 +1,10 @@
 .song {
   margin: 20px;
+  margin-top: 0;
+  padding: 10px;
   color: var(--almost-black);
   background-color: var(--almost-white);
+  border-radius: 5px;
   width: 95%;
   max-width: 1000px;
   display: flex;
@@ -15,6 +18,11 @@
   margin: 10px;
 }
 
+.song__info {
+  width: 100%;
+  margin-left: 5px;
+}
+
 .song__info-container {
   display: flex;
   align-items: center;
@@ -23,6 +31,10 @@
 .song__artist-name {
   text-align: left;
   font-size: min(1.5rem, 5cqw);
+}
+
+.song__artist-name a {
+  text-decoration: none;
 }
 
 .song__song-name {

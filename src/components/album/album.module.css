@@ -1,7 +1,11 @@
 .container {
   margin: 20px;
+  margin-top: 0;
+  padding: 10px;
+  padding-bottom: 0;
   color: var(--almost-black);
   background-color: var(--almost-white);
+  border-radius: 5px;
   width: 95%;
   max-width: 1000px;
 }

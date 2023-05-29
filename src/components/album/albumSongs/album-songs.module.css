@@ -3,4 +3,9 @@
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
+  border-bottom: 1px solid var(--dark-grey);
+}
+
+.container:last-of-type {
+  border-bottom: none;
 }

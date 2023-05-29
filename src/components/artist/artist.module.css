@@ -1,5 +1,6 @@
 .artist {
   margin: 20px;
+  margin-top: 0;
   color: var(--almost-black);
   background-color: var(--almost-white);
   width: 95%;
@@ -12,7 +13,7 @@
   text-decoration: none;
 }
 
-.artist__cover-art {
+.artist__link > img {
   aspect-ratio: 1;
   width: 100px;
   margin: 10px;
@@ -20,4 +21,6 @@
 
 .artist__name {
   text-align: left;
+  width: 100%;
+  margin-left: 5px;
 }
