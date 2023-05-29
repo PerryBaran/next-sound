@@ -3,7 +3,7 @@ import Cookies from "js-cookie"
 
 export const instance = axios.create({
   withCredentials: true,
-  baseURL: "https://soundcloud-clone-api-production.up.railway.app/"
+  baseURL: "https://soundcloud-clone-api.onrender.com"
 })
 
 export function config() {
