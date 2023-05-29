@@ -42,7 +42,7 @@ export default async function Search(props: Props) {
                 />
               )
             }
-            if (data.UserId) {
+            if (data.UserId && !(data.Songs.length === 1 && data.Songs[0].name === data.name)) {
               return (
                 <Album
                   artistName={data.User.name}
