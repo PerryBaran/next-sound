@@ -44,7 +44,7 @@ export default function Album({
   })
 
   return (
-    <div className={css.container}>
+    <div className={css["container"]}>
       <div className={css["album-info-container"]}>
         <Image
           src={albumArt || music}

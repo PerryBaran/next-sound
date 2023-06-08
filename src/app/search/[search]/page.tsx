@@ -25,7 +25,7 @@ export default async function Search(props: Props) {
   )
 
   return (
-    <div className={css.container}>
+    <div className={css["container"]}>
       {searchResults.length === 0 ? (
         <h2>{"No results"}</h2>
       ) : (

@@ -20,19 +20,19 @@ export default function Song({
   songAudio
 }: Props) {
   return (
-    <div className={css.song}>
-      <div className={css["song__info-container"]}>
+    <div className={css["container"]}>
+      <div className={css["info-container"]}>
         <Image
           src={albumArt || music}
           alt={`${albumName} cover art`}
           height={100}
           width={100}
         />
-        <div className={css["song__info"]}>
-          <h2 className={css["song__artist-name"]}>
+        <div className={css["info"]}>
+          <h2 className={css["artist-name"]}>
             <Link href={`/profile/${artistName}`}>{artistName}</Link>
           </h2>
-          <h3 className={css["song__song-name"]}>{songName}</h3>
+          <h3 className={css["song-name"]}>{songName}</h3>
         </div>
       </div>
       <SongMenu

@@ -1,4 +1,4 @@
-.artist {
+.container {
   margin: 20px;
   margin-top: 0;
   color: var(--almost-black);
@@ -7,19 +7,19 @@
   max-width: 1000px;
 }
 
-.artist__link {
+.link {
   display: flex;
   align-items: center;
   text-decoration: none;
 }
 
-.artist__link > img {
+.link > img {
   aspect-ratio: 1;
   width: 100px;
   margin: 10px;
 }
 
-.artist__name {
+.name {
   text-align: left;
   width: 100%;
   margin-left: 5px;

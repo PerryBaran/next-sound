@@ -1,4 +1,4 @@
-.song {
+.container {
   margin: 20px;
   margin-top: 0;
   padding: 10px;
@@ -12,41 +12,26 @@
   justify-content: space-between;
 }
 
-.song__cover-art {
-  aspect-ratio: 1;
-  width: 100px;
-  margin: 10px;
-}
-
-.song__info {
-  width: 100%;
-  margin-left: 5px;
-}
-
-.song__info-container {
+.info-container {
   display: flex;
   align-items: center;
 }
 
-.song__artist-name {
+.info {
+  width: 100%;
+  margin-left: 5px;
+}
+
+.artist-name {
   text-align: left;
   font-size: min(1.5rem, 5cqw);
 }
 
-.song__artist-name a {
+.artist-name a {
   text-decoration: none;
 }
 
-.song__song-name {
+.song-name {
   text-align: left;
   font-size: min(1.2rem, 3cqw);
-}
-
-.song__buttons {
-  display: flex;
-  flex-direction: column;
-}
-
-.song__artist-name__link {
-  text-decoration: none;
 }

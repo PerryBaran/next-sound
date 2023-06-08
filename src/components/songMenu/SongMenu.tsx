@@ -25,11 +25,11 @@ export default function SongMenu({ songs }: Props) {
   }
 
   return (
-    <div className={css.container} onBlur={handleBlur}>
+    <div className={css["container"]} onBlur={handleBlur}>
       {visible ? (
-        <div className={css.options}>
+        <div className={css["options"]}>
           <button onMouseDown={() => handleAddToPlaylist(songs, true, true)}>
-            <span className={css["song-menu-image-container"]}>
+            <span className={css["image-container"]}>
               <Image src={play} alt="play now" width={9} />
             </span>
             <span>Play Now</span>
@@ -38,13 +38,13 @@ export default function SongMenu({ songs }: Props) {
             onMouseDown={() => handleAddToPlaylist(songs, true, false)}
             className={css["play-next"]}
           >
-            <span className={css["song-menu-image-container"]}>
+            <span className={css["image-container"]}>
               <Image src={addList} alt="play now" width={15} />
             </span>
             <span>Play Next</span>
           </button>
           <button onMouseDown={() => handleAddToPlaylist(songs, false, false)}>
-            <span className={css["song-menu-image-container"]}>
+            <span className={css["image-container"]}>
               <Image src={addList} alt="play now" width={15} />
             </span>
             <span>Add To Queue</span>
@@ -53,7 +53,7 @@ export default function SongMenu({ songs }: Props) {
       ) : null}
       <button
         onClick={() => setVisible((prev) => !prev)}
-        className={css.button}
+        className={css["button"]}
       >
         <Image src={dots} alt="..." height={18} width={18} />
       </button>

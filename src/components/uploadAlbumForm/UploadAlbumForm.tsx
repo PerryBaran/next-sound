@@ -251,7 +251,7 @@ export default function UploadAlbumForm({ data }: Props) {
                 draggable
                 onDragEnter={() => dragEnter(i)}
                 onDragEnd={() => dragEnd(i)}
-                className={css.song}
+                className={css["song"]}
               >
                 <h4>Song {i + 1}</h4>
                 <label htmlFor={`song-name${i}`}>

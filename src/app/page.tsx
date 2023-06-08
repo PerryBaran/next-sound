@@ -13,7 +13,7 @@ export default async function Home() {
   const albums: Albums[] = await getAlbums()
 
   return (
-    <main className={css.container}>
+    <main className={css["container"]}>
       {albums.map((album) => {
         if (album.Songs.length === 1 && album.Songs[0].name === album.name) {
           return (

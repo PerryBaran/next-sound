@@ -14,7 +14,7 @@ export default async function Profile(props: Props) {
   const [user]: User[] = await getUsers({ name, exact: true })
 
   return (
-    <div className={css.container}>
+    <div className={css["container"]}>
       {!user?.name ? (
         <h2>No User Found</h2>
       ) : (
