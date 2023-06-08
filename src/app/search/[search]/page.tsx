@@ -29,44 +29,47 @@ export default async function Search(props: Props) {
       {searchResults.length === 0 ? (
         <h2>{"No results"}</h2>
       ) : (
-          searchResults.map((data: any) => {
-            if (data.AlbumId) {
-              return (
-                <Song
-                  artistName={data.Album.User.name}
-                  albumName={data.Album.name}
-                  albumArt={data.Album.url}
-                  songName={data.name}
-                  songAudio={data.url}
-                  key={`${data.id}${data.name}`}
-                />
-              )
-            }
-            if (data.UserId && !(data.Songs.length === 1 && data.Songs[0].name === data.name)) {
-              return (
-                <Album
-                  artistName={data.User.name}
-                  albumName={data.name}
-                  albumArt={data.url}
-                  songs={data.Songs}
-                  albumUserId={data.User.id}
-                  key={`${data.id}${data.name}`}
-                  albumId={data.id}
-                  profile={false}
-                />
-              )
-            }
-            if (data.email) {
-              return (
-                <Artist
-                  name={data.name}
-                  image={data.Albums[0]?.url}
-                  key={`${data.id}${data.name}`}
-                />
-              )
-            }
-            return null
-          })
+        searchResults.map((data: any) => {
+          if (data.AlbumId) {
+            return (
+              <Song
+                artistName={data.Album.User.name}
+                albumName={data.Album.name}
+                albumArt={data.Album.url}
+                songName={data.name}
+                songAudio={data.url}
+                key={`${data.id}${data.name}`}
+              />
+            )
+          }
+          if (
+            data.UserId &&
+            !(data.Songs.length === 1 && data.Songs[0].name === data.name)
+          ) {
+            return (
+              <Album
+                artistName={data.User.name}
+                albumName={data.name}
+                albumArt={data.url}
+                songs={data.Songs}
+                albumUserId={data.User.id}
+                key={`${data.id}${data.name}`}
+                albumId={data.id}
+                profile={false}
+              />
+            )
+          }
+          if (data.email) {
+            return (
+              <Artist
+                name={data.name}
+                image={data.Albums[0]?.url}
+                key={`${data.id}${data.name}`}
+              />
+            )
+          }
+          return null
+        })
       )}
     </div>
   )

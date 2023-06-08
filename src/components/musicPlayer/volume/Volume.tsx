@@ -18,9 +18,7 @@ export default function Volume({ volume, handleVolume }: Props) {
     handleVolume(currentVolume)
   }
 
-  const handleVolumeToggle = (
-    e: any
-  ) => {
+  const handleVolumeToggle = (e: any) => {
     if (e.nativeEvent?.pointerType !== "mouse") return
     const preVolume = volume
     if (preVolume !== 0) {

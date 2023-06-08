@@ -17,14 +17,14 @@ export default async function Home() {
       {albums.map((album) => {
         if (album.Songs.length === 1 && album.Songs[0].name === album.name) {
           return (
-          <Song 
-            key={album.id}
-            artistName={album.User.name}
-            albumName={album.name}
-            albumArt={album.url}
-            songName={album.Songs[0].name}
-            songAudio={album.Songs[0].url}
-          />
+            <Song
+              key={album.id}
+              artistName={album.User.name}
+              albumName={album.name}
+              albumArt={album.url}
+              songName={album.Songs[0].name}
+              songAudio={album.Songs[0].url}
+            />
           )
         }
         return (
