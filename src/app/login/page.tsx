@@ -6,6 +6,7 @@ import { useUserContext } from "../../context/UserContext"
 import Alert from "../../components/alert/Alert"
 import { login } from "../../requests/users"
 import Link from "next/link"
+import css from "./login.module.css"
 
 export default function Login() {
   const [fields, setFields] = useState({
@@ -45,11 +46,9 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <Alert message={alert} />
-      <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        <label htmlFor="email">
+    <div className={css["container"]}>
+      <form onSubmit={handleSubmit} className={css["form"]}>
+        <label htmlFor="email" className={css["field"]}>
           <span>Email</span>
           <input
             type="text"
@@ -59,7 +58,7 @@ export default function Login() {
             onChange={handleFieldChange}
           />
         </label>
-        <label htmlFor="password">
+        <label htmlFor="password" className={css["field"]}>
           <span>Password</span>
           <input
             type="password"
@@ -69,7 +68,10 @@ export default function Login() {
             onChange={handleFieldChange}
           />
         </label>
-        <button type="submit">Login</button>
+        <Alert message={alert} />
+        <button type="submit" className={css["submit"]}>
+          Login
+        </button>
       </form>
       <p>
         Don&apos;t have an account? <Link href="/signup">Signup here</Link>

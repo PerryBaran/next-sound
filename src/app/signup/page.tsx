@@ -6,6 +6,7 @@ import { signup } from "../../requests/users"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import css from "../login/login.module.css"
 
 export default function SignUp() {
   const [fields, setFields] = useState({
@@ -57,11 +58,9 @@ export default function SignUp() {
   }
 
   return (
-    <div>
-      <Alert message={alert} />
-      <form onSubmit={handleSubmit}>
-        <h2>Please Signup</h2>
-        <label htmlFor="name">
+    <div className={css["container"]}>
+      <form onSubmit={handleSubmit} className={css["form"]}>
+        <label htmlFor="name" className={css["field"]}>
           <span>Username</span>
           <input
             type="text"
@@ -71,7 +70,7 @@ export default function SignUp() {
             onChange={handleFieldChange}
           />
         </label>
-        <label htmlFor="email">
+        <label htmlFor="email" className={css["field"]}>
           <span>Email</span>
           <input
             type="text"
@@ -81,7 +80,7 @@ export default function SignUp() {
             onChange={handleFieldChange}
           />
         </label>
-        <label htmlFor="password">
+        <label htmlFor="password" className={css["field"]}>
           <span>Password</span>
           <input
             type="password"
@@ -91,7 +90,7 @@ export default function SignUp() {
             onChange={handleFieldChange}
           />
         </label>
-        <label htmlFor="confirmPassword">
+        <label htmlFor="confirmPassword" className={css["field"]}>
           <span>Confirm Password</span>
           <input
             type="password"
@@ -101,7 +100,10 @@ export default function SignUp() {
             onChange={handleFieldChange}
           />
         </label>
-        <button type="submit">SignUp</button>
+        <Alert message={alert} />
+        <button type="submit" className={css["submit"]}>
+          SignUp
+        </button>
       </form>
       <p>
         Already have an account? <Link href="/login">Login here</Link>
