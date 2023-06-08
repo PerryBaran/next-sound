@@ -3,10 +3,10 @@
 exports[`Artist snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="artist"
+    class="container"
   >
     <a
-      class="artist__link"
+      class="link"
       href="/profile/name"
     >
       <img
@@ -21,7 +21,7 @@ exports[`Artist snapshot 1`] = `
         width="100"
       />
       <h2
-        class="artist__name"
+        class="name"
       >
         name
       </h2>

@@ -3,10 +3,10 @@
 exports[`Song snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="song"
+    class="container"
   >
     <div
-      class="song__info-container"
+      class="info-container"
     >
       <img
         alt="album-name cover art"
@@ -20,10 +20,10 @@ exports[`Song snapshot 1`] = `
         width="100"
       />
       <div
-        class="song__info"
+        class="info"
       >
         <h2
-          class="song__artist-name"
+          class="artist-name"
         >
           <a
             href="/profile/artist-name"
@@ -32,7 +32,7 @@ exports[`Song snapshot 1`] = `
           </a>
         </h2>
         <h3
-          class="song__song-name"
+          class="song-name"
         >
           song-name
         </h3>
