@@ -22,3 +22,7 @@
   --music-player-height: 80px;
   --break-point: 700px;
 }
+
+body {
+  background-color: var(--dark-grey);
+}
