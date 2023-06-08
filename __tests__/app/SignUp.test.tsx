@@ -50,9 +50,6 @@ describe("SignUp", () => {
     })
 
     test("renders correctly", () => {
-      expect(screen.getByText(/please signup/i)).toBeInstanceOf(
-        HTMLHeadingElement
-      )
       expect(screen.getByLabelText(/username/i)).toHaveAttribute("type", "text")
       expect(screen.getByLabelText(/email/i)).toHaveAttribute("type", "text")
       expect(screen.getByLabelText(/^password$/i)).toHaveAttribute(
@@ -63,13 +60,13 @@ describe("SignUp", () => {
         "type",
         "password"
       )
-      expect(screen.getByText(/^signup$/i)).toHaveAttribute("type", "submit")
+      expect(screen.getByText(/signup/i)).toHaveAttribute("type", "submit")
       expect(screen.getByText(/already have an account/i)).toBeInTheDocument()
       expect(screen.getByText(/login here/i)).toHaveAttribute("href", "/login")
     })
 
     test("handleSubmit - no username", () => {
-      fireEvent.click(screen.getByText(/^signup$/i))
+      fireEvent.click(screen.getByText(/signup/i))
 
       expect(screen.getByText(/please provide a username/i)).toBeInTheDocument()
     })
@@ -78,7 +75,7 @@ describe("SignUp", () => {
       fireEvent.change(screen.getByLabelText(/username/i), {
         target: { value: "user-name" }
       })
-      fireEvent.click(screen.getByText(/^signup$/i))
+      fireEvent.click(screen.getByText(/signup/i))
 
       expect(
         screen.getByText(/please provide your email address/i)
@@ -92,7 +89,7 @@ describe("SignUp", () => {
       fireEvent.change(screen.getByLabelText(/email/i), {
         target: { value: "email" }
       })
-      fireEvent.click(screen.getByText(/^signup$/i))
+      fireEvent.click(screen.getByText(/signup/i))
 
       expect(
         screen.getByText(/please provide a valid email/i)
@@ -106,7 +103,7 @@ describe("SignUp", () => {
       fireEvent.change(screen.getByLabelText(/email/i), {
         target: { value: "email@mail.com" }
       })
-      fireEvent.click(screen.getByText(/^signup$/i))
+      fireEvent.click(screen.getByText(/signup/i))
 
       expect(
         screen.getByText(/please insert your password/i)
@@ -123,7 +120,7 @@ describe("SignUp", () => {
       fireEvent.change(screen.getByLabelText(/^password$/i), {
         target: { value: "1234567" }
       })
-      fireEvent.click(screen.getByText(/^signup$/i))
+      fireEvent.click(screen.getByText(/signup/i))
 
       expect(
         screen.getByText(/password must be atleast 8 characters long/i)
@@ -140,7 +137,7 @@ describe("SignUp", () => {
       fireEvent.change(screen.getByLabelText(/^password$/i), {
         target: { value: "12345678" }
       })
-      fireEvent.click(screen.getByText(/^signup$/i))
+      fireEvent.click(screen.getByText(/signup/i))
 
       expect(screen.getByText(/passwords must match/i)).toBeInTheDocument()
     })
@@ -163,7 +160,7 @@ describe("SignUp", () => {
       fireEvent.change(screen.getByLabelText(/confirm password/i), {
         target: { value: mockData.password }
       })
-      fireEvent.click(screen.getByText(/^signup$/i))
+      fireEvent.click(screen.getByText(/signup/i))
     })
   })
 
@@ -192,7 +189,7 @@ describe("SignUp", () => {
       fireEvent.change(screen.getByLabelText(/confirm password/i), {
         target: { value: mockData.password }
       })
-      fireEvent.click(screen.getByText(/^signup$/i))
+      fireEvent.click(screen.getByText(/signup/i))
 
       await waitFor(() => {
         expect(screen.getByText(error)).toBeInTheDocument()
@@ -218,7 +215,7 @@ describe("SignUp", () => {
       fireEvent.change(screen.getByLabelText(/confirm password/i), {
         target: { value: mockData.password }
       })
-      fireEvent.click(screen.getByText(/^signup$/i))
+      fireEvent.click(screen.getByText(/signup/i))
 
       await waitFor(() => {
         expect(screen.getByText(/unexpected Error/i)).toBeInTheDocument()

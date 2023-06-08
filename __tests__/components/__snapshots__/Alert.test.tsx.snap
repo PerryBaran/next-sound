@@ -4,7 +4,9 @@ exports[`Alert snapshots falsey message snapshot 1`] = `<DocumentFragment />`;
 
 exports[`Alert snapshots truthy message snapshot 1`] = `
 <DocumentFragment>
-  <p>
+  <p
+    class="alert"
+  >
     test
   </p>
 </DocumentFragment>

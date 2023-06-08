@@ -1,13 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SignUp snapshot 1`] = `
+exports[`Login snapshot 1`] = `
 <DocumentFragment>
-  <div>
-    <form>
-      <h2>
-        Login
-      </h2>
+  <div
+    class="container"
+  >
+    <form
+      class="form"
+    >
       <label
+        class="field"
         for="email"
       >
         <span>
@@ -21,6 +23,7 @@ exports[`SignUp snapshot 1`] = `
         />
       </label>
       <label
+        class="field"
         for="password"
       >
         <span>
@@ -34,6 +37,7 @@ exports[`SignUp snapshot 1`] = `
         />
       </label>
       <button
+        class="submit"
         type="submit"
       >
         Login

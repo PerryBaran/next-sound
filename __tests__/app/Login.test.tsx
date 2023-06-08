@@ -5,7 +5,7 @@ import * as userRequests from "../../src/requests/users"
 import * as navigation from "next/navigation"
 import * as UserContext from "../../src/context/UserContext"
 
-describe("SignUp", () => {
+describe("Login", () => {
   let loginSpy: jest.SpyInstance
   let mockPush = jest.fn()
   let mockHandleLogin = jest.fn()
@@ -50,15 +50,12 @@ describe("SignUp", () => {
     })
 
     test("renders correctly", () => {
-      expect(screen.getAllByText(/login/i)[0]).toBeInstanceOf(
-        HTMLHeadingElement
-      )
       expect(screen.getByLabelText(/email/i)).toHaveAttribute("type", "text")
       expect(screen.getByLabelText(/password/i)).toHaveAttribute(
         "type",
         "password"
       )
-      expect(screen.getAllByText(/login/i)[1]).toHaveAttribute("type", "submit")
+      expect(screen.getByText(/login/i)).toHaveAttribute("type", "submit")
       expect(screen.getByText(/don't have an account\n?/i)).toBeInTheDocument()
       expect(screen.getByText(/signup here/i)).toHaveAttribute(
         "href",
@@ -67,7 +64,7 @@ describe("SignUp", () => {
     })
 
     test("handleSubmit - no email provided", () => {
-      fireEvent.click(screen.getAllByText(/login/i)[1])
+      fireEvent.click(screen.getByText(/login/i))
 
       expect(
         screen.getByText(/please provide your email address/i)
@@ -78,7 +75,7 @@ describe("SignUp", () => {
       fireEvent.change(screen.getByLabelText(/email/i), {
         target: { value: "email" }
       })
-      fireEvent.click(screen.getAllByText(/login/i)[1])
+      fireEvent.click(screen.getByText(/login/i))
 
       expect(
         screen.getByText(/please provide your password/i)
@@ -92,7 +89,7 @@ describe("SignUp", () => {
       fireEvent.change(screen.getByLabelText(/password/i), {
         target: { value: "12345678" }
       })
-      fireEvent.click(screen.getAllByText(/login/i)[1])
+      fireEvent.click(screen.getByText(/login/i))
 
       expect(
         screen.getByText(/please provide a valid email/i)
@@ -110,7 +107,7 @@ describe("SignUp", () => {
       fireEvent.change(screen.getByLabelText(/password/i), {
         target: { value: mockData.password }
       })
-      fireEvent.click(screen.getAllByText(/login/i)[1])
+      fireEvent.click(screen.getByText(/login/i))
 
       await waitFor(() => {
         expect(loginSpy).toBeCalledWith(mockData)
@@ -135,7 +132,7 @@ describe("SignUp", () => {
       fireEvent.change(screen.getByLabelText(/password/i), {
         target: { value: "12345678" }
       })
-      fireEvent.click(screen.getAllByText(/login/i)[1])
+      fireEvent.click(screen.getByText(/login/i))
 
       await waitFor(() => {
         expect(screen.getByText(error)).toBeInTheDocument()
@@ -151,7 +148,7 @@ describe("SignUp", () => {
       fireEvent.change(screen.getByLabelText(/password/i), {
         target: { value: "12345678" }
       })
-      fireEvent.click(screen.getAllByText(/login/i)[1])
+      fireEvent.click(screen.getByText(/login/i))
 
       await waitFor(() => {
         expect(screen.getByText(/unexpected error/i)).toBeInTheDocument()

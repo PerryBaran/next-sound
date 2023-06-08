@@ -2,12 +2,14 @@
 
 exports[`SignUp snapshot 1`] = `
 <DocumentFragment>
-  <div>
-    <form>
-      <h2>
-        Please Signup
-      </h2>
+  <div
+    class="container"
+  >
+    <form
+      class="form"
+    >
       <label
+        class="field"
         for="name"
       >
         <span>
@@ -21,6 +23,7 @@ exports[`SignUp snapshot 1`] = `
         />
       </label>
       <label
+        class="field"
         for="email"
       >
         <span>
@@ -34,6 +37,7 @@ exports[`SignUp snapshot 1`] = `
         />
       </label>
       <label
+        class="field"
         for="password"
       >
         <span>
@@ -47,6 +51,7 @@ exports[`SignUp snapshot 1`] = `
         />
       </label>
       <label
+        class="field"
         for="confirmPassword"
       >
         <span>
@@ -60,6 +65,7 @@ exports[`SignUp snapshot 1`] = `
         />
       </label>
       <button
+        class="submit"
         type="submit"
       >
         SignUp
