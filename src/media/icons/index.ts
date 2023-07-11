@@ -18,6 +18,7 @@ import shuffle from "./shuffle.png"
 import close from "./close.png"
 import dots from "./dots.png"
 import addList from "./add-list.png"
+import upDown from "./upDown.png"
 
 export {
   menu,
@@ -39,5 +40,6 @@ export {
   shuffle,
   close,
   dots,
-  addList
+  addList,
+  upDown
 }
