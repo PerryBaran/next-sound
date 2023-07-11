@@ -2,21 +2,31 @@
 
 exports[`Confirm snapshot 1`] = `
 <DocumentFragment>
-  <div>
-    <div>
-      <h3>
+  <div
+    class="container"
+  >
+    <div
+      class="confirm"
+    >
+      <h3
+        class="are-you-sure"
+      >
         Are You Sure?
       </h3>
-      <button
-        type="button"
-      >
-        Yes
-      </button>
-      <button
-        type="button"
-      >
-        No
-      </button>
+      <div>
+        <button
+          class="yes"
+          type="button"
+        >
+          Yes
+        </button>
+        <button
+          class="no"
+          type="button"
+        >
+          No
+        </button>
+      </div>
     </div>
   </div>
 </DocumentFragment>
