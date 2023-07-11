@@ -74,7 +74,9 @@ describe("UploadAlbumForm", () => {
         expect(screen.getByText(/1/i)).toBeInstanceOf(HTMLHeadingElement)
         expect(screen.getByLabelText(/audio/i)).toHaveAttribute("type", "file")
         expect(screen.getByText(/x/i)).toBeInstanceOf(HTMLButtonElement)
-        expect(screen.getByText(/add new song/i)).toBeInstanceOf(HTMLButtonElement)
+        expect(screen.getByText(/add new song/i)).toBeInstanceOf(
+          HTMLButtonElement
+        )
         expect(screen.getByText(/submit/i)).toHaveAttribute("type", "submit")
         expect(screen.getByText(/cancel/i)).toBeInstanceOf(HTMLButtonElement)
       })
@@ -190,7 +192,9 @@ describe("UploadAlbumForm", () => {
         expect(screen.getAllByLabelText(/x/i)[0]).toBeInstanceOf(
           HTMLInputElement
         )
-        expect(screen.getByText(/add new song/i)).toBeInstanceOf(HTMLButtonElement)
+        expect(screen.getByText(/add new song/i)).toBeInstanceOf(
+          HTMLButtonElement
+        )
         expect(screen.getByText(/save changes/i)).toHaveAttribute(
           "type",
           "submit"

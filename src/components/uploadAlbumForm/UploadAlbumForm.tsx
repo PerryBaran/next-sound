@@ -81,7 +81,7 @@ export default function UploadAlbumForm({ data }: Props) {
     user: { name }
   } = useUserContext()
   const [confirm, setConfirm] = useState("")
-  const [draggable, setDraggable] = useState(false);
+  const [draggable, setDraggable] = useState(false)
 
   const handleAlbumNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
@@ -243,7 +243,9 @@ export default function UploadAlbumForm({ data }: Props) {
           setConfirm("submit")
         }}
       >
-        <h2 className={css["heading"]}>{data ? "Edit Album" : "Upload Album"}</h2>
+        <h2 className={css["heading"]}>
+          {data ? "Edit Album" : "Upload Album"}
+        </h2>
         <div className={css["album-info"]}>
           <div>
             <label htmlFor="album-name" className={css["album-label"]}>
@@ -258,20 +260,26 @@ export default function UploadAlbumForm({ data }: Props) {
             <div className={css["album-art"]}>
               <label htmlFor="art" className={css["album-label"]}>
                 <span>Cover Art</span>
-                <input type="file" id="art" onChange={handleAlbumImageChange} />        
+                <input type="file" id="art" onChange={handleAlbumImageChange} />
               </label>
-              {album.image && <button type="button" onClick={removeAlbumImage}>x</button>}              
+              {album.image && (
+                <button type="button" onClick={removeAlbumImage}>
+                  x
+                </button>
+              )}
             </div>
           </div>
           <Image
-              src={renderAlbumArt()}
-              height={100}
-              width={100}
-              alt="cover art"
-            />
+            src={renderAlbumArt()}
+            height={100}
+            width={100}
+            alt="cover art"
+          />
         </div>
         <div className={css["songs-container"]}>
-          <h3 className={css["heading"]}>{data ? "Edit Songs" : "Upload Songs"}</h3>
+          <h3 className={css["heading"]}>
+            {data ? "Edit Songs" : "Upload Songs"}
+          </h3>
           <ul>
             {songs.map((song, i) => {
               return (
@@ -296,7 +304,10 @@ export default function UploadAlbumForm({ data }: Props) {
                     />
                   </button>
                   <h4 className={css["song-position"]}>{i + 1}</h4>
-                  <label htmlFor={`song-name${i}`} className={css["song-label"]}>
+                  <label
+                    htmlFor={`song-name${i}`}
+                    className={css["song-label"]}
+                  >
                     <span>Name</span>
                     <input
                       type="text"
@@ -306,7 +317,10 @@ export default function UploadAlbumForm({ data }: Props) {
                       onChange={(e) => handleSongNameChange(e, i)}
                     />
                   </label>
-                  <label htmlFor={`song-audio${i}`} className={css["song-label"]}>
+                  <label
+                    htmlFor={`song-audio${i}`}
+                    className={css["song-label"]}
+                  >
                     <span className="upload-info">Audio</span>
                     <input
                       type="file"
@@ -360,7 +374,7 @@ export default function UploadAlbumForm({ data }: Props) {
               setConfirm={setConfirm}
               callback={confirmCallback(confirm)}
             />
-          )}          
+          )}
         </div>
       </form>
     </div>

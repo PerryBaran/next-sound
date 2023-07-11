@@ -38,7 +38,7 @@ export default async function Profile(props: Props) {
                 profile={true}
               />
             )
-          })}        
+          })}
       </div>
     </div>
   )

@@ -57,7 +57,7 @@
   justify-content: space-evenly;
   margin-bottom: 10px;
   padding-bottom: 5px;
-  border-bottom: 1px solid var(--darker-grey)
+  border-bottom: 1px solid var(--darker-grey);
 }
 
 .song-position {
