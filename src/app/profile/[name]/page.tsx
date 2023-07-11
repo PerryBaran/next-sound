@@ -23,21 +23,23 @@ export default async function Profile(props: Props) {
           <EditProfileButton userId={user.id} />
         </div>
       )}
-      {user?.Albums &&
-        user.Albums.map((album) => {
-          return (
-            <Album
-              key={album.id}
-              artistName={user.name}
-              albumName={album.name}
-              albumArt={album.url}
-              songs={album.Songs}
-              albumId={album.id}
-              albumUserId={user.id}
-              profile={true}
-            />
-          )
-        })}
+      <div>
+        {user?.Albums &&
+          user.Albums.map((album) => {
+            return (
+              <Album
+                key={album.id}
+                artistName={user.name}
+                albumName={album.name}
+                albumArt={album.url}
+                songs={album.Songs}
+                albumId={album.id}
+                albumUserId={user.id}
+                profile={true}
+              />
+            )
+          })}        
+      </div>
     </div>
   )
 }
