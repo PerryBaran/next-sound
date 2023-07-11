@@ -71,10 +71,10 @@ describe("UploadAlbumForm", () => {
         expect(screen.getByText(/upload songs/i)).toBeInstanceOf(
           HTMLHeadingElement
         )
-        expect(screen.getByText(/song 1/i)).toBeInstanceOf(HTMLHeadingElement)
+        expect(screen.getByText(/1/i)).toBeInstanceOf(HTMLHeadingElement)
         expect(screen.getByLabelText(/audio/i)).toHaveAttribute("type", "file")
         expect(screen.getByText(/x/i)).toBeInstanceOf(HTMLButtonElement)
-        expect(screen.getByText("+")).toBeInstanceOf(HTMLButtonElement)
+        expect(screen.getByText(/add new song/i)).toBeInstanceOf(HTMLButtonElement)
         expect(screen.getByText(/submit/i)).toHaveAttribute("type", "submit")
         expect(screen.getByText(/cancel/i)).toBeInstanceOf(HTMLButtonElement)
       })
@@ -90,13 +90,13 @@ describe("UploadAlbumForm", () => {
       test("add button", () => {
         expect(screen.getAllByLabelText(/audio/i)).toHaveLength(1)
 
-        fireEvent.click(screen.getByText("+"))
+        fireEvent.click(screen.getByText(/add new song/i))
 
         expect(screen.getAllByLabelText(/audio/i)).toHaveLength(2)
       })
 
       test("drag and drop", () => {
-        fireEvent.click(screen.getByText("+"))
+        fireEvent.click(screen.getByText(/add new song/i))
 
         const name = "name"
         fireEvent.change(screen.getAllByLabelText(/name/i)[1], {
@@ -182,7 +182,7 @@ describe("UploadAlbumForm", () => {
         expect(screen.getByText(/edit songs/i)).toBeInstanceOf(
           HTMLHeadingElement
         )
-        expect(screen.getByText(/song 1/i)).toBeInstanceOf(HTMLHeadingElement)
+        expect(screen.getByText(/1/i)).toBeInstanceOf(HTMLHeadingElement)
         expect(screen.getAllByLabelText(/audio/i)[0]).toHaveAttribute(
           "type",
           "file"
@@ -190,7 +190,7 @@ describe("UploadAlbumForm", () => {
         expect(screen.getAllByLabelText(/x/i)[0]).toBeInstanceOf(
           HTMLInputElement
         )
-        expect(screen.getByText("+")).toBeInstanceOf(HTMLButtonElement)
+        expect(screen.getByText(/add new song/i)).toBeInstanceOf(HTMLButtonElement)
         expect(screen.getByText(/save changes/i)).toHaveAttribute(
           "type",
           "submit"
@@ -214,7 +214,7 @@ describe("UploadAlbumForm", () => {
       test("add button", () => {
         expect(screen.getAllByLabelText(/audio/i)).toHaveLength(2)
 
-        fireEvent.click(screen.getByText("+"))
+        fireEvent.click(screen.getByText(/add new song/i))
 
         expect(screen.getAllByLabelText(/audio/i)).toHaveLength(3)
       })
@@ -222,7 +222,7 @@ describe("UploadAlbumForm", () => {
       test("remove button", () => {
         expect(screen.getAllByLabelText(/audio/i)).toHaveLength(2)
 
-        fireEvent.click(screen.getByText("+"))
+        fireEvent.click(screen.getByText(/add new song/i))
 
         expect(screen.getAllByLabelText(/audio/i)).toHaveLength(3)
 

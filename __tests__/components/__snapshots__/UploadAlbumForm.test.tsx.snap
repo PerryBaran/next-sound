@@ -2,159 +2,237 @@
 
 exports[`UploadAlbumForm update - with data snapshot 1`] = `
 <DocumentFragment>
-  <div>
-    <form>
-      <h2>
+  <div
+    class="container"
+  >
+    <form
+      class="albums"
+    >
+      <h2
+        class="heading"
+      >
         Edit Album
       </h2>
-      <div>
-        <label
-          for="album-name"
-        >
-          <span>
-            Name
-          </span>
-          <input
-            id="album-name"
-            type="text"
-            value="album-name"
-          />
-        </label>
-        <label
-          for="art"
-        >
-          <span>
-            Cover Art
-          </span>
-          <input
-            id="art"
-            type="file"
-          />
-        </label>
+      <div
+        class="album-info"
+      >
+        <div>
+          <label
+            class="album-label"
+            for="album-name"
+          >
+            <span>
+              Album Name
+            </span>
+            <input
+              id="album-name"
+              type="text"
+              value="album-name"
+            />
+          </label>
+          <div
+            class="album-art"
+          >
+            <label
+              class="album-label"
+              for="art"
+            >
+              <span>
+                Cover Art
+              </span>
+              <input
+                id="art"
+                type="file"
+              />
+            </label>
+          </div>
+        </div>
+        <img
+          alt="cover art"
+          data-nimg="1"
+          decoding="async"
+          height="100"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=256&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=128&q=75 1x, /_next/image?url=%2Fimg.jpg&w=256&q=75 2x"
+          style="color: transparent;"
+          width="100"
+        />
       </div>
-      <div>
-        <h3>
+      <div
+        class="songs-container"
+      >
+        <h3
+          class="heading"
+        >
           Edit Songs
         </h3>
-        <div
-          class="song"
-          draggable="true"
+        <ul>
+          <li
+            class="song"
+            draggable="false"
+          >
+            <button
+              class="drag-drop"
+            >
+              <img
+                alt="drag to change position"
+                data-nimg="1"
+                decoding="async"
+                draggable="false"
+                height="15"
+                loading="lazy"
+                src="/_next/image?url=%2Fimg.jpg&w=32&q=75"
+                srcset="/_next/image?url=%2Fimg.jpg&w=16&q=75 1x, /_next/image?url=%2Fimg.jpg&w=32&q=75 2x"
+                style="color: transparent;"
+                width="15"
+              />
+            </button>
+            <h4
+              class="song-position"
+            >
+              1
+            </h4>
+            <label
+              class="song-label"
+              for="song-name0"
+            >
+              <span>
+                Name
+              </span>
+              <input
+                id="song-name0"
+                name="name"
+                type="text"
+                value="song-1-name"
+              />
+            </label>
+            <label
+              class="song-label"
+              for="song-audio0"
+            >
+              <span
+                class="upload-info"
+              >
+                Audio
+              </span>
+              <input
+                id="song-audio0"
+                type="file"
+              />
+            </label>
+            <label
+              class="delete-song"
+              for="delete-song0"
+            >
+              <span
+                class="upload-info"
+              >
+                x
+              </span>
+              <input
+                id="delete-song0"
+                name="delete"
+                type="checkbox"
+              />
+            </label>
+          </li>
+          <li
+            class="song"
+            draggable="false"
+          >
+            <button
+              class="drag-drop"
+            >
+              <img
+                alt="drag to change position"
+                data-nimg="1"
+                decoding="async"
+                draggable="false"
+                height="15"
+                loading="lazy"
+                src="/_next/image?url=%2Fimg.jpg&w=32&q=75"
+                srcset="/_next/image?url=%2Fimg.jpg&w=16&q=75 1x, /_next/image?url=%2Fimg.jpg&w=32&q=75 2x"
+                style="color: transparent;"
+                width="15"
+              />
+            </button>
+            <h4
+              class="song-position"
+            >
+              2
+            </h4>
+            <label
+              class="song-label"
+              for="song-name1"
+            >
+              <span>
+                Name
+              </span>
+              <input
+                id="song-name1"
+                name="name"
+                type="text"
+                value="song-2-name"
+              />
+            </label>
+            <label
+              class="song-label"
+              for="song-audio1"
+            >
+              <span
+                class="upload-info"
+              >
+                Audio
+              </span>
+              <input
+                id="song-audio1"
+                type="file"
+              />
+            </label>
+            <label
+              class="delete-song"
+              for="delete-song1"
+            >
+              <span
+                class="upload-info"
+              >
+                x
+              </span>
+              <input
+                id="delete-song1"
+                name="delete"
+                type="checkbox"
+              />
+            </label>
+          </li>
+        </ul>
+        <button
+          class="add-song"
+          type="button"
         >
-          <h4>
-            Song 1
-          </h4>
-          <label
-            for="song-name0"
-          >
-            <span>
-              Name
-            </span>
-            <input
-              id="song-name0"
-              name="name"
-              type="text"
-              value="song-1-name"
-            />
-          </label>
-          <label
-            for="song-audio0"
-          >
-            <span
-              class="upload-info"
-            >
-              Audio
-            </span>
-            <input
-              id="song-audio0"
-              type="file"
-            />
-          </label>
-          <label
-            class="delete-song"
-            for="delete-song0"
-          >
-            <span
-              class="upload-info"
-            >
-              x
-            </span>
-            <input
-              id="delete-song0"
-              name="delete"
-              type="checkbox"
-            />
-          </label>
-        </div>
-        <div
-          class="song"
-          draggable="true"
+          Add New Song
+        </button>
+      </div>
+      <div
+        class="submit-buttons"
+      >
+        <button
+          type="submit"
         >
-          <h4>
-            Song 2
-          </h4>
-          <label
-            for="song-name1"
-          >
-            <span>
-              Name
-            </span>
-            <input
-              id="song-name1"
-              name="name"
-              type="text"
-              value="song-2-name"
-            />
-          </label>
-          <label
-            for="song-audio1"
-          >
-            <span
-              class="upload-info"
-            >
-              Audio
-            </span>
-            <input
-              id="song-audio1"
-              type="file"
-            />
-          </label>
-          <label
-            class="delete-song"
-            for="delete-song1"
-          >
-            <span
-              class="upload-info"
-            >
-              x
-            </span>
-            <input
-              id="delete-song1"
-              name="delete"
-              type="checkbox"
-            />
-          </label>
-        </div>
+          Save Changes
+        </button>
         <button
           type="button"
         >
-          +
+          Delete Album
+        </button>
+        <button
+          type="button"
+        >
+          Cancel
         </button>
       </div>
-      <button
-        type="submit"
-      >
-        Save Changes
-      </button>
-      <button
-        type="button"
-      >
-        Delete Album
-      </button>
-      <button
-        type="button"
-      >
-        Cancel
-      </button>
     </form>
   </div>
 </DocumentFragment>
@@ -162,96 +240,154 @@ exports[`UploadAlbumForm update - with data snapshot 1`] = `
 
 exports[`UploadAlbumForm upload - no data snapshot 1`] = `
 <DocumentFragment>
-  <div>
-    <form>
-      <h2>
+  <div
+    class="container"
+  >
+    <form
+      class="albums"
+    >
+      <h2
+        class="heading"
+      >
         Upload Album
       </h2>
-      <div>
-        <label
-          for="album-name"
-        >
-          <span>
-            Name
-          </span>
-          <input
-            id="album-name"
-            type="text"
-            value=""
-          />
-        </label>
-        <label
-          for="art"
-        >
-          <span>
-            Cover Art
-          </span>
-          <input
-            id="art"
-            type="file"
-          />
-        </label>
-      </div>
-      <div>
-        <h3>
-          Upload Songs
-        </h3>
-        <div
-          class="song"
-          draggable="true"
-        >
-          <h4>
-            Song 1
-          </h4>
+      <div
+        class="album-info"
+      >
+        <div>
           <label
-            for="song-name0"
+            class="album-label"
+            for="album-name"
           >
             <span>
-              Name
+              Album Name
             </span>
             <input
-              id="song-name0"
-              name="name"
+              id="album-name"
               type="text"
               value=""
             />
           </label>
-          <label
-            for="song-audio0"
+          <div
+            class="album-art"
           >
-            <span
-              class="upload-info"
+            <label
+              class="album-label"
+              for="art"
             >
-              Audio
-            </span>
-            <input
-              id="song-audio0"
-              type="file"
-            />
-          </label>
-          <button
-            class="delete-song"
-            type="button"
-          >
-            x
-          </button>
+              <span>
+                Cover Art
+              </span>
+              <input
+                id="art"
+                type="file"
+              />
+            </label>
+          </div>
         </div>
+        <img
+          alt="cover art"
+          data-nimg="1"
+          decoding="async"
+          height="100"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=256&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=128&q=75 1x, /_next/image?url=%2Fimg.jpg&w=256&q=75 2x"
+          style="color: transparent;"
+          width="100"
+        />
+      </div>
+      <div
+        class="songs-container"
+      >
+        <h3
+          class="heading"
+        >
+          Upload Songs
+        </h3>
+        <ul>
+          <li
+            class="song"
+            draggable="false"
+          >
+            <button
+              class="drag-drop"
+            >
+              <img
+                alt="drag to change position"
+                data-nimg="1"
+                decoding="async"
+                draggable="false"
+                height="15"
+                loading="lazy"
+                src="/_next/image?url=%2Fimg.jpg&w=32&q=75"
+                srcset="/_next/image?url=%2Fimg.jpg&w=16&q=75 1x, /_next/image?url=%2Fimg.jpg&w=32&q=75 2x"
+                style="color: transparent;"
+                width="15"
+              />
+            </button>
+            <h4
+              class="song-position"
+            >
+              1
+            </h4>
+            <label
+              class="song-label"
+              for="song-name0"
+            >
+              <span>
+                Name
+              </span>
+              <input
+                id="song-name0"
+                name="name"
+                type="text"
+                value=""
+              />
+            </label>
+            <label
+              class="song-label"
+              for="song-audio0"
+            >
+              <span
+                class="upload-info"
+              >
+                Audio
+              </span>
+              <input
+                id="song-audio0"
+                type="file"
+              />
+            </label>
+            <button
+              class="delete-song"
+              type="button"
+            >
+              x
+            </button>
+          </li>
+        </ul>
+        <button
+          class="add-song"
+          type="button"
+        >
+          Add New Song
+        </button>
+      </div>
+      <div
+        class="submit-buttons"
+      >
+        <button
+          type="submit"
+        >
+          Submit
+        </button>
         <button
           type="button"
         >
-          +
+          Cancel
         </button>
       </div>
-      <button
-        type="submit"
-      >
-        Submit
-      </button>
-      <button
-        type="button"
-      >
-        Cancel
-      </button>
     </form>
   </div>
 </DocumentFragment>
