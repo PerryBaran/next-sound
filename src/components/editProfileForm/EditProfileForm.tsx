@@ -7,6 +7,7 @@ import Alert from "../../components/alert/Alert"
 import { useRouter } from "next/navigation"
 import ConfirmPassword from "../../components/confirmPassword/ConfirmPassword"
 import Confirm from "../../components/confirm/Confirm"
+import css from "./editProfileForm.module.css"
 
 export default function EditProfileForm({
   data,
@@ -103,16 +104,17 @@ export default function EditProfileForm({
   }
 
   return (
-    <div>
+    <div className={css["container"]}>
       <Alert message={alert} />
       <form
         onSubmit={(e: React.FormEvent) => {
           e.preventDefault()
           setConfirm("submit")
         }}
+        className={css["form"]}
       >
-        <h2>Edit Profile</h2>
-        <label htmlFor="name">
+        <h2 className={css["heading"]}>Edit Profile</h2>
+        <label htmlFor="name" className={css["field"]}>
           <span>Name</span>
           <input
             type="text"
@@ -122,7 +124,7 @@ export default function EditProfileForm({
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="email">
+        <label htmlFor="email" className={css["field"]}>
           <span>Email</span>
           <input
             type="text"
@@ -132,7 +134,7 @@ export default function EditProfileForm({
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="password">
+        <label htmlFor="password" className={css["field"]}>
           <span>New Password</span>
           <input
             type="password"
@@ -142,7 +144,7 @@ export default function EditProfileForm({
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="confirm-password">
+        <label htmlFor="confirm-password" className={css["field"]}>
           <span>Confirm New Password</span>
           <input
             type="password"
@@ -152,13 +154,15 @@ export default function EditProfileForm({
             onChange={handleChange}
           />
         </label>
-        <button type="submit">Save Changes</button>
-        <button type="button" onClick={() => setConfirm("delete")}>
-          Delete Account
-        </button>
-        <button type="button" onClick={() => setConfirm("cancel")}>
-          Cancel
-        </button>
+        <div className={css["buttons"]}>
+          <button type="submit">Save Changes</button>
+          <button type="button" onClick={() => setConfirm("delete")}>
+            Delete Account
+          </button>
+          <button type="button" onClick={() => setConfirm("cancel")}>
+            Cancel
+          </button>
+        </div>
       </form>
       {confirm === "delete" && (
         <ConfirmPassword callback={handleDeleteAlbum} setConfirm={setConfirm} />

@@ -2,12 +2,19 @@
 
 exports[`EditProfile snapshot 1`] = `
 <DocumentFragment>
-  <div>
-    <form>
-      <h2>
+  <div
+    class="container"
+  >
+    <form
+      class="form"
+    >
+      <h2
+        class="heading"
+      >
         Edit Profile
       </h2>
       <label
+        class="field"
         for="name"
       >
         <span>
@@ -21,6 +28,7 @@ exports[`EditProfile snapshot 1`] = `
         />
       </label>
       <label
+        class="field"
         for="email"
       >
         <span>
@@ -34,6 +42,7 @@ exports[`EditProfile snapshot 1`] = `
         />
       </label>
       <label
+        class="field"
         for="password"
       >
         <span>
@@ -47,6 +56,7 @@ exports[`EditProfile snapshot 1`] = `
         />
       </label>
       <label
+        class="field"
         for="confirm-password"
       >
         <span>
@@ -59,21 +69,25 @@ exports[`EditProfile snapshot 1`] = `
           value=""
         />
       </label>
-      <button
-        type="submit"
+      <div
+        class="buttons"
       >
-        Save Changes
-      </button>
-      <button
-        type="button"
-      >
-        Delete Account
-      </button>
-      <button
-        type="button"
-      >
-        Cancel
-      </button>
+        <button
+          type="submit"
+        >
+          Save Changes
+        </button>
+        <button
+          type="button"
+        >
+          Delete Account
+        </button>
+        <button
+          type="button"
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   </div>
 </DocumentFragment>
