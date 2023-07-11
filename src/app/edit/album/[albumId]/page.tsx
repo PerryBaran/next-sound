@@ -11,6 +11,7 @@ interface Props {
 interface SWRRequest {
   name: string
   id: string
+  url?: string
   Songs: {
     name: string
     position: number

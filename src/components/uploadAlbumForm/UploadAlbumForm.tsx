@@ -9,11 +9,14 @@ import css from "./editAlbum.module.css"
 import Confirm from "../confirm/Confirm"
 import updateAlbum from "./helpers/updateAlbum"
 import uploadAlbum from "./helpers/uploadAlbum"
+import Image from "next/image"
+import { music, upDown } from "../../media/icons"
 
 interface Props {
   data?: {
     name: string
     id: string
+    url?: string
     Songs?: {
       name: string
       position: number
@@ -78,6 +81,7 @@ export default function UploadAlbumForm({ data }: Props) {
     user: { name }
   } = useUserContext()
   const [confirm, setConfirm] = useState("")
+  const [draggable, setDraggable] = useState(false);
 
   const handleAlbumNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
@@ -93,6 +97,12 @@ export default function UploadAlbumForm({ data }: Props) {
 
     setAlbum((prev) => {
       return { ...prev, image: files[0] }
+    })
+  }
+
+  const removeAlbumImage = () => {
+    setAlbum((prev) => {
+      return { ...prev, image: undefined }
     })
   }
 
@@ -217,106 +227,141 @@ export default function UploadAlbumForm({ data }: Props) {
     }
   }
 
+  const renderAlbumArt = () => {
+    if (album.image) return URL.createObjectURL(album.image)
+    if (data && data.url) return data.url
+    return music
+  }
+
   return (
-    <div>
+    <div className={css["container"]}>
       <Alert message={alert} />
       <form
+        className={css["albums"]}
         onSubmit={(e: React.FormEvent) => {
           e.preventDefault()
           setConfirm("submit")
         }}
       >
-        <h2>{data ? "Edit Album" : "Upload Album"}</h2>
-        <div>
-          <label htmlFor="album-name">
-            <span>Name</span>
-            <input
-              type="text"
-              id="album-name"
-              value={album.name}
-              onChange={handleAlbumNameChange}
+        <h2 className={css["heading"]}>{data ? "Edit Album" : "Upload Album"}</h2>
+        <div className={css["album-info"]}>
+          <div>
+            <label htmlFor="album-name" className={css["album-label"]}>
+              <span>Album Name</span>
+              <input
+                type="text"
+                id="album-name"
+                value={album.name}
+                onChange={handleAlbumNameChange}
+              />
+            </label>
+            <div className={css["album-art"]}>
+              <label htmlFor="art" className={css["album-label"]}>
+                <span>Cover Art</span>
+                <input type="file" id="art" onChange={handleAlbumImageChange} />        
+              </label>
+              {album.image && <button type="button" onClick={removeAlbumImage}>x</button>}              
+            </div>
+          </div>
+          <Image
+              src={renderAlbumArt()}
+              height={100}
+              width={100}
+              alt="cover art"
             />
-          </label>
-          <label htmlFor="art">
-            <span>Cover Art</span>
-            <input type="file" id="art" onChange={handleAlbumImageChange} />
-          </label>
         </div>
-        <div>
-          <h3>{data ? "Edit Songs" : "Upload Songs"}</h3>
-          {songs.map((song, i) => {
-            return (
-              <div
-                key={song.key}
-                draggable
-                onDragEnter={() => dragEnter(i)}
-                onDragEnd={() => dragEnd(i)}
-                className={css["song"]}
-              >
-                <h4>Song {i + 1}</h4>
-                <label htmlFor={`song-name${i}`}>
-                  <span>Name</span>
-                  <input
-                    type="text"
-                    id={`song-name${i}`}
-                    name="name"
-                    value={song.current.name}
-                    onChange={(e) => handleSongNameChange(e, i)}
-                  />
-                </label>
-                <label htmlFor={`song-audio${i}`}>
-                  <span className="upload-info">Audio</span>
-                  <input
-                    type="file"
-                    id={`song-audio${i}`}
-                    onChange={(e) => handleSongAudioChange(e, i)}
-                  />
-                </label>
-                {!song.original ? (
+        <div className={css["songs-container"]}>
+          <h3 className={css["heading"]}>{data ? "Edit Songs" : "Upload Songs"}</h3>
+          <ul>
+            {songs.map((song, i) => {
+              return (
+                <li
+                  key={song.key}
+                  draggable={draggable}
+                  onDragEnter={() => dragEnter(i)}
+                  onDragEnd={() => dragEnd(i)}
+                  className={css["song"]}
+                >
                   <button
-                    type="button"
-                    onClick={() => removeSong(i)}
-                    className={css["delete-song"]}
+                    className={css["drag-drop"]}
+                    onFocus={() => setDraggable(true)}
+                    onBlur={() => setDraggable(false)}
                   >
-                    x
+                    <Image
+                      draggable={false}
+                      src={upDown}
+                      alt="drag to change position"
+                      width={15}
+                      height={15}
+                    />
                   </button>
-                ) : (
-                  <label
-                    htmlFor={`delete-song${i}`}
-                    className={css["delete-song"]}
-                  >
-                    <span className="upload-info">x</span>
+                  <h4 className={css["song-position"]}>{i + 1}</h4>
+                  <label htmlFor={`song-name${i}`} className={css["song-label"]}>
+                    <span>Name</span>
                     <input
-                      type="checkbox"
-                      id={`delete-song${i}`}
-                      name="delete"
-                      checked={song.current.delete}
-                      onChange={(e) => handleSongDelete(e, i)}
+                      type="text"
+                      id={`song-name${i}`}
+                      name="name"
+                      value={song.current.name}
+                      onChange={(e) => handleSongNameChange(e, i)}
                     />
                   </label>
-                )}
-              </div>
-            )
-          })}
-          <button type="button" onClick={addSong}>
-            +
+                  <label htmlFor={`song-audio${i}`} className={css["song-label"]}>
+                    <span className="upload-info">Audio</span>
+                    <input
+                      type="file"
+                      id={`song-audio${i}`}
+                      onChange={(e) => handleSongAudioChange(e, i)}
+                    />
+                  </label>
+                  {!song.original ? (
+                    <button
+                      type="button"
+                      onClick={() => removeSong(i)}
+                      className={css["delete-song"]}
+                    >
+                      x
+                    </button>
+                  ) : (
+                    <label
+                      htmlFor={`delete-song${i}`}
+                      className={css["delete-song"]}
+                    >
+                      <span className="upload-info">x</span>
+                      <input
+                        type="checkbox"
+                        id={`delete-song${i}`}
+                        name="delete"
+                        checked={song.current.delete}
+                        onChange={(e) => handleSongDelete(e, i)}
+                      />
+                    </label>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
+          <button type="button" onClick={addSong} className={css["add-song"]}>
+            Add New Song
           </button>
         </div>
-        <button type="submit">{data ? "Save Changes" : "Submit"}</button>
-        {data && (
-          <button type="button" onClick={() => setConfirm("delete")}>
-            Delete Album
+        <div className={css["submit-buttons"]}>
+          <button type="submit">{data ? "Save Changes" : "Submit"}</button>
+          {data && (
+            <button type="button" onClick={() => setConfirm("delete")}>
+              Delete Album
+            </button>
+          )}
+          <button type="button" onClick={() => setConfirm("cancel")}>
+            Cancel
           </button>
-        )}
-        <button type="button" onClick={() => setConfirm("cancel")}>
-          Cancel
-        </button>
-        {confirm && (
-          <Confirm
-            setConfirm={setConfirm}
-            callback={confirmCallback(confirm)}
-          />
-        )}
+          {confirm && (
+            <Confirm
+              setConfirm={setConfirm}
+              callback={confirmCallback(confirm)}
+            />
+          )}          
+        </div>
       </form>
     </div>
   )
