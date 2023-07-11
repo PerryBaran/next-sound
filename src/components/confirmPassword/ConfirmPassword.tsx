@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef } from "react"
+import css from "./confirmPassword.module.css"
 
 interface Props {
   callback: (string: string) => void
@@ -22,15 +23,29 @@ export default function ConfirmPassword({ callback, setConfirm }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} aria-label="form">
-      <label htmlFor="confirm">
-        <span>Confirm Password</span>
-        <input type="password" id="confirm" ref={password} />
-      </label>
-      <button type="submit">Confirm</button>
-      <button type="button" onClick={handleCancel}>
-        Cancel
-      </button>
-    </form>
+    <div className={css["container"]}>
+      <form
+        onSubmit={handleSubmit}
+        aria-label="form"
+        className={css["confirm-password"]}
+      >
+        <label htmlFor="confirm">
+          <span>Confirm Password</span>
+          <input type="password" id="confirm" ref={password} />
+        </label>
+        <div>
+          <button type="submit" className={css["confirm"]}>
+            Confirm
+          </button>
+          <button
+            type="button"
+            onClick={handleCancel}
+            className={css["cancel"]}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
   )
 }
